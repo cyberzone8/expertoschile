@@ -1,0 +1,47 @@
+:root{--bg:#13233b;--bg2:#0b1424;--card:#0e1a2e;--ink:#f4efe6;--mute:#8fa3bf;--line:#2c3e5a;--P:#e879f9;--R:#22d3ee;--Pr:#6366f1;--D:#f4efe6;--g:#22c55e;--y:#facc15;--r:#ef4444;--font:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{background:var(--bg2);scroll-behavior:smooth}
+body{color:var(--ink);font-family:var(--font);line-height:1.6;background:radial-gradient(120% 60% at 50% 0,var(--bg),var(--bg2));padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+.w{max-width:900px;margin:0 auto;padding:0 20px}
+nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:18px 0;font-weight:800;letter-spacing:.05em}
+nav .links{display:flex;gap:16px;flex-wrap:wrap}
+nav a{color:var(--mute);font-weight:600;font-size:14px;text-decoration:none;letter-spacing:0}
+nav a:hover,nav a.on{color:var(--ink)}
+nav a.brand{color:var(--ink);font-weight:800;letter-spacing:.05em;font-size:16px}
+.eye{font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--R);margin-bottom:12px}
+h1{font-size:clamp(30px,6.4vw,50px);line-height:1.08;letter-spacing:-.025em;margin-bottom:16px}
+h2{font-size:clamp(24px,4.6vw,34px);line-height:1.15;letter-spacing:-.015em;margin-bottom:12px}
+h3{font-size:18px;margin-bottom:6px}
+p{color:var(--mute);margin-bottom:12px}
+p b,li b{color:var(--ink)}
+.lead{font-size:clamp(17px,2.4vw,20px);max-width:36em}
+section{padding:34px 0;border-top:1px solid var(--line)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.card p{font-size:15px;margin-bottom:8px}
+.btn{font:700 16px var(--font);display:inline-block;padding:.85em 1.4em;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;cursor:pointer}
+.btn:focus-visible,button:focus-visible{outline:3px solid var(--D);outline-offset:2px}
+.btn.sm{font-size:14px;padding:.55em 1em}
+.cta{background:var(--R);color:#06222b;border-color:var(--R)}
+.wa{background:#25D366;color:#06220f;border-color:#25D366}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+/* semáforo: etapa del servicio */
+.st-g{--c:var(--g)}.st-y{--c:var(--y)}.st-r{--c:var(--r)}
+.card.st{border-top:5px solid var(--c)}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-right:8px;box-shadow:0 0 10px var(--c)}
+.stage{display:flex;align-items:center;font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--c);margin-bottom:8px}
+.sema{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.sema button,.sema span{font:700 14px var(--font);display:inline-flex;align-items:center;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:.45em 1em;cursor:pointer}
+.sema button.on{border-color:var(--c);box-shadow:0 0 0 2px var(--c) inset}
+.sema .dot{margin-right:8px}
+/* evidencia */
+.tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;border-radius:6px;padding:.15em .55em;margin-right:8px;color:#06222b;vertical-align:middle}
+.e1{background:#bdf1f8}.e2{background:#7ee7f5}.e3{background:#c7c9f9}.e4{background:#e9d5ff}
+.pill{display:inline-block;border:2px solid var(--line);border-radius:999px;padding:.15em .8em;font-size:12px;color:var(--mute);margin:0 6px 6px 0}
+.micro{font-size:13px;margin-top:10px}
+a.l{color:var(--R)}
+details{border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0;background:var(--card)}
+summary{font-weight:700;cursor:pointer}
+details>p,details>div{margin-top:10px}
+footer{padding:30px 0 40px;text-align:center;font-size:12px;color:var(--mute);border-top:1px solid var(--line)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
