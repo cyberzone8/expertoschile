@@ -22,6 +22,7 @@ h3{font-size:18px;margin-bottom:6px}
 p{color:var(--mute);margin-bottom:12px}
 p b{color:var(--ink)}
 .hl{color:var(--y)}
+.num{font-size:clamp(26px,5vw,36px);font-weight:850;color:var(--R);line-height:1.1;margin-bottom:6px}
 .lead{font-size:clamp(17px,2.4vw,21px);max-width:34em}
 section{padding:38px 0;border-top:1px solid var(--line)}
 .btn{font:700 16px var(--font);display:inline-block;padding:.9em 1.5em;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;cursor:pointer}
@@ -52,15 +53,20 @@ details p{margin:10px 0 0;font-size:15px}
 footer{padding:30px 0 40px;text-align:center;font-size:12px;color:var(--mute);border-top:1px solid var(--line)}
 .sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0));background:rgba(11,20,36,.94);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:10}
 .sticky .btn{width:100%;max-width:420px;text-align:center}
+.lk{display:flex;gap:16px;flex-wrap:wrap}
+.st-g{--c:var(--g)}.st-y{--c:var(--y)}.st-r{--c:var(--r)}
+.card.st{border-top:5px solid var(--c)}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-right:8px;box-shadow:0 0 10px var(--c)}
+.stage{display:flex;align-items:center;font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--c);margin-bottom:8px}
 </style></head><body>
 <div class="w">
-<nav><span>EXPERTOS CHILE</span><a href="quienes-somos.html" data-link>Qué es Expertos Chile</a></nav>
+<nav><span>EXPERTOS CHILE</span><span class="lk"><a href="casos.html" data-link>Casos</a><a href="productos.html" data-link>Servicios</a><a href="charlas.html" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a></span></nav>
 
 <div class="hero">
- <div class="eye">DIAGNÓSTICO DE EFECTOS EN CADENA</div>
- <h1>¿Qué <span class="hl">costos ocultos</span> tiene tu próxima decisión?</h1>
- <p class="lead">Arreglas un problema y aparece otro en otra área. Tus indicadores están bien, pero algo no cuadra. En 2 minutos verás <b>dónde pueden estar los costos que ningún indicador mide</b>.</p>
- <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a><a class="btn" href="#como">Cómo funciona</a></div>
+ <div class="eye">PARA EMPRESAS E INSTITUCIONES</div>
+ <h1>Antes de decidir, mira <span class="hl">qué otras piezas se mueven</span>.</h1>
+ <p class="lead">Imagina ver el dominó completo <b>antes</b> de mover la primera ficha. Un cambio de sistema dejó unos <b>US$64 millones</b> en ventas sin despachar. Una expansión terminó con <b>133 tiendas cerradas</b>. Son casos reales, con cifras reportadas por las propias empresas. Tú ya mides, controlas y corriges, y es justo ahí donde conviene mirar lo que esos indicadores no muestran: los efectos en cadena de tu próxima decisión.</p>
+ <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a><a class="btn" href="casos.html" data-link>Ver los casos reales</a></div>
  <p class="micro">Sin registro previo · Orientación inicial, no un estudio completo.</p>
 </div>
 
@@ -74,6 +80,40 @@ footer{padding:30px 0 40px;text-align:center;font-size:12px;color:var(--mute);bo
  </div>
 </section>
 
+<section id="casos">
+ <h2>Casos reales, números reales</h2>
+ <p>Cuando una decisión no se mira en conjunto, el costo aparece en otra parte. Esto es lo que reportaron las propias empresas.</p>
+ <div class="grid">
+  <div class="card"><div class="num">≈US$64 M</div><p>en ventas que Revlon estimó no poder despachar en 2018, tras lanzar un nuevo sistema ERP, más US$53,6 M de cargos adicionales.</p></div>
+  <div class="card"><div class="num">133 tiendas</div><p>cerradas por Target en Canadá, con costos de salida antes de impuestos por cerca de US$5,1 mil millones.</p></div>
+ </div>
+ <p class="micro">Cifras reportadas por las empresas en documentos públicos; no son cálculos nuestros. <a href="casos.html" data-link style="color:var(--R)">Ver qué ocurrió y cómo se puede mirar</a>.</p>
+</section>
+
+<section id="utilidad">
+ <h2>Qué obtienes</h2>
+ <div class="grid">
+  <div class="card"><h3>Ver antes de decidir</h3><p>Un mapa de los efectos probables de una decisión concreta: qué áreas, procesos y personas toca.</p></div>
+  <div class="card"><h3>Saber dónde buscar el costo oculto</h3><p>Los lugares donde suelen aparecer retrabajo, sobrecarga o reclamos, y cómo empezar a medirlos.</p></div>
+  <div class="card"><h3>Defensas que sí funcionan</h3><p>Distinguimos un control que existe de uno que realmente detiene la propagación.</p></div>
+  <div class="card"><h3>Medir el resultado</h3><p>Indicadores de seguimiento, para comprobar si la intervención cambió algo.</p></div>
+ </div>
+ <p class="micro">No prometemos ahorros ni predecimos el futuro: mostramos hipótesis fundamentadas para verificar con tu equipo y tus datos.</p>
+</section>
+
+<section id="rubro">
+ <h2>¿Te suena en tu área?</h2>
+ <p>Ejemplos de preguntas que ayudamos a responder, según el tipo de organización.</p>
+ <div class="grid">
+  <div class="card"><h3>Operaciones y logística</h3><p>Si cambiamos de proveedor, sistema o turnos, ¿qué otros procesos se resienten?</p></div>
+  <div class="card"><h3>Energía e infraestructura</h3><p>Si se interviene una obra o una zona, ¿qué ocurre con vecinos, proveedores y plazos?</p></div>
+  <div class="card"><h3>Comercio y centros comerciales</h3><p>Si abrimos, ampliamos o cambiamos horarios, ¿qué pasa con dotación, servicio y reclamos?</p></div>
+  <div class="card"><h3>Banca y servicios financieros</h3><p>Si rediseñamos un proceso, ¿qué cambia para el cliente y para los equipos de atención?</p></div>
+  <div class="card"><h3>Hotelería y servicios</h3><p>Si crece la demanda en temporada, ¿dónde se rompe primero la cadena de servicio?</p></div>
+  <div class="card"><h3>Sector público y municipios</h3><p>Si priorizamos una inversión, ¿qué sectores y servicios quedan más expuestos?</p></div>
+ </div>
+</section>
+
 <section id="como">
  <h2>Cómo funciona</h2>
  <p>Un recorrido corto, en tres etapas. Tú decides hasta dónde llegar.</p>
@@ -83,6 +123,22 @@ footer{padding:30px 0 40px;text-align:center;font-size:12px;color:var(--mute);bo
   <div class="f3">3 · Conversamos<small>Agenda o WhatsApp, si te sirve</small></div>
  </div>
  <p>Si después quieres ir más a fondo, tomamos <b>una decisión concreta</b> de tu organización y la mapeamos con tu equipo: efectos probables, costos ocultos y los tres puntos donde conviene prevenir, controlar o recuperar.</p>
+</section>
+
+<section id="etapas">
+ <h2>¿En qué momento estás?</h2>
+ <p>Cuando sabes dónde estás, es más fácil ver el siguiente paso. Elige tu etapa y mira lo que podrías ver.</p>
+ <div class="grid">
+  <div class="card st st-g"><div class="stage"><i class="dot"></i>ANTES</div><h3>Estoy por decidir</h3><p>Ves qué otras piezas se mueven y qué costos pueden aparecer, mientras todavía puedes elegir.</p><a class="btn" href="productos.html" data-link>Ver servicios</a></div>
+  <div class="card st st-y"><div class="stage"><i class="dot"></i>DURANTE</div><h3>Estoy en pleno cambio</h3><p>Detectas señales tempranas y pones puntos de control antes de que el efecto llegue al cliente.</p><a class="btn" href="productos.html" data-link>Ver servicios</a></div>
+  <div class="card st st-r"><div class="stage"><i class="dot"></i>DESPUÉS</div><h3>El problema ya está aquí</h3><p>Entiendes por qué sigue ocurriendo y dónde detenerlo, para recuperar el rumbo.</p><a class="btn" href="productos.html" data-link>Ver servicios</a></div>
+ </div>
+</section>
+
+<section id="charlas">
+ <h2>Míranos trabajar, en vivo y gratis</h2>
+ <p>Una vez por semana tomamos un caso real y lo recorremos juntos en 30 minutos: cómo estaba armado, qué se movió y dónde se podía intervenir. Cuando termines, sabrás qué preguntas hacerte antes de tu próxima decisión.</p>
+ <div class="btns"><a class="btn cta" href="charlas.html" data-link>Ver el calendario de charlas</a><a class="btn" href="casos.html" data-link>Explorar el banco de casos</a></div>
 </section>
 
 <section id="caminos">
@@ -110,6 +166,7 @@ footer{padding:30px 0 40px;text-align:center;font-size:12px;color:var(--mute);bo
 
 <section id="final">
  <h2>Decide sabiendo qué estás moviendo.</h2>
+ <p><b>¿Qué decisión tienes sobre la mesa esta semana?</b> Si la ves completa hoy, la decides distinto.</p>
  <p>Antes de mover una pieza, descubre qué otras puede mover.</p>
  <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a></div>
 </section>
