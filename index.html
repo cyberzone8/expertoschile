@@ -1,169 +1,126 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Expertos Chile · Diagnóstico de costos ocultos</title>
-<meta name="description" content="Cuestionario de 2 minutos para ver qué costos ocultos puede tener tu próxima decisión y que tus indicadores no explican.">
+<title>Expertos Chile · ¿Qué costos ocultos tiene tu próxima decisión?</title>
+<meta name="description" content="Arreglas un problema y aparece otro. Haz el diagnóstico de 2 minutos y mira dónde pueden estar los costos que tus indicadores no explican.">
 <meta property="og:title" content="¿Qué costos ocultos tiene tu próxima decisión?">
-<meta property="og:description" content="Diagnóstico de 2 minutos. Expertos Chile.">
+<meta property="og:description" content="Diagnóstico de 2 minutos · Expertos Chile">
 <style>
 :root{--bg:#13233b;--bg2:#0b1424;--card:#0e1a2e;--ink:#f4efe6;--mute:#8fa3bf;--line:#2c3e5a;--P:#e879f9;--R:#22d3ee;--Pr:#6366f1;--D:#f4efe6;--g:#22c55e;--y:#facc15;--r:#ef4444;--font:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
 *{box-sizing:border-box;margin:0}
-html{background:var(--bg2)}
-body{min-height:100vh;color:var(--ink);font-family:var(--font);line-height:1.5;background:radial-gradient(120% 80% at 50% 0,var(--bg),var(--bg2));padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
-.w{max-width:760px;margin:0 auto;padding:18px 18px 48px}
-header{display:flex;justify-content:space-between;align-items:center;padding:6px 0 18px;font-weight:800;letter-spacing:.04em}
-header small{color:var(--mute);font-weight:500;letter-spacing:0}
-/* embudo: etapas */
-.fn{display:flex;gap:6px;margin-bottom:22px}
-.fn div{flex:1;text-align:center;font-size:12px;color:var(--mute);border-top:4px solid var(--line);padding-top:6px;transition:.3s}
-.fn div.on{color:var(--ink);border-color:var(--R)}
-.fn div.done{border-color:var(--g);color:var(--ink)}
-h1{font-size:clamp(28px,6vw,46px);line-height:1.08;letter-spacing:-.02em;margin-bottom:14px}
-h2{font-size:clamp(22px,4.4vw,32px);line-height:1.15;letter-spacing:-.015em;margin-bottom:12px}
+html{background:var(--bg2);scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0)}
+body{color:var(--ink);font-family:var(--font);line-height:1.6;background:radial-gradient(120% 60% at 50% 0,var(--bg),var(--bg2));padding:env(safe-area-inset-top,0) 0 calc(env(safe-area-inset-bottom,0) + 70px)}
+.w{max-width:880px;margin:0 auto;padding:0 20px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0;font-weight:800;letter-spacing:.05em}
+nav a{color:var(--mute);font-weight:600;font-size:14px;text-decoration:none;letter-spacing:0}
+nav a:hover{color:var(--ink)}
+.hero{padding:36px 0 40px}
+.eye{font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--R);margin-bottom:12px}
+h1{font-size:clamp(32px,7vw,58px);line-height:1.05;letter-spacing:-.025em;margin-bottom:18px}
+h2{font-size:clamp(24px,4.6vw,34px);line-height:1.15;letter-spacing:-.015em;margin-bottom:14px}
+h3{font-size:18px;margin-bottom:6px}
 p{color:var(--mute);margin-bottom:12px}
-p b,li b{color:var(--ink)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0}
+p b{color:var(--ink)}
 .hl{color:var(--y)}
-button,.btn{font:700 16px var(--font);display:inline-block;padding:.85em 1.4em;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-decoration:none;text-align:center}
-button:focus-visible,.btn:focus-visible,input:focus-visible{outline:3px solid var(--D);outline-offset:2px}
-.cta{background:var(--R);color:#06222b;border-color:var(--R)}
-.cta:hover{filter:brightness(1.08)}
-.opts{display:grid;gap:10px;margin:16px 0}
-.opts button{text-align:left;font-weight:600}
-.opts button:hover{border-color:var(--R)}
-.bar{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:6px}
-.bar i{display:block;height:100%;background:var(--R);transition:width .3s}
-.qn{font-size:13px;color:var(--mute);margin-bottom:12px}
-label{display:block;font-weight:600;margin:12px 0 6px}
-input{width:100%;font:16px var(--font);padding:.8em;border-radius:10px;border:2px solid var(--line);background:var(--bg2);color:var(--ink)}
-.small{font-size:12px;color:var(--mute);margin-top:10px}
+.lead{font-size:clamp(17px,2.4vw,21px);max-width:34em}
+section{padding:38px 0;border-top:1px solid var(--line)}
+.btn{font:700 16px var(--font);display:inline-block;padding:.9em 1.5em;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;cursor:pointer}
+.btn:focus-visible{outline:3px solid var(--D);outline-offset:2px}
+.cta{background:var(--R);color:#06222b;border-color:var(--R)}.cta:hover{filter:brightness(1.08)}
+.wa{background:#25D366;color:#06220f;border-color:#25D366}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.micro{font-size:13px;margin-top:12px}
+.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0;font-weight:800;font-size:15px}
+.chain span.t{border:2px solid var(--c);color:var(--c);border-radius:10px;padding:.35em .8em}
+.chain span.a{color:var(--mute)}
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
 .pills span{border:2px solid var(--line);border-radius:999px;padding:.3em .9em;font-size:14px;color:var(--mute)}
-.dim{margin:12px 0}
-.dim .row{display:flex;justify-content:space-between;font-weight:700;font-size:15px}
-.dim .tr{height:12px;background:var(--line);border-radius:8px;overflow:hidden;margin:6px 0}
-.dim .tr i{display:block;height:100%;border-radius:8px;width:0;transition:width .8s}
-.dim p{font-size:14px;margin:0}
-.lvl{display:inline-block;font-weight:800;border-radius:999px;padding:.25em .9em;margin-bottom:10px}
-.hide{display:none!important}
-ul{padding-left:20px;color:var(--mute);margin-bottom:12px}li{margin:4px 0}
-footer{margin-top:36px;font-size:12px;color:var(--mute);text-align:center}
-textarea{width:100%;font:16px var(--font);padding:.8em;border-radius:10px;border:2px solid var(--line);background:var(--bg2);color:var(--ink)}
-textarea:focus-visible{outline:3px solid var(--D);outline-offset:2px}
-.chk{display:flex;gap:8px;align-items:flex-start;margin-top:12px}.chk input{width:auto;margin-top:4px}.chk label{margin:0;font-weight:400;font-size:13px;color:var(--mute)}
-.wa{background:#25D366;color:#06220f;border-color:#25D366;width:100%;margin-top:10px}.wa:hover{background:#1ebe5b}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.card p{margin:0;font-size:15px}
+.card ul{margin:8px 0 0;padding-left:18px;color:var(--mute);font-size:15px}
+/* embudo visual */
+.fun{display:grid;gap:8px;margin:20px auto;max-width:640px}
+.fun div{margin:0 auto;border-radius:12px;padding:12px 16px;text-align:center;font-weight:700;color:#06222b}
+.fun small{display:block;font-weight:500;font-size:13px;opacity:.85}
+.f1{width:100%;background:var(--R)}.f2{width:78%;background:#7ee7f5}.f3{width:56%;background:#bdf1f8}
+.paths{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:18px}
+.path{display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+details{border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0;background:var(--card)}
+summary{font-weight:700;cursor:pointer}
+details p{margin:10px 0 0;font-size:15px}
+footer{padding:30px 0 40px;text-align:center;font-size:12px;color:var(--mute);border-top:1px solid var(--line)}
+.sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0));background:rgba(11,20,36,.94);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:10}
+.sticky .btn{width:100%;max-width:420px;text-align:center}
 </style></head><body>
 <div class="w">
-<header><span>EXPERTOS CHILE</span><small>Diagnóstico de efectos en cadena</small></header>
-<div class="fn" id="fn"><div>1 · Descubre</div><div>2 · Responde</div><div>3 · Resultado</div><div>4 · Conversemos</div></div>
+<nav><span>EXPERTOS CHILE</span><a href="quienes-somos.html" data-link>Qué es Expertos Chile</a></nav>
 
-<!-- Etapa 1: promesa -->
-<section id="s0">
+<div class="hero">
+ <div class="eye">DIAGNÓSTICO DE EFECTOS EN CADENA</div>
  <h1>¿Qué <span class="hl">costos ocultos</span> tiene tu próxima decisión?</h1>
- <p>Arreglas un problema y aparece otro en otra área. Tus indicadores están bien, pero algo no cuadra. Responde 6 preguntas (2 minutos) y mira <b>dónde puede estar el costo que ningún indicador mide</b>.</p>
- <div class="pills"><span>♠ Decisiones</span><span>♣ Procesos</span><span>♦ Recursos</span><span>♥ Personas</span></div>
- <button class="btn cta" id="go" type="button">Empezar el diagnóstico</button>
- <div class="card"><b>¿Para quién es?</b>
-  <ul><li>Gerencias de operaciones, sostenibilidad y relaciones comunitarias.</li><li>Equipos que están por tomar una decisión que afectará a más de un área.</li><li>Municipios e instituciones que deben priorizar inversión en un territorio.</li></ul>
-  <p class="small" style="margin:0">Es una orientación inicial, no un estudio. Un diagnóstico completo se hace con tus datos y tu equipo.</p></div>
- <a class="small" id="demoLink" href="#" target="_blank" rel="noopener" hidden>Ver la demo de 50 segundos</a>
-</section>
-
-<!-- Etapa 2: preguntas -->
-<section id="s1" class="hide">
- <div class="bar"><i id="pb"></i></div><div class="qn" id="qn"></div>
- <h2 id="qt"></h2><div class="opts" id="qo"></div>
-</section>
-
-<!-- Etapa 3 y 4: resultado + oferta -->
-<section id="s3" class="hide">
- <span class="lvl" id="lv"></span>
- <h2 id="lt"></h2><p id="ld"></p>
- <div class="card" id="dims"></div>
- <div class="card">
-  <h2 style="font-size:22px">Siguiente paso: un diagnóstico de efectos en cadena</h2>
-  <p>Tomamos <b>una decisión concreta</b> que tengas pendiente y la mapeamos con tu equipo:</p>
-  <ul><li>Mapa de 10 a 15 efectos probables, con su nivel de probabilidad.</li><li>Los costos ocultos que hoy no mide ningún indicador.</li><li>Los 3 puntos donde conviene prevenir, controlar o recuperar.</li></ul>
-  <button class="btn cta" id="book" type="button">Agendar en el calendario</button>
-  <p class="small">Plazo y valor del diagnóstico: se definen según el alcance de la decisión.</p>
- </div>
- <div class="card" id="wa">
-  <h2 style="font-size:22px">O envíanos tu consulta por WhatsApp</h2>
-  <p>Incluimos tu resultado en el mensaje para responderte con contexto.</p>
-  <label for="nm">Nombre completo *</label><input id="nm" autocomplete="name" placeholder="Ej: Juan Pérez">
-  <label for="tel">Teléfono de contacto *</label><input id="tel" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678">
-  <label for="og">Organización (opcional)</label><input id="og" autocomplete="organization">
-  <label for="dc">Decisión que tienes pendiente</label><textarea id="dc" rows="3" placeholder="Ej: cambiar el recorrido de despacho, abrir una ruta turística…"></textarea>
-  <p class="small"><b>Privacidad:</b> los datos no se guardan en esta web. Se envían directamente a nuestro chat de atención.</p>
-  <div class="chk"><input type="checkbox" id="cons"><label for="cons">Acepto enviar mis datos por WhatsApp para ser contactado.</label></div>
-  <p id="err" class="small hl" role="alert"></p>
-  <button class="btn wa" id="send" type="button">Enviar por WhatsApp</button>
- </div>
- <button class="btn" id="again" type="button">Repetir el cuestionario</button>
-</section>
-<footer>© Expertos Chile · Orientación general, no constituye asesoría profesional.</footer>
+ <p class="lead">Arreglas un problema y aparece otro en otra área. Tus indicadores están bien, pero algo no cuadra. En 2 minutos verás <b>dónde pueden estar los costos que ningún indicador mide</b>.</p>
+ <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a><a class="btn" href="#como">Cómo funciona</a></div>
+ <p class="micro">Sin registro previo · Orientación inicial, no un estudio completo.</p>
 </div>
 
+<section id="dolor">
+ <h2>Cuando mueves una pieza, se mueven otras</h2>
+ <p>Una decisión rara vez se queda donde nació. Pasa por procesos, consume recursos y llega a las personas. Lo que se mide es la pieza que ves, y el costo aparece en otro lado.</p>
+ <div class="chain"><span class="t" style="--c:var(--D)">♠ Decisión</span><span class="a">→</span><span class="t" style="--c:var(--Pr)">♣ Proceso</span><span class="a">→</span><span class="t" style="--c:var(--R)">♦ Recurso</span><span class="a">→</span><span class="t" style="--c:var(--P)">♥ Personas</span><span class="a">→</span><span class="t" style="--c:var(--y)">¿Resultado?</span></div>
+ <div class="grid">
+  <div class="card"><h3>Lo que ya haces</h3><p>Medir, controlar y corregir: indicadores, reuniones, procesos, consultoría y tecnología. Y muchas veces funciona.</p></div>
+  <div class="card"><h3>Lo que suele quedar sin mirar</h3><ul><li>Retrabajo y horas extra</li><li>Sobrecarga y rotación</li><li>Reclamos de clientes o vecinos</li><li>Parches que mueven el problema</li></ul></div>
+ </div>
+</section>
+
+<section id="como">
+ <h2>Cómo funciona</h2>
+ <p>Un recorrido corto, en tres etapas. Tú decides hasta dónde llegar.</p>
+ <div class="fun">
+  <div class="f1">1 · Haces el diagnóstico<small>6 preguntas, 2 minutos, resultado inmediato</small></div>
+  <div class="f2">2 · Ves tus puntos ciegos<small>Decisiones, procesos, recursos y personas</small></div>
+  <div class="f3">3 · Conversamos<small>Agenda o WhatsApp, si te sirve</small></div>
+ </div>
+ <p>Si después quieres ir más a fondo, tomamos <b>una decisión concreta</b> de tu organización y la mapeamos con tu equipo: efectos probables, costos ocultos y los tres puntos donde conviene prevenir, controlar o recuperar.</p>
+</section>
+
+<section id="caminos">
+ <h2>Elige por dónde empezar</h2>
+ <div class="paths">
+  <div class="card path"><div><h3>Quiero conocer a Expertos Chile</h3><p>Qué hacemos, cómo pensamos y para quién trabajamos.</p></div><a class="btn" href="quienes-somos.html" data-link>Conocer más</a></div>
+  <div class="card path"><div><h3>Quiero ver mi caso</h3><p>Responde el cuestionario y descubre dónde pueden estar tus puntos ciegos.</p></div><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico</a></div>
+  <div class="card path"><div><h3>Prefiero conversar</h3><p>Cuéntanos qué decisión tienes pendiente y te respondemos.</p></div><a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a></div>
+ </div>
+</section>
+
+<section id="para">
+ <h2>¿Para quién es?</h2>
+ <div class="pills"><span>Gerencias de operaciones</span><span>Sostenibilidad</span><span>Relaciones comunitarias</span><span>Municipios e instituciones</span></div>
+ <p>Para equipos que están por tomar una decisión que afectará a más de un área, o que quieren entender por qué ciertos costos suben sin una causa clara.</p>
+</section>
+
+<section id="faq">
+ <h2>Preguntas frecuentes</h2>
+ <details><summary>¿Es una predicción?</summary><p>No. Planteamos hipótesis de efectos, con su nivel de probabilidad, para verificarlas con tu equipo y tus datos.</p></details>
+ <details><summary>¿Qué pasa con mis datos?</summary><p>El cuestionario no guarda nada en la web. Solo si decides escribirnos por WhatsApp, esos datos llegan directamente a nuestro chat.</p></details>
+ <details><summary>¿Cuánto cuesta?</summary><p>El diagnóstico de 2 minutos es gratuito. Un diagnóstico completo se define según el alcance de la decisión; lo conversamos antes de empezar.</p></details>
+ <details><summary>¿En qué se diferencia de un tablero de indicadores o una consultoría?</summary><p>Los indicadores miran cada pieza por separado y la consultoría suele transformar la organización completa. Aquí miramos qué otras piezas se mueven cuando tomas una decisión concreta.</p></details>
+</section>
+
+<section id="final">
+ <h2>Decide sabiendo qué estás moviendo.</h2>
+ <p>Antes de mover una pieza, descubre qué otras puede mover.</p>
+ <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a></div>
+</section>
+<footer>© Expertos Chile SpA · Los Ángeles, Biobío · Información general, no constituye asesoría profesional.</footer>
+</div>
+<div class="sticky"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a></div>
 <script>
-/* ===== CONFIGURACIÓN: EDITAR ANTES DE PUBLICAR ===== */
-const CONFIG={
-  whatsapp:"569XXXXXXXX", // número en formato internacional, sin + ni espacios
-  calendarUrl:"",         // enlace público de tu calendario (ej. página de citas de Google Calendar). Vacío = se coordina por WhatsApp
-  demoUrl:""              // enlace a la demo de 50 s (opcional)
-};
-/* ===== CONTENIDO ===== */
-const DIMS={
- decisiones:{n:"Decisiones",c:"var(--D)",t:"Decisiones que se toman sin ver a quién más mueven. El costo aparece meses después, en otra área."},
- procesos:{n:"Procesos",c:"var(--Pr)",t:"Arreglos locales que desplazan el problema aguas abajo: retrabajo, cuellos de botella, parches que se repiten."},
- recursos:{n:"Recursos",c:"var(--R)",t:"Costos que los indicadores no explican: horas extra, inventario, reprocesos o gasto que sube sin causa clara."},
- personas:{n:"Personas",c:"var(--P)",t:"Sobrecarga, rotación y reclamos de clientes o vecinos después de un cambio."}
-};
-const OPT=["Nunca","A veces","Con frecuencia","Casi siempre"];
-const REV=["Siempre, de forma ordenada","A veces, de manera informal","Solo en lo más evidente","No lo hacemos"];
-const Q=[
- {d:"procesos",q:"Cuando arreglan un problema, ¿con qué frecuencia aparece otro en otra área?",o:OPT},
- {d:"decisiones",q:"Antes de una decisión importante, ¿mapean qué áreas y personas se verán afectadas?",o:REV},
- {d:"recursos",q:"¿Con qué frecuencia suben costos que sus indicadores no logran explicar?",o:OPT},
- {d:"personas",q:"Después de un cambio, ¿aparecen sobrecarga, rotación o reclamos?",o:OPT},
- {d:"decisiones",q:"¿Hay decisiones “parchadas” cuyo problema original vuelve a aparecer?",o:OPT},
- {d:"personas",q:"¿Se enteran de los efectos en clientes o en la comunidad solo cuando ya hay un reclamo?",o:OPT}
-];
-const LV=[
- {max:.33,t:"Visibilidad alta",c:"var(--g)",h:"Hoy ven bastante de lo que mueven sus decisiones.",d:"Buen punto de partida. Aun así, conviene revisar las decisiones grandes que se acercan, porque los efectos más caros suelen ser los menos visibles."},
- {max:.66,t:"Puntos ciegos moderados",c:"var(--y)",h:"Hay efectos que probablemente no están viendo.",d:"Es habitual: los indicadores miran cada pieza por separado. Una revisión de conexiones antes de la próxima decisión puede evitar costos repetidos."},
- {max:1.01,t:"Puntos ciegos altos",c:"var(--r)",h:"Es probable que estén pagando costos que ningún indicador muestra.",d:"Las respuestas sugieren que los arreglos se desplazan de un lugar a otro. Conviene mapear las conexiones antes de mover otra pieza."}
-];
-/* ===== LÓGICA ===== */
-const $=id=>document.getElementById(id),S=["s0","s1","s3"].map(i=>$(i));
-let ans=[],cur=0,last={};
-function stage(n,f){S.forEach((s,i)=>s.classList.toggle("hide",i!==(n===3?2:n)));
- const fnStep=f!==undefined?f:n===0?0:n===1?1:2;
- [...$("fn").children].forEach((e,i)=>{e.className=i<fnStep?"done":i===fnStep?"on":""});
- scrollTo({top:0})}
-function ask(){const q=Q[cur];$("pb").style.width=(cur/Q.length*100)+"%";$("qn").textContent="Pregunta "+(cur+1)+" de "+Q.length;$("qt").textContent=q.q;
- $("qo").innerHTML="";q.o.forEach((t,i)=>{const b=document.createElement("button");b.type="button";b.textContent=t;b.onclick=()=>{ans[cur]=i;cur++;cur<Q.length?ask():result()};$("qo").appendChild(b)});
- $("qt").focus&&0}
-function result(){
- const sum={},cnt={};Object.keys(DIMS).forEach(k=>{sum[k]=0;cnt[k]=0});
- Q.forEach((q,i)=>{sum[q.d]+=ans[i];cnt[q.d]++});
- const pct=Object.keys(DIMS).map(k=>({k,p:sum[k]/(cnt[k]*3)})).sort((a,b)=>b.p-a.p);
- const tot=ans.reduce((a,b)=>a+b,0)/(Q.length*3);
- const L=LV.find(l=>tot<=l.max);
- $("lv").textContent=L.t;$("lv").style.background=L.c;$("lv").style.color="#0b1424";
- $("lt").textContent=L.h;$("ld").textContent=L.d;
- $("dims").innerHTML="<b>Dónde pueden estar tus puntos ciegos</b>"+pct.map(x=>`<div class="dim"><div class="row"><span>${DIMS[x.k].n}</span><span>${Math.round(x.p*100)}%</span></div><div class="tr"><i style="background:${DIMS[x.k].c}" data-w="${Math.round(x.p*100)}"></i></div>${x.p>=.5?`<p>${DIMS[x.k].t}</p>`:""}</div>`).join("");
- stage(3);requestAnimationFrame(()=>document.querySelectorAll(".tr i").forEach(i=>i.style.width=i.dataset.w+"%"));
- last={nivel:L.t,pct:Math.round(tot*100),top:pct.slice(0,2).map(x=>DIMS[x.k].n+" "+Math.round(x.p*100)+"%").join(", ")};
-}
-$("go").onclick=()=>{ans=[];cur=0;stage(1);ask()};
-function wa(txt){window.open("https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent(txt),"_blank","noopener")}
-$("send").onclick=()=>{const nm=$("nm").value.trim(),tel=$("tel").value.trim();
- if(!nm||!tel||!$("cons").checked){$("err").textContent="Completa nombre y teléfono, y acepta el consentimiento.";return}
- $("err").textContent="";
- wa("*Consulta - Diagnóstico de costos ocultos*\n*Nombre:* "+nm+"\n*Teléfono:* "+tel+"\n*Organización:* "+($("og").value.trim()||"No indica")+"\n*Decisión pendiente:* "+($("dc").value.trim()||"Sin detalle")+"\n*Resultado:* "+last.nivel+" ("+last.pct+"%). Mayores puntos ciegos: "+last.top);
- stage(3,3)};
-$("book").onclick=()=>{if(CONFIG.calendarUrl)window.open(CONFIG.calendarUrl,"_blank","noopener");else wa("Hola, quiero agendar una conversación de 30 minutos sobre el diagnóstico de efectos en cadena. Mi resultado fue: "+last.nivel+" ("+last.pct+"%).");stage(3,3)};
-$("again").onclick=()=>{$("err").textContent="";stage(0)};
-if(CONFIG.demoUrl){const a=$("demoLink");a.href=CONFIG.demoUrl;a.hidden=false}
-stage(0);
-</script></body></html>
+const CONFIG={whatsapp:"569XXXXXXXX"}; // EDITAR: número en formato internacional, sin + ni espacios
+/* Conserva el origen (?ref=...) en los enlaces internos, para medir de dónde llegan */
+const ref=new URLSearchParams(location.search).get("ref")||"";
+document.querySelectorAll("a[data-link]").forEach(a=>{if(ref)a.href+=(a.href.includes("?")?"&":"?")+"ref="+encodeURIComponent(ref)});
+document.getElementById("wa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hola, vi la página de Expertos Chile y quiero conversar."+(ref?" (Ref: "+ref+")":""));
+</script>
+</body></html>
