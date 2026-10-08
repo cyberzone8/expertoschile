@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Banco de casos reales · Expertos Chile</title>
+<meta name="description" content="Casos reales de efectos en cadena, con cifras reportadas y fuentes. Qué ocurrió y cómo se puede mirar.">
+<link rel="stylesheet" href="estilo.css">
+<style>
+.num{font-size:clamp(24px,5vw,34px);font-weight:850;color:var(--R);line-height:1.1}
+.stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:12px 0}
+.stats .card{padding:14px}.stats p{font-size:13px;margin:6px 0 0}
+.chainv{display:grid;gap:8px;margin:12px 0}
+.chainv div{border-left:4px solid var(--line);padding:4px 0 4px 14px;font-size:15px;color:var(--ink)}
+.chainv .e1{border-color:#bdf1f8;background:none}.chainv .e2{border-color:#7ee7f5;background:none}
+.lens{border:1px dashed var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}.lens b{color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--mute);margin:12px 0}
+small.src{display:block;font-size:12px;color:var(--mute);margin-top:8px}
+.quote{font-weight:700;color:var(--ink);font-size:clamp(16px,2.4vw,20px)}
+.card.st h3{margin-top:2px}
+</style></head><body><div class="w">
+<nav><a class="brand" href="index.html" data-link>EXPERTOS CHILE</a><div class="links"><a href="casos.html" class="on" data-link>Casos</a><a href="productos.html" data-link>Servicios</a><a href="charlas.html" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a></div></nav>
+
+<div style="padding:30px 0 20px">
+ <div class="eye">BANCO DE CASOS</div>
+ <h1>Los efectos en cadena existen. Y tienen cifras.</h1>
+ <p class="lead">Casos públicos, con números reportados por las propias organizaciones. Primero lo que ocurrió; después, cómo se puede mirar. Cada semana, uno de ellos se revisa en vivo en nuestras <a class="l" href="charlas.html" data-link>charlas</a>.</p>
+ <div class="legend"><span><span class="tag e1">DOCUMENTADO</span>consta en un documento público</span><span><span class="tag e2">REPORTADO</span>cifra o estimación de la organización</span><span><span class="tag e3">INFERIDO</span>relación que deducimos</span><span><span class="tag e4">HIPÓTESIS</span>escenario para analizar</span></div>
+</div>
+
+<section style="border-top:none;padding-top:0">
+ <div class="sema" id="filtro"></div>
+ <div class="grid" id="lista" style="grid-template-columns:1fr"></div>
+</section>
+
+<section id="metodo"><h2>Cómo leer estos casos</h2>
+ <p class="quote">Los casos históricos muestran lo que ocurrió. El modelo muestra cómo podemos analizarlo. No confundimos explicación con predicción.</p>
+ <p>No sabemos qué habría pasado con otra decisión, y no decimos que habríamos evitado estos problemas. Lo que hacemos es poner sobre la mesa <b>las conexiones que conviene mirar antes de decidir</b>: qué piezas están ligadas, dónde puede propagarse un efecto y qué defensas existen y realmente funcionan.</p>
+ <div class="card"><h3>¿Y en tu organización?</h3><p>Con tu información pasamos de casos ajenos a tu caso: <b>decisión → configuración → efectos probables → puntos de intervención → medición</b>.</p>
+ <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a><a class="btn" href="productos.html" data-link>Ver los servicios</a></div></div>
+</section>
+<footer>© Expertos Chile SpA · Los Ángeles, Biobío · Casos con fines ilustrativos, basados en documentos y reportes públicos. No constituye asesoría profesional.</footer>
+</div>
+<script>
+const REV=`<div class="stats"><div class="card"><div class="num">≈US$64 M</div><p><span class="tag e2">REPORTADO</span>ventas que la empresa estima no pudo despachar en 2018</p></div><div class="card"><div class="num">US$53,6 M</div><p><span class="tag e2">REPORTADO</span>cargos incrementales en 2018, para remediar el servicio</p></div></div>
+<div class="chainv"><div class="e1"><span class="tag e1">DOCUMENTADO</span>En febrero de 2018 se lanzó un nuevo sistema ERP en Estados Unidos.</div><div class="e1"><span class="tag e1">DOCUMENTADO</span>Hubo disrupciones en el centro de fabricación y despacho de Oxford, Carolina del Norte.</div><div class="e2"><span class="tag e2">REPORTADO</span>La empresa estimó que no pudo cumplir despachos por unos US$64 millones en ventas y que incurrió en US$53,6 millones de cargos adicionales.</div><div class="e1"><span class="tag e1">DOCUMENTADO</span>Identificó una debilidad material en su control interno, ligada a la implementación del sistema.</div></div>
+<div class="lens"><b>Cómo lo miramos:</b> una decisión de tecnología (♠ → ♦) tocó un proceso crítico (♣: fabricación y despacho) y terminó en el cliente. <span class="tag e4">HIPÓTESIS</span>Pregunta de análisis: ¿qué defensa habría podido detener la propagación antes de llegar a los despachos?</div>
+<small class="src">Fuente: Revlon Consumer Products Corporation, Formulario 10-K 2018 (SEC). <a class="l" href="https://www.sec.gov/Archives/edgar/data/890547/000089054719000003/rcpc201810-k.htm" target="_blank" rel="noopener">Ver documento</a>. Las cifras son estimaciones de la empresa, no cálculos de Expertos Chile.</small>`;
+const TGT=`<div class="stats"><div class="card"><div class="num">133</div><p><span class="tag e1">DOCUMENTADO</span>tiendas cerradas, con ≈17.600 empleados afectados (anuncio de enero de 2015)</p></div><div class="card"><div class="num">≈US$5,1 mil M</div><p><span class="tag e2">REPORTADO</span>costos de salida antes de impuestos; el anuncio inicial estimó US$5,4 mil M</p></div></div>
+<div class="chainv"><div class="e1"><span class="tag e1">DOCUMENTADO</span>La compañía ingresó a Canadá en 2013 y abrió 124 tiendas en sus primeros diez meses.</div><div class="e2"><span class="tag e2">REPORTADO</span>Las pérdidas superaron los US$1.000 millones tras el primer año de operación.</div><div class="e1"><span class="tag e1">DOCUMENTADO</span>El nuevo CEO reconoció que se había hecho demasiado y demasiado rápido.</div><div class="e1"><span class="tag e1">DOCUMENTADO</span>En enero de 2015 se decidió discontinuar la operación y solicitar protección de acreedores.</div><div class="e2"><span class="tag e2">REPORTADO</span>Se registraron cargos antes de impuestos por ≈US$5,1 mil millones, con un beneficio tributario de US$1,6 mil millones.</div></div>
+<div class="lens"><b>Cómo lo miramos:</b> una decisión de expansión (♠) activó recursos, procesos y personas a la vez, y la decisión de salir fue a su vez una <b>nueva perturbación</b>. <span class="tag e4">HIPÓTESIS</span>Pregunta de análisis: ¿qué otras piezas se movían al abrir tan rápido, y dónde pudo haber un punto de control?</div>
+<small class="src">Fuentes: reportes sobre el anuncio de Target y su informe anual 2014, en <a class="l" href="https://www.biv.com/news/retail-manufacturing/target-nets-us16-billion-tax-break-failure-canadia-8242679" target="_blank" rel="noopener">BIV</a> y <a class="l" href="https://tcbmag.com/target-leaving-canada-what-it-means-what-it-will-cost/" target="_blank" rel="noopener">TCB Magazine</a>. No atribuimos toda la pérdida a una sola causa.</small>`;
+const WIP=`<p>Ficha en preparación. Publicaremos las cifras y fuentes una vez verificadas con los documentos originales, con cada dato atribuido y su nivel de evidencia.</p>`;
+/* e: g antes, y durante, r después · d: detalle verificado (o null) */
+const C=[
+{e:"g",t:"Target Canadá",o:"Target Corporation · Canadá y EE. UU. · 2013–2015",s:["Decisión","Recovery"],d:TGT},
+{e:"g",t:"Puente Chacao",o:"Obra pública · Chile",s:["Inversión","Project"],d:null},
+{e:"g",t:"HS2",o:"Alta velocidad · Reino Unido",s:["Inversión"],d:null},
+{e:"g",t:"Sydney Opera House",o:"Obra icónica · Australia",s:["Inversión","Project"],d:null},
+{e:"g",t:"Centro de Salud Ambiental de Arica",o:"Obra pública · Chile",s:["Check","Operation"],d:null},
+{e:"y",t:"Revlon · ERP",o:"Revlon · Estados Unidos · 2018",s:["Transformación","Recovery"],d:REV},
+{e:"y",t:"Hospital de La Serena",o:"Obra pública · Chile",s:["Project"],d:null},
+{e:"y",t:"Hospital Provincia Cordillera",o:"Obra pública · Chile",s:["Project","Operation"],d:null},
+{e:"y",t:"NHS National Programme for IT",o:"Sistema de salud · Reino Unido",s:["Transformación","Recovery"],d:null},
+{e:"y",t:"Hershey · ERP",o:"Hershey · Estados Unidos",s:["Transformación"],d:null},
+{e:"y",t:"Lidl · SAP",o:"Lidl · Alemania",s:["Transformación","Recovery"],d:null},
+{e:"r",t:"TNE / JUNAEB",o:"Servicio público · Chile",s:["Operation"],d:null}
+];
+const L={g:"ANTES",y:"DURANTE",r:"DESPUÉS"};let f="";
+function draw(){
+ document.getElementById("filtro").innerHTML=[["","Todos"],["g","ANTES"],["y","DURANTE"],["r","DESPUÉS"]].map(([k,t])=>`<button type="button" class="${k?"st-"+k:""} ${f===k?"on":""}" data-k="${k}">${k?'<i class="dot"></i>':""}${t}</button>`).join("");
+ document.getElementById("lista").innerHTML=C.filter(c=>!f||c.e===f).map(c=>`<div class="card st st-${c.e}"><div class="stage"><i class="dot"></i>${L[c.e]}</div><h3>${c.t}</h3><p>${c.o}</p><div>${c.s.map(x=>`<span class="pill">Domino ${x}</span>`).join("")}${c.d?'<span class="pill" style="border-color:var(--R);color:var(--R)">ficha verificada</span>':'<span class="pill">en verificación</span>'}</div><details><summary>${c.d?"Ver qué ocurrió y cómo lo miramos":"Estado de la ficha"}</summary><div>${c.d||WIP}</div></details></div>`).join("");
+ document.querySelectorAll("#filtro button").forEach(b=>b.onclick=()=>{f=b.dataset.k;draw()});
+ addRef();
+}
+const ref=new URLSearchParams(location.search).get("ref")||"";
+function addRef(){document.querySelectorAll("a[data-link]:not([data-r])").forEach(a=>{a.dataset.r=1;if(ref)a.href+=(a.href.includes("?")?"&":"?")+"ref="+encodeURIComponent(ref)})}
+draw();
+</script></body></html>

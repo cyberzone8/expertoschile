@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Servicios · Expertos Chile</title>
+<meta name="description" content="Siete servicios para ver qué mueve una decisión: antes, durante y después. Expertos Chile.">
+<link rel="stylesheet" href="estilo.css">
+</head><body><div class="w">
+<nav><a class="brand" href="index.html" data-link>EXPERTOS CHILE</a><div class="links"><a href="casos.html" data-link>Casos</a><a href="productos.html" class="on" data-link>Servicios</a><a href="charlas.html" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a></div></nav>
+
+<div style="padding:30px 0 20px">
+ <div class="eye">SERVICIOS</div>
+ <h1>Elige el momento en que estás. Te mostramos lo que viene después.</h1>
+ <p class="lead">Si estás por decidir, en pleno cambio o ya con el problema encima, hay un lugar donde empezar. Cada servicio parte de una pregunta y termina en un punto donde intervenir.</p>
+ <div class="sema"><span class="st-g"><i class="dot"></i>ANTES · prevenir</span><span class="st-y"><i class="dot"></i>DURANTE · controlar</span><span class="st-r"><i class="dot"></i>DESPUÉS · recuperar</span></div>
+</div>
+
+<section id="entrada">
+ <h2>Para empezar, sin compromiso</h2>
+ <div class="grid">
+  <div class="card"><h3>Diagnóstico de 2 minutos</h3><p>Seis preguntas y un resultado inmediato: dónde pueden estar tus puntos ciegos.</p><div class="btns"><a class="btn cta sm" href="diagnostico.html" data-link>Hacerlo ahora</a></div></div>
+  <div class="card"><h3>Charla semanal en vivo</h3><p>Cada semana tomamos un caso real y lo miramos juntos, paso a paso. Tú ves cómo trabajamos.</p><div class="btns"><a class="btn sm" href="charlas.html" data-link>Ver el calendario</a></div></div>
+ </div>
+</section>
+
+<section id="catalogo"><h2>Los siete servicios</h2><p>Filtra por etapa y mira qué entrega cada uno.</p>
+ <div class="sema" id="filtro"></div>
+ <div class="grid" id="lista"></div>
+ <p class="micro">Alcance, plazo y valor se definen según la decisión que traigas. Lo conversamos antes de empezar, sin compromiso.</p>
+</section>
+
+<section id="como"><h2>Cómo es trabajar con nosotros</h2>
+ <div class="grid">
+  <div class="card"><h3>1 · Configurar</h3><p>Ordenamos las piezas y sus conexiones: personas, recursos, procesos y decisiones.</p></div>
+  <div class="card"><h3>2 · Propagar</h3><p>Miramos qué ocurre cuando una pieza se mueve y dónde puede seguir el efecto.</p></div>
+  <div class="card"><h3>3 · Intervenir</h3><p>Definimos dónde poner defensas y cómo medir si funcionaron.</p></div>
+ </div>
+ <div class="btns"><a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Contarnos tu decisión por WhatsApp</a></div>
+</section>
+<footer>© Expertos Chile SpA · Los Ángeles, Biobío · Información general, no constituye asesoría profesional.</footer>
+</div>
+<script>
+const CONFIG={whatsapp:"569XXXXXXXX"}; // EDITAR
+const S=[
+{e:"g",n:"Domino Check",q:"¿Dónde está el dominó?",d:"Una mirada rápida a una decisión o proceso para ubicar sus conexiones y puntos ciegos.",x:["Mapa inicial de conexiones","3 puntos ciegos priorizados"],c:["Centro de Salud Ambiental (Arica)","Caso PYME"]},
+{e:"g",n:"Domino Decisión",q:"¿Qué puede mover esta decisión?",d:"Antes de decidir, vemos qué otras piezas se mueven y qué costos ocultos pueden aparecer.",x:["Mapa de efectos probables","Costos ocultos a vigilar"],c:["Target Canadá"]},
+{e:"g",n:"Domino Inversión",q:"¿Qué estamos comprometiendo?",d:"Escenarios de exposición de una inversión, con sus supuestos a validar. No es un costo final.",x:["Escenarios y supuestos","Puntos de control del gasto"],c:["Puente Chacao","HS2","Sydney Opera House"]},
+{e:"y",n:"Domino Project",q:"¿Dónde puede romperse el proyecto?",d:"Con el proyecto en marcha, mapeamos dependencias para detectar señales tempranas.",x:["Mapa de dependencias","Defensas y puntos de control"],c:["Hospital de La Serena","Hospital Provincia Cordillera"]},
+{e:"y",n:"Domino Transformación",q:"¿Qué otras piezas mueve el cambio?",d:"Un cambio de sistema, estructura o proceso toca a más áreas de las previstas. Las ubicamos.",x:["Efectos en procesos y personas","Plan de contención"],c:["Revlon","NHS","Hershey","Lidl"]},
+{e:"r",n:"Domino Operation",q:"¿Por qué sigue ocurriendo?",d:"Cuando el problema se repite, buscamos qué defensas existen y cuáles realmente funcionan.",x:["Análisis de recurrencia","Defensa existente vs. efectiva"],c:["TNE / JUNAEB","Centro de Salud Ambiental (Arica)"]},
+{e:"r",n:"Domino Recovery",q:"¿Dónde detenemos el dominó?",d:"Con el efecto ya en marcha, definimos cómo contenerlo y recuperar el rumbo.",x:["Plan de contención y recuperación","Indicadores de seguimiento"],c:["Revlon","NHS","Target Canadá","Lidl"]}
+];
+const L={g:"ANTES",y:"DURANTE",r:"DESPUÉS"};let f="";
+function draw(){
+ document.getElementById("filtro").innerHTML=[["","Todos"],["g","ANTES"],["y","DURANTE"],["r","DESPUÉS"]].map(([k,t])=>`<button type="button" class="${k?"st-"+k:""} ${f===k?"on":""}" data-k="${k}">${k?'<i class="dot"></i>':""}${t}</button>`).join("");
+ document.getElementById("lista").innerHTML=S.filter(s=>!f||s.e===f).map(s=>`<div class="card st st-${s.e}"><div class="stage"><i class="dot"></i>${L[s.e]}</div><h3>${s.n}</h3><p><b>${s.q}</b></p><p>${s.d}</p><p>${s.x.map(t=>"✓ "+t).join("<br>")}</p><div>${s.c.map(t=>`<span class="pill">${t}</span>`).join("")}</div><a class="btn sm" href="casos.html" data-link>Ver casos</a></div>`).join("");
+ document.querySelectorAll("#filtro button").forEach(b=>b.onclick=()=>{f=b.dataset.k;draw();if(typeof addRef=="function")addRef()});
+}
+draw();
+const ref=new URLSearchParams(location.search).get("ref")||"";
+function addRef(){document.querySelectorAll("a[data-link]:not([data-r])").forEach(a=>{a.dataset.r=1;if(ref)a.href+=(a.href.includes("?")?"&":"?")+"ref="+encodeURIComponent(ref)})}
+addRef();
+document.getElementById("wa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hola, vi los servicios de Expertos Chile y quiero conversar sobre una decisión."+(ref?" (Ref: "+ref+")":""));
+</script></body></html>

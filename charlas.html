@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Charlas semanales de casos aplicados · Expertos Chile</title>
+<meta name="description" content="Cada semana, un caso real mirado en vivo: configuración, propagación e intervención. Inscríbete gratis.">
+<link rel="stylesheet" href="estilo.css">
+<style>
+.ev{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:start}
+.date{text-align:center;border:2px solid var(--c);border-radius:14px;padding:8px 4px}
+.date b{display:block;font-size:30px;line-height:1;color:var(--ink)}.date small{color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.next{box-shadow:0 0 0 2px var(--c) inset}
+@media(max-width:520px){.ev{grid-template-columns:1fr}.date{display:flex;gap:10px;align-items:baseline;justify-content:flex-start;padding:8px 12px}.date b{font-size:22px}}
+.steps{display:grid;gap:12px;margin-top:14px}
+.step{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-left:6px solid var(--c);border-radius:14px;padding:14px 16px;background:var(--card)}
+.step i{font-style:normal;font-weight:800;font-size:13px;letter-spacing:.08em;min-width:92px;color:var(--c);padding-top:2px}
+.step p{margin:0;font-size:15px}
+</style></head><body><div class="w">
+<nav><a class="brand" href="index.html" data-link>EXPERTOS CHILE</a><div class="links"><a href="casos.html" data-link>Casos</a><a href="productos.html" data-link>Servicios</a><a href="charlas.html" class="on" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a></div></nav>
+
+<div style="padding:30px 0 20px">
+ <div class="eye">EN VIVO · UNA VEZ A LA SEMANA</div>
+ <h1>Mira cómo trabajamos, con un caso real, en 30 minutos.</h1>
+ <p class="lead">Cada semana tomamos un caso documentado y lo recorremos juntos: cómo estaba armado, qué se movió y dónde se podía intervenir. Al terminar, sabrás qué preguntas hacerte antes de tu próxima decisión.</p>
+ <div class="btns"><a class="btn cta" href="#calendario">Ver próximas charlas</a><a class="btn" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a></div>
+</div>
+
+<section id="formato"><h2>Qué vas a ver en vivo</h2>
+ <div class="steps">
+  <div class="step st-g"><i>ANTES</i><p><b>Configuración.</b> Armamos el cubo: personas, recursos, procesos y decisiones del caso.</p></div>
+  <div class="step st-y"><i>DURANTE</i><p><b>Propagación.</b> Movemos una ficha y observamos cuáles caen, y dónde había defensas.</p></div>
+  <div class="step st-r"><i>DESPUÉS</i><p><b>Intervención.</b> Marcamos dónde convendría intervenir y cómo mediríamos el resultado.</p></div>
+ </div>
+ <p class="micro">Formato: 5 min de método, 15 min de caso en vivo con sus fuentes, 10 min de preguntas. Puedes traer una decisión tuya y la miramos juntos.</p>
+</section>
+
+<section id="calendario"><h2>Próximas charlas</h2>
+ <p id="prox"></p><div id="ev" class="grid" style="grid-template-columns:1fr"></div>
+ <p class="micro">La inscripción es gratuita y por WhatsApp. Te enviamos el enlace de conexión antes de cada charla. Los casos marcados "en verificación" se confirman antes de la fecha.</p>
+</section>
+
+<section id="quien"><h2>¿Para quién es?</h2>
+ <p>Para quienes toman decisiones que tocan a más de un área: operaciones, sostenibilidad, relaciones comunitarias, proyectos, finanzas y gestión pública.</p>
+ <div class="btns"><a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Quiero que me avisen de la próxima charla</a></div>
+</section>
+<footer>© Expertos Chile SpA · Los Ángeles, Biobío · Casos con fines ilustrativos, basados en documentos y reportes públicos.</footer>
+</div>
+<script>
+/* ===== EDITAR ===== */
+const CONFIG={whatsapp:"569XXXXXXXX",hora:"12:00",duracionMin:30,zona:"America/Santiago"};
+/* e: g=antes, y=durante, r=despues. ok=true si el caso ya está verificado */
+const EV=[
+{f:"2026-10-15",e:"y",t:"Un cambio de sistema que frenó los despachos",c:"Revlon · ERP",ok:true},
+{f:"2026-10-22",e:"g",t:"Abrir rápido: lo que mueve una expansión",c:"Target Canadá",ok:true},
+{f:"2026-10-29",e:"g",t:"Tu decisión sobre la mesa: diagnóstico en vivo",c:"Caso PYME",ok:true},
+{f:"2026-11-05",e:"g",t:"Una decisión contractual y su exposición",c:"Puente Chacao",ok:false},
+{f:"2026-11-12",e:"y",t:"La defensa que existe y no se ejecuta",c:"Hospital Provincia Cordillera",ok:false},
+{f:"2026-11-19",e:"r",t:"Cuando el problema se repite",c:"TNE / JUNAEB",ok:false},
+{f:"2026-11-26",e:"y",t:"Transformación tecnológica a gran escala",c:"NHS",ok:false}
+];
+const L={g:"ANTES",y:"DURANTE",r:"DESPUÉS"},p2=n=>String(n).padStart(2,"0");
+const ref=new URLSearchParams(location.search).get("ref")||"";
+const hoy=new Date();hoy.setHours(0,0,0,0);
+let primero=true;
+document.getElementById("ev").innerHTML=EV.filter(x=>new Date(x.f+"T00:00:00")>=hoy).map(x=>{
+ const d=new Date(x.f+"T00:00:00"),[h,m]=CONFIG.hora.split(":").map(Number);
+ const fin=new Date(0,0,0,h,m+CONFIG.duracionMin),ini=`${x.f.replace(/-/g,"")}T${p2(h)}${p2(m)}00`,end=`${x.f.replace(/-/g,"")}T${p2(fin.getHours())}${p2(fin.getMinutes())}00`;
+ const cal="https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent("Charla Expertos Chile: "+x.t)+"&dates="+ini+"/"+end+"&ctz="+CONFIG.zona+"&details="+encodeURIComponent("Caso: "+x.c+". Te enviaremos el enlace de conexión.");
+ const wa="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hola, quiero inscribirme a la charla del "+d.toLocaleDateString("es-CL",{day:"numeric",month:"long"})+" ("+x.c+")."+(ref?" (Ref: "+ref+")":""));
+ const cls=primero?" next":"";primero=false;
+ return `<div class="card st st-${x.e}${cls}"><div class="ev"><div class="date"><small>${d.toLocaleDateString("es-CL",{weekday:"short"})}</small><b>${d.getDate()}</b><small>${d.toLocaleDateString("es-CL",{month:"short"})}</small></div><div><div class="stage"><i class="dot"></i>${L[x.e]} · ${CONFIG.hora} h${cls?" · PRÓXIMA":""}</div><h3>${x.t}</h3><p>${x.c}${x.ok?"":' <span class="pill">en verificación</span>'}</p><div class="btns" style="margin-top:6px"><a class="btn cta sm" href="${wa}" target="_blank" rel="noopener">Inscribirme</a><a class="btn sm" href="${cal}" target="_blank" rel="noopener">Agregar al calendario</a></div></div></div></div>`}).join("")||"<p>Pronto publicaremos nuevas fechas.</p>";
+document.getElementById("wa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hola, quiero que me avisen de las próximas charlas de casos."+(ref?" (Ref: "+ref+")":""));
+document.querySelectorAll("a[data-link]").forEach(a=>{if(ref)a.href+=(a.href.includes("?")?"&":"?")+"ref="+encodeURIComponent(ref)});
+</script></body></html>
