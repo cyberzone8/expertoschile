@@ -43,15 +43,16 @@ ul{padding-left:20px;color:var(--mute)}li{margin:6px 0}
 .note{font-size:13px;color:var(--mute);margin-top:12px}
 footer{padding:30px 0 40px;text-align:center;font-size:12px;color:var(--mute);border-top:1px solid var(--line)}
 @media(max-width:520px){dl{grid-template-columns:1fr}dt{margin-top:6px}}
+nav a.navcta{background:var(--R);color:#06222b;border-radius:8px;padding:.25em .8em;font-weight:700}nav a.navcta:hover{color:#06222b;filter:brightness(1.08)}nav a.on{color:var(--ink)}
 </style></head><body>
 <div class="w">
-<nav><span>EXPERTOS CHILE</span><span style="display:flex;gap:16px;flex-wrap:wrap"><a href="casos.html">Casos</a><a href="productos.html">Servicios</a><a href="charlas.html">Charlas</a><a href="index.html">Inicio</a></span></nav>
+<nav><a href="index.html" data-link style="color:var(--ink);font-weight:800;letter-spacing:.05em">EXPERTOS CHILE</a><span style="display:flex;gap:16px;flex-wrap:wrap;align-items:center"><a href="casos.html" data-link>Casos</a><a href="productos.html" data-link>Servicios</a><a href="charlas.html" data-link>Charlas</a><a href="quienes-somos.html" class="on" data-link>Quiénes somos</a><a href="diagnostico.html" class="navcta" data-link>Diagnóstico</a></span></nav>
 
 <div class="hero">
  <div class="eye">ASESORÍA · CAPACITACIÓN · TECNOLOGÍA</div>
  <h1>Antes de mover una pieza, descubre qué otras puede mover.</h1>
  <p class="lead">Expertos Chile es una sociedad con base en Los Ángeles, Región del Biobío, que asesora y capacita a empresas, instituciones y personas para que decidan <b>viendo las conexiones</b> entre decisiones, procesos, recursos y personas.</p>
- <div class="btns"><a class="btn cta" href="diagnostico.html">Hacer el diagnóstico de 2 minutos</a><a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a></div>
+ <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico de 2 minutos</a><a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a></div>
 </div>
 
 <section id="hacemos">
@@ -73,6 +74,7 @@ footer{padding:30px 0 40px;text-align:center;font-size:12px;color:var(--mute);bo
   <div class="step"><i style="color:var(--R)">ANTICIPAR</i><p>Planteamos hipótesis de qué efectos puede tener un cambio, con su nivel de probabilidad, para verificarlas con tu equipo y tus datos.</p></div>
   <div class="step"><i style="color:var(--Pr)">INTERVENIR</i><p>Definimos dónde conviene prevenir, controlar o recuperar, con responsables claros.</p></div>
  </div>
+<div class="btns"><a class="btn" href="productos.html" data-link>Ver los servicios</a><a class="btn" href="casos.html" data-link>Ver casos reales</a><a class="btn" href="charlas.html" data-link>Ir a una charla</a></div>
 </section>
 
 <section id="para">
@@ -82,12 +84,12 @@ footer{padding:30px 0 40px;text-align:center;font-size:12px;color:var(--mute);bo
   <li><b style="color:var(--ink)">Instituciones y municipios</b> que necesitan ordenar información para priorizar.</li>
   <li><b style="color:var(--ink)">Personas y equipos</b> que quieren desarrollar nuevas capacidades.</li>
  </ul>
- <div class="btns"><a class="btn cta" href="diagnostico.html">Ver dónde pueden estar tus puntos ciegos</a></div>
+ <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Ver dónde pueden estar tus puntos ciegos</a></div>
 </section>
 <footer>© Expertos Chile SpA · Los Ángeles, Biobío · Este sitio entrega información general y no constituye asesoría profesional.</footer>
 </div>
 <script>
-const CONFIG={whatsapp:"569XXXXXXXX"}; // EDITAR: número en formato internacional, sin + ni espacios
-document.getElementById("wa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hola, vi la página de Expertos Chile y quiero conversar.");
+const CONFIG={whatsapp:"569XXXXXXXX"}; const ref=new URLSearchParams(location.search).get("ref")||"";document.querySelectorAll("a[data-link]").forEach(a=>{if(ref)a.href+=(a.href.includes("?")?"&":"?")+"ref="+encodeURIComponent(ref)}); // EDITAR: número en formato internacional, sin + ni espacios
+document.getElementById("wa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hola, vi la página de Expertos Chile y quiero conversar."+(ref?" (Ref: "+ref+")":""));
 </script>
 </body></html>
