@@ -15,7 +15,7 @@
 .step i{font-style:normal;font-weight:800;font-size:13px;letter-spacing:.08em;min-width:92px;color:var(--c);padding-top:2px}
 .step p{margin:0;font-size:15px}
 </style></head><body><div class="w">
-<nav><a class="brand" href="index.html" data-link>EXPERTOS CHILE</a><div class="links"><a href="casos.html" data-link>Casos</a><a href="productos.html" data-link>Servicios</a><a href="charlas.html" class="on" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a></div></nav>
+<nav><a class="brand" href="index.html" data-link>EXPERTOS CHILE</a><div class="links"><a href="casos.html" data-link>Casos</a><a href="productos.html" data-link>Servicios</a><a href="charlas.html" class="on" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a><a href="diagnostico.html" class="navcta" data-link>Diagnóstico</a></div></nav>
 
 <div style="padding:30px 0 20px">
  <div class="eye">EN VIVO · UNA VEZ A LA SEMANA</div>
@@ -40,7 +40,7 @@
 
 <section id="quien"><h2>¿Para quién es?</h2>
  <p>Para quienes toman decisiones que tocan a más de un área: operaciones, sostenibilidad, relaciones comunitarias, proyectos, finanzas y gestión pública.</p>
- <div class="btns"><a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Quiero que me avisen de la próxima charla</a></div>
+ <div class="btns"><a class="btn" href="casos.html" data-link>Ver el banco de casos</a><a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Quiero que me avisen de la próxima charla</a></div>
 </section>
 <footer>© Expertos Chile SpA · Los Ángeles, Biobío · Casos con fines ilustrativos, basados en documentos y reportes públicos.</footer>
 </div>
@@ -49,13 +49,13 @@
 const CONFIG={whatsapp:"569XXXXXXXX",hora:"12:00",duracionMin:30,zona:"America/Santiago"};
 /* e: g=antes, y=durante, r=despues. ok=true si el caso ya está verificado */
 const EV=[
-{f:"2026-10-15",e:"y",t:"Un cambio de sistema que frenó los despachos",c:"Revlon · ERP",ok:true},
-{f:"2026-10-22",e:"g",t:"Abrir rápido: lo que mueve una expansión",c:"Target Canadá",ok:true},
+{f:"2026-10-15",e:"y",t:"Un cambio de sistema que frenó los despachos",c:"Revlon · ERP",i:"revlon",ok:true},
+{f:"2026-10-22",e:"g",t:"Abrir rápido: lo que mueve una expansión",c:"Target Canadá",i:"target",ok:true},
 {f:"2026-10-29",e:"g",t:"Tu decisión sobre la mesa: diagnóstico en vivo",c:"Caso PYME",ok:true},
-{f:"2026-11-05",e:"g",t:"Una decisión contractual y su exposición",c:"Puente Chacao",ok:false},
-{f:"2026-11-12",e:"y",t:"La defensa que existe y no se ejecuta",c:"Hospital Provincia Cordillera",ok:false},
-{f:"2026-11-19",e:"r",t:"Cuando el problema se repite",c:"TNE / JUNAEB",ok:false},
-{f:"2026-11-26",e:"y",t:"Transformación tecnológica a gran escala",c:"NHS",ok:false}
+{f:"2026-11-05",e:"g",t:"Una decisión contractual y su exposición",c:"Puente Chacao",i:"chacao",ok:false},
+{f:"2026-11-12",e:"y",t:"La defensa que existe y no se ejecuta",c:"Hospital Provincia Cordillera",i:"cordillera",ok:false},
+{f:"2026-11-19",e:"r",t:"Cuando el problema se repite",c:"TNE / JUNAEB",i:"tne",ok:false},
+{f:"2026-11-26",e:"y",t:"Transformación tecnológica a gran escala",c:"NHS",i:"nhs",ok:false}
 ];
 const L={g:"ANTES",y:"DURANTE",r:"DESPUÉS"},p2=n=>String(n).padStart(2,"0");
 const ref=new URLSearchParams(location.search).get("ref")||"";
@@ -67,7 +67,7 @@ document.getElementById("ev").innerHTML=EV.filter(x=>new Date(x.f+"T00:00:00")>=
  const cal="https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent("Charla Expertos Chile: "+x.t)+"&dates="+ini+"/"+end+"&ctz="+CONFIG.zona+"&details="+encodeURIComponent("Caso: "+x.c+". Te enviaremos el enlace de conexión.");
  const wa="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hola, quiero inscribirme a la charla del "+d.toLocaleDateString("es-CL",{day:"numeric",month:"long"})+" ("+x.c+")."+(ref?" (Ref: "+ref+")":""));
  const cls=primero?" next":"";primero=false;
- return `<div class="card st st-${x.e}${cls}"><div class="ev"><div class="date"><small>${d.toLocaleDateString("es-CL",{weekday:"short"})}</small><b>${d.getDate()}</b><small>${d.toLocaleDateString("es-CL",{month:"short"})}</small></div><div><div class="stage"><i class="dot"></i>${L[x.e]} · ${CONFIG.hora} h${cls?" · PRÓXIMA":""}</div><h3>${x.t}</h3><p>${x.c}${x.ok?"":' <span class="pill">en verificación</span>'}</p><div class="btns" style="margin-top:6px"><a class="btn cta sm" href="${wa}" target="_blank" rel="noopener">Inscribirme</a><a class="btn sm" href="${cal}" target="_blank" rel="noopener">Agregar al calendario</a></div></div></div></div>`}).join("")||"<p>Pronto publicaremos nuevas fechas.</p>";
+ return `<div class="card st st-${x.e}${cls}"><div class="ev"><div class="date"><small>${d.toLocaleDateString("es-CL",{weekday:"short"})}</small><b>${d.getDate()}</b><small>${d.toLocaleDateString("es-CL",{month:"short"})}</small></div><div><div class="stage"><i class="dot"></i>${L[x.e]} · ${CONFIG.hora} h${cls?" · PRÓXIMA":""}</div><h3>${x.t}</h3><p>${x.c}${x.ok?"":' <span class="pill">en verificación</span>'}</p><div class="btns" style="margin-top:6px"><a class="btn cta sm" href="${wa}" target="_blank" rel="noopener">Inscribirme</a><a class="btn sm" href="${cal}" target="_blank" rel="noopener">Agregar al calendario</a><a class="btn sm" href="${x.i?'casos.html#'+x.i:'diagnostico.html'}" data-link>${x.i?'Ver el caso':'Hacer el diagnóstico'}</a><a class="btn sm" href="productos.html?e=${x.e}" data-link>Ver el servicio</a></div></div></div></div>`}).join("")||"<p>Pronto publicaremos nuevas fechas.</p>";
 document.getElementById("wa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hola, quiero que me avisen de las próximas charlas de casos."+(ref?" (Ref: "+ref+")":""));
 document.querySelectorAll("a[data-link]").forEach(a=>{if(ref)a.href+=(a.href.includes("?")?"&":"?")+"ref="+encodeURIComponent(ref)});
 </script></body></html>
