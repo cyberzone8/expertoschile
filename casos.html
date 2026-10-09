@@ -17,7 +17,7 @@ small.src{display:block;font-size:12px;color:var(--mute);margin-top:8px}
 .quote{font-weight:700;color:var(--ink);font-size:clamp(16px,2.4vw,20px)}
 .card.st h3{margin-top:2px}
 </style></head><body><div class="w">
-<nav><a class="brand" href="index.html" data-link>EXPERTOS CHILE</a><div class="links"><a href="casos.html" class="on" data-link>Casos</a><a href="productos.html" data-link>Servicios</a><a href="charlas.html" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a></div></nav>
+<nav><a class="brand" href="index.html" data-link>EXPERTOS CHILE</a><div class="links"><a href="casos.html" class="on" data-link>Casos</a><a href="productos.html" data-link>Servicios</a><a href="charlas.html" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a><a href="diagnostico.html" class="navcta" data-link>Diagnóstico</a></div></nav>
 
 <div style="padding:30px 0 20px">
  <div class="eye">BANCO DE CASOS</div>
@@ -35,7 +35,7 @@ small.src{display:block;font-size:12px;color:var(--mute);margin-top:8px}
  <p class="quote">Los casos históricos muestran lo que ocurrió. El modelo muestra cómo podemos analizarlo. No confundimos explicación con predicción.</p>
  <p>No sabemos qué habría pasado con otra decisión, y no decimos que habríamos evitado estos problemas. Lo que hacemos es poner sobre la mesa <b>las conexiones que conviene mirar antes de decidir</b>: qué piezas están ligadas, dónde puede propagarse un efecto y qué defensas existen y realmente funcionan.</p>
  <div class="card"><h3>¿Y en tu organización?</h3><p>Con tu información pasamos de casos ajenos a tu caso: <b>decisión → configuración → efectos probables → puntos de intervención → medición</b>.</p>
- <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a><a class="btn" href="productos.html" data-link>Ver los servicios</a></div></div>
+ <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a><a class="btn" href="productos.html" data-link>Ver los servicios</a><a class="btn" href="charlas.html" data-link>Ir a una charla</a><a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Contarnos tu decisión por WhatsApp</a><a class="btn" href="quienes-somos.html" data-link>Quiénes somos</a></div></div>
 </section>
 <footer>© Expertos Chile SpA · Los Ángeles, Biobío · Casos con fines ilustrativos, basados en documentos y reportes públicos. No constituye asesoría profesional.</footer>
 </div>
@@ -51,27 +51,30 @@ const TGT=`<div class="stats"><div class="card"><div class="num">133</div><p><sp
 const WIP=`<p>Ficha en preparación. Publicaremos las cifras y fuentes una vez verificadas con los documentos originales, con cada dato atribuido y su nivel de evidencia.</p>`;
 /* e: g antes, y durante, r después · d: detalle verificado (o null) */
 const C=[
-{e:"g",t:"Target Canadá",o:"Target Corporation · Canadá y EE. UU. · 2013–2015",s:["Decisión","Recovery"],d:TGT},
-{e:"g",t:"Puente Chacao",o:"Obra pública · Chile",s:["Inversión","Project"],d:null},
-{e:"g",t:"HS2",o:"Alta velocidad · Reino Unido",s:["Inversión"],d:null},
-{e:"g",t:"Sydney Opera House",o:"Obra icónica · Australia",s:["Inversión","Project"],d:null},
-{e:"g",t:"Centro de Salud Ambiental de Arica",o:"Obra pública · Chile",s:["Check","Operation"],d:null},
-{e:"y",t:"Revlon · ERP",o:"Revlon · Estados Unidos · 2018",s:["Transformación","Recovery"],d:REV},
-{e:"y",t:"Hospital de La Serena",o:"Obra pública · Chile",s:["Project"],d:null},
-{e:"y",t:"Hospital Provincia Cordillera",o:"Obra pública · Chile",s:["Project","Operation"],d:null},
-{e:"y",t:"NHS National Programme for IT",o:"Sistema de salud · Reino Unido",s:["Transformación","Recovery"],d:null},
-{e:"y",t:"Hershey · ERP",o:"Hershey · Estados Unidos",s:["Transformación"],d:null},
-{e:"y",t:"Lidl · SAP",o:"Lidl · Alemania",s:["Transformación","Recovery"],d:null},
-{e:"r",t:"TNE / JUNAEB",o:"Servicio público · Chile",s:["Operation"],d:null}
+{e:"g",i:"target",t:"Target Canadá",o:"Target Corporation · Canadá y EE. UU. · 2013–2015",s:["Decisión","Recovery"],d:TGT},
+{e:"g",i:"chacao",t:"Puente Chacao",o:"Obra pública · Chile",s:["Inversión","Project"],d:null},
+{e:"g",i:"hs2",t:"HS2",o:"Alta velocidad · Reino Unido",s:["Inversión"],d:null},
+{e:"g",i:"opera",t:"Sydney Opera House",o:"Obra icónica · Australia",s:["Inversión","Project"],d:null},
+{e:"g",i:"arica",t:"Centro de Salud Ambiental de Arica",o:"Obra pública · Chile",s:["Check","Operation"],d:null},
+{e:"y",i:"revlon",t:"Revlon · ERP",o:"Revlon · Estados Unidos · 2018",s:["Transformación","Recovery"],d:REV},
+{e:"y",i:"serena",t:"Hospital de La Serena",o:"Obra pública · Chile",s:["Project"],d:null},
+{e:"y",i:"cordillera",t:"Hospital Provincia Cordillera",o:"Obra pública · Chile",s:["Project","Operation"],d:null},
+{e:"y",i:"nhs",t:"NHS National Programme for IT",o:"Sistema de salud · Reino Unido",s:["Transformación","Recovery"],d:null},
+{e:"y",i:"hershey",t:"Hershey · ERP",o:"Hershey · Estados Unidos",s:["Transformación"],d:null},
+{e:"y",i:"lidl",t:"Lidl · SAP",o:"Lidl · Alemania",s:["Transformación","Recovery"],d:null},
+{e:"r",i:"tne",t:"TNE / JUNAEB",o:"Servicio público · Chile",s:["Operation"],d:null}
 ];
-const L={g:"ANTES",y:"DURANTE",r:"DESPUÉS"};let f="";
+const L={g:"ANTES",y:"DURANTE",r:"DESPUÉS"};const q0=new URLSearchParams(location.search).get("e")||"";let f=["g","y","r"].includes(q0)?q0:"";
 function draw(){
  document.getElementById("filtro").innerHTML=[["","Todos"],["g","ANTES"],["y","DURANTE"],["r","DESPUÉS"]].map(([k,t])=>`<button type="button" class="${k?"st-"+k:""} ${f===k?"on":""}" data-k="${k}">${k?'<i class="dot"></i>':""}${t}</button>`).join("");
- document.getElementById("lista").innerHTML=C.filter(c=>!f||c.e===f).map(c=>`<div class="card st st-${c.e}"><div class="stage"><i class="dot"></i>${L[c.e]}</div><h3>${c.t}</h3><p>${c.o}</p><div>${c.s.map(x=>`<span class="pill">Domino ${x}</span>`).join("")}${c.d?'<span class="pill" style="border-color:var(--R);color:var(--R)">ficha verificada</span>':'<span class="pill">en verificación</span>'}</div><details><summary>${c.d?"Ver qué ocurrió y cómo lo miramos":"Estado de la ficha"}</summary><div>${c.d||WIP}</div></details></div>`).join("");
+ document.getElementById("lista").innerHTML=C.filter(c=>!f||c.e===f).map(c=>`<div class="card st st-${c.e}" id="${c.i}"><div class="stage"><i class="dot"></i>${L[c.e]}</div><h3>${c.t}</h3><p>${c.o}</p><div>${c.s.map(x=>`<span class="pill">Domino ${x}</span>`).join("")}${c.d?'<span class="pill" style="border-color:var(--R);color:var(--R)">ficha verificada</span>':'<span class="pill">en verificación</span>'}</div><details><summary>${c.d?"Ver qué ocurrió y cómo lo miramos":"Estado de la ficha"}</summary><div>${c.d||WIP}</div></details><div class="btns"><a class="btn sm" href="productos.html?e=${c.e}" data-link>Servicio para esta etapa</a><a class="btn sm" href="charlas.html#calendario" data-link>Verlo en una charla</a></div></div>`).join("");
  document.querySelectorAll("#filtro button").forEach(b=>b.onclick=()=>{f=b.dataset.k;draw()});
  addRef();
 }
 const ref=new URLSearchParams(location.search).get("ref")||"";
 function addRef(){document.querySelectorAll("a[data-link]:not([data-r])").forEach(a=>{a.dataset.r=1;if(ref)a.href+=(a.href.includes("?")?"&":"?")+"ref="+encodeURIComponent(ref)})}
 draw();
+(function(){const h=location.hash.slice(1),el=h&&document.getElementById(h);if(el){const d=el.querySelector("details");if(d)d.open=true;el.scrollIntoView()}})();
+const CONFIG={whatsapp:"569XXXXXXXX"}; // EDITAR
+document.getElementById("wa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hola, vi los casos de Expertos Chile y quiero conversar sobre una decisión."+(ref?" (Ref: "+ref+")":""));
 </script></body></html>
