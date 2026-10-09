@@ -5,7 +5,7 @@
 <meta name="description" content="Siete servicios para ver qué mueve una decisión: antes, durante y después. Expertos Chile.">
 <link rel="stylesheet" href="estilo.css">
 </head><body><div class="w">
-<nav><a class="brand" href="index.html" data-link>EXPERTOS CHILE</a><div class="links"><a href="casos.html" data-link>Casos</a><a href="productos.html" class="on" data-link>Servicios</a><a href="charlas.html" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a></div></nav>
+<nav><a class="brand" href="index.html" data-link>EXPERTOS CHILE</a><div class="links"><a href="casos.html" data-link>Casos</a><a href="productos.html" class="on" data-link>Servicios</a><a href="charlas.html" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a><a href="diagnostico.html" class="navcta" data-link>Diagnóstico</a></div></nav>
 
 <div style="padding:30px 0 20px">
  <div class="eye">SERVICIOS</div>
@@ -49,10 +49,10 @@ const S=[
 {e:"r",n:"Domino Operation",q:"¿Por qué sigue ocurriendo?",d:"Cuando el problema se repite, buscamos qué defensas existen y cuáles realmente funcionan.",x:["Análisis de recurrencia","Defensa existente vs. efectiva"],c:["TNE / JUNAEB","Centro de Salud Ambiental (Arica)"]},
 {e:"r",n:"Domino Recovery",q:"¿Dónde detenemos el dominó?",d:"Con el efecto ya en marcha, definimos cómo contenerlo y recuperar el rumbo.",x:["Plan de contención y recuperación","Indicadores de seguimiento"],c:["Revlon","NHS","Target Canadá","Lidl"]}
 ];
-const L={g:"ANTES",y:"DURANTE",r:"DESPUÉS"};let f="";
+const L={g:"ANTES",y:"DURANTE",r:"DESPUÉS"};const ID={"Centro de Salud Ambiental (Arica)":"arica","Target Canadá":"target","Puente Chacao":"chacao","HS2":"hs2","Sydney Opera House":"opera","Hospital de La Serena":"serena","Hospital Provincia Cordillera":"cordillera","Revlon":"revlon","NHS":"nhs","Hershey":"hershey","Lidl":"lidl","TNE / JUNAEB":"tne"};const q0=new URLSearchParams(location.search).get("e")||"";let f=["g","y","r"].includes(q0)?q0:"";
 function draw(){
  document.getElementById("filtro").innerHTML=[["","Todos"],["g","ANTES"],["y","DURANTE"],["r","DESPUÉS"]].map(([k,t])=>`<button type="button" class="${k?"st-"+k:""} ${f===k?"on":""}" data-k="${k}">${k?'<i class="dot"></i>':""}${t}</button>`).join("");
- document.getElementById("lista").innerHTML=S.filter(s=>!f||s.e===f).map(s=>`<div class="card st st-${s.e}"><div class="stage"><i class="dot"></i>${L[s.e]}</div><h3>${s.n}</h3><p><b>${s.q}</b></p><p>${s.d}</p><p>${s.x.map(t=>"✓ "+t).join("<br>")}</p><div>${s.c.map(t=>`<span class="pill">${t}</span>`).join("")}</div><a class="btn sm" href="casos.html" data-link>Ver casos</a></div>`).join("");
+ document.getElementById("lista").innerHTML=S.filter(s=>!f||s.e===f).map(s=>`<div class="card st st-${s.e}"><div class="stage"><i class="dot"></i>${L[s.e]}</div><h3>${s.n}</h3><p><b>${s.q}</b></p><p>${s.d}</p><p>${s.x.map(t=>"✓ "+t).join("<br>")}</p><div>${s.c.map(t=>ID[t]?`<a class="pill" href="casos.html#${ID[t]}" data-link>${t}</a>`:`<span class="pill">${t}</span>`).join("")}</div><a class="btn sm" href="casos.html?e=${s.e}" data-link>Ver casos de esta etapa</a></div>`).join("");
  document.querySelectorAll("#filtro button").forEach(b=>b.onclick=()=>{f=b.dataset.k;draw();if(typeof addRef=="function")addRef()});
 }
 draw();
