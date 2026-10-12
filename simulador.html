@@ -1,0 +1,1263 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Simulador interactivo de Expertos Chile para explorar problemas operacionales, relaciones entre procesos y posibles puntos de intervención.">
+  <title>Simulador de escenarios | Expertos Chile</title>
+
+  <!-- Reutiliza los estilos generales del sitio -->
+  <link rel="stylesheet" href="estilo.css">
+
+  <!-- Estilos específicos del simulador -->
+  <style>
+    #ec-simulador {
+      --ec-bg: #f5f7fa;
+      --ec-card: #ffffff;
+      --ec-text: #182230;
+      --ec-muted: #667085;
+      --ec-border: #dce2ea;
+      --ec-green: #218653;
+      --ec-yellow: #d49a16;
+      --ec-red: #cf4545;
+      --ec-blue: #2459a9;
+
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 18px 56px;
+      color: var(--ec-text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    #ec-simulador * {
+      box-sizing: border-box;
+    }
+
+    #ec-simulador h1,
+    #ec-simulador h2,
+    #ec-simulador h3,
+    #ec-simulador p {
+      margin-top: 0;
+    }
+
+    #ec-simulador h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.12;
+      margin-bottom: 16px;
+    }
+
+    #ec-simulador h2 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+
+    #ec-simulador h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    #ec-simulador .ec-muted {
+      color: var(--ec-muted);
+    }
+
+    #ec-simulador .ec-hero {
+      padding: clamp(22px, 5vw, 48px);
+      border: 1px solid var(--ec-border);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 95% 5%, #dce9ff 0, transparent 30%),
+        linear-gradient(135deg, #ffffff, #f5f8fc);
+      margin-bottom: 24px;
+    }
+
+    #ec-simulador .ec-eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: #e8effb;
+      color: #244b87;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    #ec-simulador .ec-notice {
+      padding: 13px 15px;
+      border-left: 4px solid var(--ec-blue);
+      background: #eef4ff;
+      border-radius: 7px;
+      font-size: .93rem;
+    }
+
+    #ec-simulador .ec-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    #ec-simulador .ec-card {
+      background: var(--ec-card);
+      border: 1px solid var(--ec-border);
+      border-radius: 16px;
+      padding: 22px;
+      min-width: 0;
+      box-shadow: 0 5px 18px rgba(20, 35, 60, .045);
+    }
+
+    #ec-simulador .ec-field {
+      margin-bottom: 22px;
+    }
+
+    #ec-simulador .ec-label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    #ec-simulador select,
+    #ec-simulador input[type="text"] {
+      width: 100%;
+      padding: 12px 13px;
+      border: 1px solid #bfc9d8;
+      border-radius: 9px;
+      background: white;
+      color: var(--ec-text);
+      font: inherit;
+    }
+
+    #ec-simulador select:focus,
+    #ec-simulador input:focus,
+    #ec-simulador button:focus-visible,
+    #ec-simulador a:focus-visible {
+      outline: 3px solid #a8c7ff;
+      outline-offset: 2px;
+    }
+
+    #ec-simulador .ec-options {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    #ec-simulador .ec-stage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      min-height: 88px;
+      padding: 12px;
+      border: 1px solid var(--ec-border);
+      border-radius: 11px;
+      cursor: pointer;
+      background: white;
+      transition: border-color .15s, background .15s;
+    }
+
+    #ec-simulador .ec-stage:has(input:checked) {
+      border-color: #345fa5;
+      background: #eef4ff;
+      box-shadow: inset 0 0 0 1px #345fa5;
+    }
+
+    #ec-simulador .ec-stage input {
+      accent-color: #2459a9;
+    }
+
+    #ec-simulador .ec-stage strong {
+      font-size: .94rem;
+    }
+
+    #ec-simulador .ec-stage small {
+      color: var(--ec-muted);
+      line-height: 1.3;
+    }
+
+    #ec-simulador .ec-stage-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+
+    #ec-simulador .ec-green {
+      background: var(--ec-green);
+    }
+
+    #ec-simulador .ec-yellow {
+      background: var(--ec-yellow);
+    }
+
+    #ec-simulador .ec-red {
+      background: var(--ec-red);
+    }
+
+    #ec-simulador .ec-btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 17px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      background: #203f70;
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      transition: opacity .15s, transform .15s;
+    }
+
+    #ec-simulador .ec-btn:hover {
+      opacity: .9;
+      transform: translateY(-1px);
+    }
+
+    #ec-simulador .ec-btn-secondary {
+      color: #203f70;
+      background: white;
+      border-color: #bfc9d8;
+    }
+
+    #ec-simulador .ec-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    #ec-simulador .ec-result {
+      display: grid;
+      gap: 16px;
+    }
+
+    #ec-simulador .ec-result-head {
+      border-top: 5px solid var(--ec-green);
+    }
+
+    #ec-simulador .ec-result-head[data-stage="durante"] {
+      border-top-color: var(--ec-yellow);
+    }
+
+    #ec-simulador .ec-result-head[data-stage="despues"] {
+      border-top-color: var(--ec-red);
+    }
+
+    #ec-simulador .ec-tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #edf1f6;
+      color: #344054;
+      font-size: .8rem;
+    }
+
+    #ec-simulador .ec-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    #ec-simulador .ec-flow-item {
+      padding: 12px 9px;
+      border: 1px solid var(--ec-border);
+      border-radius: 10px;
+      text-align: center;
+      background: #fafbfc;
+      overflow-wrap: anywhere;
+    }
+
+    #ec-simulador .ec-flow-item strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+    }
+
+    #ec-simulador .ec-flow-item span {
+      display: block;
+      color: var(--ec-muted);
+      font-size: .8rem;
+    }
+
+    #ec-simulador .ec-list {
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
+
+    #ec-simulador .ec-list li {
+      margin-bottom: 9px;
+    }
+
+    #ec-simulador .ec-service {
+      padding: 15px;
+      border: 1px solid var(--ec-border);
+      border-radius: 12px;
+      margin-top: 10px;
+      background: #fff;
+    }
+
+    #ec-simulador .ec-service p {
+      margin-bottom: 9px;
+    }
+
+    #ec-simulador .ec-service a {
+      color: #2459a9;
+      font-weight: 700;
+    }
+
+    #ec-simulador .ec-bottom {
+      margin-top: 24px;
+      padding: 25px;
+      border-radius: 16px;
+      background: #172b49;
+      color: white;
+    }
+
+    #ec-simulador .ec-bottom p {
+      color: #e4eaf4;
+    }
+
+    #ec-simulador .ec-bottom .ec-btn {
+      background: white;
+      color: #172b49;
+    }
+
+    #ec-simulador .ec-bottom .ec-btn-secondary {
+      background: transparent;
+      color: white;
+      border-color: #9aabc3;
+    }
+
+    #ec-simulador .ec-small {
+      font-size: .88rem;
+    }
+
+    #ec-simulador .ec-hidden {
+      display: none !important;
+    }
+
+    #ec-simulador .ec-divider {
+      border: 0;
+      border-top: 1px solid var(--ec-border);
+      margin: 20px 0;
+    }
+
+    #ec-simulador .ec-summary {
+      padding: 13px;
+      border-radius: 10px;
+      background: #f5f7fa;
+      border: 1px dashed #bfc9d8;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 800px) {
+      #ec-simulador .ec-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #ec-simulador {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      #ec-simulador .ec-card {
+        padding: 16px;
+      }
+
+      #ec-simulador .ec-options {
+        grid-template-columns: 1fr;
+      }
+
+      #ec-simulador .ec-stage {
+        min-height: auto;
+      }
+
+      #ec-simulador .ec-flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #ec-simulador .ec-btn-row .ec-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Encabezado: adapta los enlaces si tu navegación tiene otra estructura -->
+  <header>
+    <nav aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <a href="productos.html">Servicios</a>
+      <a href="casos.html">Casos</a>
+      <a href="simulador.html" aria-current="page">Simulador</a>
+      <a href="diagnostico.html">Diagnóstico</a>
+      <a href="quienes-somos.html">Quiénes somos</a>
+    </nav>
+  </header>
+
+  <main id="ec-simulador">
+
+    <section class="ec-hero">
+      <span class="ec-eyebrow">Expertos Chile · Simulador interactivo</span>
+      <h1>Antes de mover una pieza, mira qué más puede moverse.</h1>
+
+      <p>
+        Explora cómo una situación operacional puede involucrar distintas
+        áreas, recursos, procesos e instancias de decisión. Selecciona un
+        escenario y una etapa para identificar preguntas que vale la pena
+        investigar.
+      </p>
+
+      <div class="ec-notice">
+        <strong>Importante:</strong> este simulador organiza preguntas e
+        hipótesis de trabajo. No determina por sí solo las causas de un
+        problema, no reemplaza una evaluación técnica y no calcula ahorros
+        reales.
+      </div>
+    </section>
+
+    <div class="ec-layout">
+
+      <!-- PANEL DE CONFIGURACIÓN -->
+      <section class="ec-card" aria-labelledby="ec-config-title">
+        <h2 id="ec-config-title">1. Configura el escenario</h2>
+
+        <div class="ec-field">
+          <label class="ec-label" for="ec-scenario">
+            ¿Qué situación quieres explorar?
+          </label>
+
+          <select id="ec-scenario">
+            <option value="obra">Obra o instalación que no cumple su función</option>
+            <option value="erp">Cambio de ERP o sistema digital</option>
+            <option value="proveedor">Cambio de proveedor</option>
+            <option value="expansion">Expansión rápida de operaciones</option>
+            <option value="recurrente">Problema que vuelve a repetirse</option>
+          </select>
+        </div>
+
+        <div class="ec-field">
+          <span class="ec-label">¿En qué etapa se encuentra?</span>
+
+          <div class="ec-options">
+            <label class="ec-stage">
+              <input type="radio" name="ec-stage" value="antes" checked>
+              <strong>
+                <span class="ec-stage-dot ec-green"></span>
+                Antes
+              </strong>
+              <small>Prevenir y anticipar</small>
+            </label>
+
+            <label class="ec-stage">
+              <input type="radio" name="ec-stage" value="durante">
+              <strong>
+                <span class="ec-stage-dot ec-yellow"></span>
+                Durante
+              </strong>
+              <small>Controlar y ajustar</small>
+            </label>
+
+            <label class="ec-stage">
+              <input type="radio" name="ec-stage" value="despues">
+              <strong>
+                <span class="ec-stage-dot ec-red"></span>
+                Después
+              </strong>
+              <small>Recuperar y aprender</small>
+            </label>
+          </div>
+        </div>
+
+        <div class="ec-field">
+          <label class="ec-label" for="ec-focus">
+            ¿Qué aspecto te interesa priorizar?
+          </label>
+
+          <select id="ec-focus">
+            <option value="costos">Costos y retrabajos</option>
+            <option value="continuidad">Continuidad operacional</option>
+            <option value="calidad">Calidad y cumplimiento</option>
+            <option value="coordinacion">Coordinación entre áreas</option>
+            <option value="aprendizaje">Aprendizaje y recurrencia</option>
+          </select>
+        </div>
+
+        <div class="ec-field">
+          <label class="ec-label" for="ec-context">
+            Contexto adicional (opcional)
+          </label>
+
+          <input
+            id="ec-context"
+            type="text"
+            maxlength="240"
+            placeholder="Ej.: planta industrial, contrato, bodega..."
+          >
+
+          <p class="ec-muted ec-small">
+            Es una nota local para orientar la exploración. No se envía
+            automáticamente a ningún servidor.
+          </p>
+        </div>
+
+        <button type="button" class="ec-btn" id="ec-update">
+          Explorar escenario
+        </button>
+
+        <hr class="ec-divider">
+
+        <p class="ec-muted ec-small">
+          Puedes cambiar las opciones cuantas veces quieras. Los resultados
+          se actualizan en esta página.
+        </p>
+      </section>
+
+      <!-- RESULTADOS -->
+      <section class="ec-result" aria-live="polite" aria-atomic="false">
+
+        <article class="ec-card ec-result-head" id="ec-result-head"
+          data-stage="antes">
+          <span class="ec-eyebrow" id="ec-stage-label">Etapa: antes</span>
+          <h2 id="ec-result-title">Obra o instalación que no cumple su función</h2>
+          <p id="ec-result-summary"></p>
+          <div id="ec-result-tags"></div>
+        </article>
+
+        <article class="ec-card">
+          <h2>2. Representación del sistema</h2>
+          <p class="ec-muted ec-small">
+            Estas piezas son dimensiones que conviene examinar. Su presencia
+            no significa que alguna sea responsable del problema.
+          </p>
+
+          <div class="ec-flow" id="ec-flow">
+            <div class="ec-flow-item">
+              <strong>Personas</strong>
+              <span>Roles y capacidades</span>
+            </div>
+            <div class="ec-flow-item">
+              <strong>Recursos</strong>
+              <span>Materiales y tecnología</span>
+            </div>
+            <div class="ec-flow-item">
+              <strong>Procesos</strong>
+              <span>Secuencia de trabajo</span>
+            </div>
+            <div class="ec-flow-item">
+              <strong>Decisiones</strong>
+              <span>Criterios y prioridades</span>
+            </div>
+          </div>
+
+          <p id="ec-flow-explanation" class="ec-muted ec-small"
+            style="margin-top:14px"></p>
+        </article>
+
+        <article class="ec-card">
+          <h2>3. Preguntas para investigar</h2>
+          <p>
+            La finalidad no es asumir una causa, sino reunir información
+            que permita distinguir entre explicaciones alternativas.
+          </p>
+          <ul class="ec-list" id="ec-questions"></ul>
+        </article>
+
+        <article class="ec-card">
+          <h2>4. Posible punto de intervención</h2>
+          <p id="ec-intervention"></p>
+
+          <div class="ec-notice">
+            <strong>Cómo evaluar el resultado:</strong>
+            define una línea base, un indicador observable, un periodo de
+            evaluación y los costos del piloto antes de decidir si conviene
+            ampliar la intervención.
+          </div>
+        </article>
+
+        <article class="ec-card">
+          <h2>5. Servicios relacionados de Expertos Chile</h2>
+          <p class="ec-muted ec-small">
+            La relación es orientativa. El servicio apropiado depende del
+            alcance real del problema y de la información disponible.
+          </p>
+          <div id="ec-services"></div>
+          <div class="ec-btn-row">
+            <a id="ec-services-link" class="ec-btn ec-btn-secondary"
+              href="productos.html">
+              Ver todos los servicios
+            </a>
+          </div>
+        </article>
+
+        <article class="ec-card">
+          <h2>6. Qué habría que comprobar</h2>
+          <ul class="ec-list" id="ec-validation"></ul>
+
+          <hr class="ec-divider">
+
+          <div class="ec-summary">
+            <strong>Resumen del escenario</strong>
+            <p id="ec-summary-text" style="margin:8px 0 0"></p>
+          </div>
+
+          <div class="ec-btn-row">
+            <button type="button" class="ec-btn" id="ec-copy">
+              Copiar resumen
+            </button>
+
+            <button type="button" class="ec-btn ec-btn-secondary"
+              id="ec-print">
+              Imprimir / guardar PDF
+            </button>
+          </div>
+          <p id="ec-copy-status" class="ec-muted ec-small"
+            role="status"></p>
+        </article>
+
+      </section>
+    </div>
+
+    <section class="ec-bottom">
+      <h2>¿Tienes un problema que persiste?</h2>
+      <p>
+        Podemos conversar sobre una situación concreta, entender qué se ha
+        intentado y evaluar si existe un piloto acotado que aporte valor
+        adicional a los sistemas y equipos que ya tiene tu organización.
+      </p>
+
+      <div class="ec-btn-row">
+        <a class="ec-btn" href="diagnostico.html">
+          Explorar diagnóstico
+        </a>
+
+        <a class="ec-btn ec-btn-secondary" href="casos.html">
+          Revisar casos
+        </a>
+
+        <a class="ec-btn ec-btn-secondary" href="productos.html">
+          Conocer servicios
+        </a>
+      </div>
+    </section>
+
+    <p class="ec-muted ec-small" style="margin-top:20px">
+      Los escenarios de esta página son ilustrativos. No constituyen
+      diagnósticos de empresas específicas ni garantizan resultados
+      económicos. La evidencia, las hipótesis y las conclusiones deben
+      distinguirse durante cualquier evaluación real.
+    </p>
+
+  </main>
+
+  <footer>
+    <p>Expertos Chile · Análisis de problemas y oportunidades de mejora.</p>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      /*
+       * SIMULADOR EXPERTOS CHILE
+       *
+       * Los escenarios son ejemplos de exploración.
+       * Las relaciones propuestas no son causas demostradas.
+       *
+       * IMPORTANTE:
+       * Si los nombres de servicios cambian en productos.html,
+       * actualiza también los nombres y enlaces en este objeto.
+       */
+
+      const SERVICES = {
+        check: {
+          name: "Domino Check",
+          description:
+            "Explorar relaciones iniciales, puntos ciegos y preguntas que requieren evidencia.",
+          stage: "g"
+        },
+        decision: {
+          name: "Domino Decisión",
+          description:
+            "Examinar criterios de decisión, consecuencias posibles y costos que conviene evaluar.",
+          stage: "g"
+        },
+        investment: {
+          name: "Domino Inversión",
+          description:
+            "Comparar escenarios, exposición al riesgo y condiciones antes de comprometer recursos.",
+          stage: "g"
+        },
+        project: {
+          name: "Domino Project",
+          description:
+            "Explorar relaciones entre actividades, coordinación y señales tempranas durante la ejecución.",
+          stage: "y"
+        },
+        transformation: {
+          name: "Domino Transformación",
+          description:
+            "Examinar cómo un cambio puede afectar personas, procesos y formas de trabajo.",
+          stage: "y"
+        },
+        operation: {
+          name: "Domino Operation",
+          description:
+            "Examinar el funcionamiento cotidiano, la recurrencia y los controles operacionales.",
+          stage: "r"
+        },
+        recovery: {
+          name: "Domino Recovery",
+          description:
+            "Ordenar preguntas para contener efectos, recuperar funcionamiento y aprender de lo ocurrido.",
+          stage: "r"
+        }
+      };
+
+      const DATA = {
+        obra: {
+          title: "Obra o instalación que no cumple su función",
+          summary:
+            "Una obra, instalación o solución se recibe, pero al comenzar a utilizarla no cumple completamente el propósito esperado. La organización debe investigar el problema y podría tener que incurrir en costos adicionales.",
+          tags: ["Obra o instalación", "Recepción", "Funcionamiento"],
+          pieces: [
+            ["Personas", "Roles y capacidades"],
+            ["Recursos", "Materiales y tecnología"],
+            ["Procesos", "Ejecución y pruebas"],
+            ["Decisiones", "Criterios de aceptación"]
+          ],
+          flow:
+            "La especificación, ejecución, recepción y operación pueden estar relacionadas. Hay que comprobar qué ocurrió en este caso concreto.",
+          questions: {
+            antes: [
+              "¿Está definido qué significa que la obra o instalación funcione correctamente?",
+              "¿Los requisitos, criterios de aceptación y pruebas son verificables?",
+              "¿Se identificaron las condiciones necesarias para operar y mantener la solución?",
+              "¿Quién valida la funcionalidad y con qué evidencia?"
+            ],
+            durante: [
+              "¿Las pruebas se realizan en condiciones representativas del uso real?",
+              "¿Cómo se registran las desviaciones y quién decide su resolución?",
+              "¿La información técnica llega a quienes deben validar la solución?",
+              "¿Qué cambios de alcance, recursos o condiciones se han producido?"
+            ],
+            despues: [
+              "¿Qué función específica no se está cumpliendo y cómo se comprobó?",
+              "¿Qué exigía el contrato y qué se verificó al recibir la obra?",
+              "¿Existen registros de pruebas, observaciones, modificaciones y entrega de información?",
+              "¿Qué alternativas de corrección existen y cuánto cuesta cada una?"
+            ]
+          },
+          interventions: {
+            antes:
+              "Definir una matriz de requisitos funcionales, criterios de aceptación, pruebas y responsabilidades antes de comprometer recursos.",
+            durante:
+              "Revisar los controles y evidencias de ejecución, priorizando las pruebas que permitan detectar desviaciones a tiempo.",
+            despues:
+              "Contrastar requisitos, pruebas, recepción y funcionamiento real; comparar alternativas de corrección antes de decidir nuevos gastos."
+          },
+          services: {
+            antes: ["investment", "decision"],
+            durante: ["project", "transformation"],
+            despues: ["operation", "recovery"]
+          },
+          validation: [
+            "Requisitos y alcance aprobados.",
+            "Criterios de aceptación y registros de pruebas.",
+            "Actas de recepción, observaciones y modificaciones.",
+            "Costos de corrección y funcionamiento esperado.",
+            "Evidencia que permita distinguir entre causas posibles."
+          ]
+        },
+
+        erp: {
+          title: "Cambio de ERP o sistema digital",
+          summary:
+            "Una organización cambia un sistema y aparecen dificultades de adopción, información, coordinación o continuidad operacional. La simulación permite explorar dimensiones que deben comprobarse.",
+          tags: ["Sistema digital", "Datos", "Cambio operacional"],
+          pieces: [
+            ["Personas", "Adopción y capacitación"],
+            ["Recursos", "Sistema y datos"],
+            ["Procesos", "Flujos de trabajo"],
+            ["Decisiones", "Alcance y prioridades"]
+          ],
+          flow:
+            "El cambio tecnológico puede interactuar con datos, procesos y responsabilidades. No se debe atribuir el resultado exclusivamente al software sin investigar.",
+          questions: {
+            antes: [
+              "¿Se documentaron los procesos y problemas que el nuevo sistema debía resolver?",
+              "¿Se verificó la calidad y correspondencia de los datos que se migrarán?",
+              "¿Se probaron escenarios excepcionales y operaciones críticas?",
+              "¿Qué condiciones deben cumplirse para autorizar la puesta en marcha?"
+            ],
+            durante: [
+              "¿Qué diferencias existen entre el proceso esperado y el proceso real?",
+              "¿Qué errores, retrasos o consultas aparecen con mayor frecuencia?",
+              "¿Cómo se escalan y priorizan las incidencias?",
+              "¿Las personas cuentan con capacitación y soporte adecuados?"
+            ],
+            despues: [
+              "¿Qué indicadores cambiaron respecto de la línea base?",
+              "¿Qué incidencias siguen abiertas y cuáles se repiten?",
+              "¿Qué parte del problema corresponde a datos, configuración, proceso o adopción?",
+              "¿Qué evidencia permite comparar el funcionamiento anterior y el actual?"
+            ]
+          },
+          interventions: {
+            antes:
+              "Establecer criterios de preparación, calidad de datos, pruebas de procesos críticos y condiciones de salida.",
+            durante:
+              "Clasificar incidencias por impacto, identificar patrones y revisar las interacciones entre áreas y procesos.",
+            despues:
+              "Priorizar problemas recurrentes con datos de incidencias, tiempos, retrabajo y continuidad operacional."
+          },
+          services: {
+            antes: ["decision", "investment"],
+            durante: ["project", "transformation"],
+            despues: ["operation", "recovery"]
+          },
+          validation: [
+            "Línea base de tiempos, incidencias y costos.",
+            "Resultados de pruebas y migración de datos.",
+            "Registro de incidencias y su resolución.",
+            "Evidencia de capacitación y adopción.",
+            "Comparación verificable del desempeño antes y después."
+          ]
+        },
+
+        proveedor: {
+          title: "Cambio de proveedor",
+          summary:
+            "Un cambio de proveedor puede modificar plazos, calidad, inventario, logística o coordinación. Es necesario investigar qué cambió realmente y qué efectos son atribuibles a cada factor.",
+          tags: ["Abastecimiento", "Calidad", "Logística"],
+          pieces: [
+            ["Personas", "Responsables y coordinación"],
+            ["Recursos", "Materiales e inventario"],
+            ["Procesos", "Compra y recepción"],
+            ["Decisiones", "Selección y prioridades"]
+          ],
+          flow:
+            "Una variación en abastecimiento puede afectar otras operaciones, pero el alcance y la dirección de esos efectos deben comprobarse.",
+          questions: {
+            antes: [
+              "¿Qué criterios de calidad, plazo y continuidad debe cumplir el nuevo proveedor?",
+              "¿Se evaluaron los tiempos de transición y los riesgos de abastecimiento?",
+              "¿Qué inventario de respaldo se requiere durante el cambio?",
+              "¿Qué condiciones habilitan o detienen la transición?"
+            ],
+            durante: [
+              "¿Qué diferencias aparecen entre lo solicitado y lo recibido?",
+              "¿Dónde se registran atrasos, rechazos o entregas parciales?",
+              "¿Qué áreas reciben información de cambios de plazo o especificación?",
+              "¿Qué mecanismos permiten escalar problemas a tiempo?"
+            ],
+            despues: [
+              "¿Cómo cambiaron los niveles de servicio respecto de la línea base?",
+              "¿Qué costos adicionales están documentados?",
+              "¿Los problemas se concentran en un producto, periodo o proceso?",
+              "¿Qué evidencia permite separar los efectos del proveedor de otros factores?"
+            ]
+          },
+          interventions: {
+            antes:
+              "Definir criterios de evaluación, transición, continuidad y seguimiento con indicadores verificables.",
+            durante:
+              "Monitorear entregas críticas, diferencias de calidad y coordinación entre abastecimiento, operaciones y recepción.",
+            despues:
+              "Analizar incidencias y costos documentados antes de ajustar contratos, inventarios o procedimientos."
+          },
+          services: {
+            antes: ["check", "decision"],
+            durante: ["project", "operation"],
+            despues: ["operation", "recovery"]
+          },
+          validation: [
+            "Historial de entregas, plazos y rechazos.",
+            "Criterios de calidad y niveles de servicio acordados.",
+            "Costos de transporte, inventario y retrabajo.",
+            "Fechas de transición y comunicaciones entre áreas.",
+            "Comparación con periodos equivalentes."
+          ]
+        },
+
+        expansion: {
+          title: "Expansión rápida de operaciones",
+          summary:
+            "Una organización aumenta su volumen, cobertura o capacidad. Se explora si los recursos, procesos y decisiones mantienen un nivel de funcionamiento adecuado a medida que crece la operación.",
+          tags: ["Crecimiento", "Capacidad", "Coordinación"],
+          pieces: [
+            ["Personas", "Dotación y competencias"],
+            ["Recursos", "Capacidad disponible"],
+            ["Procesos", "Volumen y secuencia"],
+            ["Decisiones", "Prioridades y límites"]
+          ],
+          flow:
+            "El crecimiento puede modificar cargas de trabajo y relaciones entre áreas. La hipótesis debe contrastarse con datos de capacidad y desempeño.",
+          questions: {
+            antes: [
+              "¿Qué capacidad real tienen los procesos críticos?",
+              "¿Qué recursos o competencias serán necesarios para el nuevo volumen?",
+              "¿Qué indicadores alertarían sobre saturación?",
+              "¿Qué condiciones deben cumplirse antes de abrir una nueva etapa?"
+            ],
+            durante: [
+              "¿Dónde se acumula trabajo y cuánto tiempo permanece pendiente?",
+              "¿Qué actividades dependen de recursos compartidos?",
+              "¿Qué decisiones se retrasan por falta de información?",
+              "¿Qué indicadores están cambiando respecto de lo planificado?"
+            ],
+            despues: [
+              "¿Qué diferencias existen entre capacidad planificada y capacidad real?",
+              "¿Qué problemas aparecen con mayor frecuencia a medida que aumenta el volumen?",
+              "¿Qué costos y demoras están documentados?",
+              "¿Qué cambios permitirían recuperar estabilidad sin frenar innecesariamente la operación?"
+            ]
+          },
+          interventions: {
+            antes:
+              "Evaluar escenarios de capacidad y definir condiciones observables para avanzar de manera gradual.",
+            durante:
+              "Identificar restricciones de capacidad y puntos de acumulación para priorizar ajustes concretos.",
+            despues:
+              "Comparar los resultados reales con el plan de crecimiento e identificar medidas de estabilización."
+          },
+          services: {
+            antes: ["investment", "decision"],
+            durante: ["project", "transformation"],
+            despues: ["operation", "recovery"]
+          },
+          validation: [
+            "Volúmenes, tiempos de ciclo y trabajo pendiente.",
+            "Capacidad disponible y utilización de recursos.",
+            "Dotación y competencias requeridas.",
+            "Costos de horas extra, retrasos y reprocesos.",
+            "Comparación con metas y periodos anteriores."
+          ]
+        },
+
+        recurrente: {
+          title: "Problema que vuelve a repetirse",
+          summary:
+            "La organización resuelve un incidente, pero una situación parecida vuelve a aparecer. Se busca ordenar las evidencias para investigar qué condiciones podrían estar favoreciendo la recurrencia.",
+          tags: ["Recurrencia", "Incidentes", "Aprendizaje"],
+          pieces: [
+            ["Personas", "Experiencia y comunicación"],
+            ["Recursos", "Herramientas e información"],
+            ["Procesos", "Controles y seguimiento"],
+            ["Decisiones", "Cierre y prioridades"]
+          ],
+          flow:
+            "Que dos incidentes se parezcan no significa que tengan la misma causa. Conviene comparar circunstancias, respuestas y evidencias antes de concluir.",
+          questions: {
+            antes: [
+              "¿Qué señales previas han aparecido antes de incidentes anteriores?",
+              "¿Qué controles detectan esas señales y quién los revisa?",
+              "¿Qué aprendizajes anteriores se incorporaron al procedimiento?",
+              "¿Qué condición observable permitiría intervenir antes?"
+            ],
+            durante: [
+              "¿Qué información se registra desde el inicio del incidente?",
+              "¿Qué acciones se realizan y qué resultado produce cada una?",
+              "¿Qué decisiones dependen de otras áreas?",
+              "¿Cómo se verifica que la solución está funcionando?"
+            ],
+            despues: [
+              "¿Qué elementos se repiten entre incidentes y cuáles son diferentes?",
+              "¿Se verificó el resultado de la solución o solo se cerró la incidencia?",
+              "¿Qué evidencia apoya las explicaciones propuestas?",
+              "¿Cómo se medirá la recurrencia después de la intervención?"
+            ]
+          },
+          interventions: {
+            antes:
+              "Definir señales tempranas, responsabilidades y criterios para activar una respuesta preventiva.",
+            durante:
+              "Registrar las condiciones del incidente, la secuencia de acciones y sus resultados.",
+            despues:
+              "Comparar incidentes y soluciones anteriores para probar hipótesis y establecer seguimiento."
+          },
+          services: {
+            antes: ["check", "decision"],
+            durante: ["project", "operation"],
+            despues: ["operation", "recovery"]
+          },
+          validation: [
+            "Registro histórico de incidentes y fechas.",
+            "Descripción de las condiciones en que ocurrió cada caso.",
+            "Acciones realizadas y resultados observados.",
+            "Costos, duración e impacto operacional.",
+            "Seguimiento posterior para verificar si se repite."
+          ]
+        }
+      };
+
+      const FOCUS_LABELS = {
+        costos: "Costos y retrabajos",
+        continuidad: "Continuidad operacional",
+        calidad: "Calidad y cumplimiento",
+        coordinacion: "Coordinación entre áreas",
+        aprendizaje: "Aprendizaje y recurrencia"
+      };
+
+      const STAGE_LABELS = {
+        antes: "Antes · prevenir y anticipar",
+        durante: "Durante · controlar y ajustar",
+        despues: "Después · recuperar y aprender"
+      };
+
+      const STAGE_CODES = {
+        antes: "g",
+        durante: "y",
+        despues: "r"
+      };
+
+      const $ = (id) => document.getElementById(id);
+
+      let currentSummary = "";
+
+      function getStage() {
+        const selected = document.querySelector(
+          'input[name="ec-stage"]:checked'
+        );
+        return selected ? selected.value : "antes";
+      }
+
+      function safeText(value) {
+        return String(value ?? "").replace(/\s+/g, " ").trim();
+      }
+
+      function makeTag(text) {
+        const span = document.createElement("span");
+        span.className = "ec-tag";
+        span.textContent = text;
+        return span;
+      }
+
+      function renderList(element, items) {
+        element.replaceChildren();
+
+        items.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          element.appendChild(li);
+        });
+      }
+
+      function getContext() {
+        return safeText($("ec-context").value);
+      }
+
+      function buildSummary(scenario, stage, focus, context) {
+        const lines = [
+          "EXPERTOS CHILE — RESUMEN DEL SIMULADOR",
+          "",
+          "Escenario: " + scenario.title,
+          "Etapa: " + STAGE_LABELS[stage],
+          "Prioridad: " + FOCUS_LABELS[focus],
+          context ? "Contexto: " + context : "",
+          "",
+          "Descripción:",
+          scenario.summary,
+          "",
+          "Posible punto de intervención:",
+          scenario.interventions[stage],
+          "",
+          "Nota: escenario ilustrativo. Las relaciones son hipótesis por investigar; no constituyen un diagnóstico ni demuestran causalidad."
+        ];
+
+        return lines.filter((line) => line !== "").join("\n");
+      }
+
+      function renderServices(scenario, stage) {
+        const container = $("ec-services");
+        container.replaceChildren();
+
+        const serviceIds = scenario.services[stage];
+
+        serviceIds.forEach((serviceId) => {
+          const service = SERVICES[serviceId];
+          if (!service) return;
+
+          const card = document.createElement("div");
+          card.className = "ec-service";
+
+          const heading = document.createElement("h3");
+          heading.textContent = service.name;
+
+          const description = document.createElement("p");
+          description.textContent = service.description;
+
+          const link = document.createElement("a");
+          const params = new URLSearchParams();
+          params.set("e", service.stage);
+          params.set("ref", "simulador");
+          link.href = "productos.html?" + params.toString();
+          link.textContent = "Ver servicios de esta etapa →";
+
+          card.append(heading, description, link);
+          container.appendChild(card);
+        });
+
+        const params = new URLSearchParams();
+        params.set("e", STAGE_CODES[stage]);
+        params.set("ref", "simulador");
+
+        $("ec-services-link").href = "productos.html?" + params.toString();
+      }
+
+      function render() {
+        const scenarioKey = $("ec-scenario").value;
+        const scenario = DATA[scenarioKey] || DATA.obra;
+        const stage = getStage();
+        const focus = $("ec-focus").value;
+        const context = getContext();
+
+        $("ec-result-head").dataset.stage = stage;
+        $("ec-stage-label").textContent = STAGE_LABELS[stage];
+        $("ec-result-title").textContent = scenario.title;
+        $("ec-result-summary").textContent = scenario.summary;
+
+        const tags = $("ec-result-tags");
+        tags.replaceChildren();
+
+        scenario.tags.forEach((tag) => tags.appendChild(makeTag(tag)));
+        tags.appendChild(makeTag("Prioridad: " + FOCUS_LABELS[focus]));
+
+        if (context) {
+          tags.appendChild(makeTag("Contexto: " + context));
+        }
+
+        const flow = $("ec-flow");
+        flow.replaceChildren();
+
+        scenario.pieces.forEach((piece) => {
+          const item = document.createElement("div");
+          item.className = "ec-flow-item";
+
+          const title = document.createElement("strong");
+          title.textContent = piece[0];
+
+          const detail = document.createElement("span");
+          detail.textContent = piece[1];
+
+          item.append(title, detail);
+          flow.appendChild(item);
+        });
+
+        $("ec-flow-explanation").textContent = scenario.flow;
+
+        renderList($("ec-questions"), scenario.questions[stage]);
+
+        $("ec-intervention").textContent = scenario.interventions[stage];
+
+        renderServices(scenario, stage);
+
+        renderList($("ec-validation"), scenario.validation);
+
+        currentSummary = buildSummary(scenario, stage, focus, context);
+        $("ec-summary-text").textContent = currentSummary;
+        $("ec-copy-status").textContent = "";
+      }
+
+      $("ec-update").addEventListener("click", render);
+      $("ec-scenario").addEventListener("change", render);
+      $("ec-focus").addEventListener("change", render);
+      $("ec-context").addEventListener("input", render);
+
+      document.querySelectorAll('input[name="ec-stage"]').forEach((radio) => {
+        radio.addEventListener("change", render);
+      });
+
+      $("ec-copy").addEventListener("click", async () => {
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(currentSummary);
+          } else {
+            const textarea = document.createElement("textarea");
+            textarea.value = currentSummary;
+            textarea.setAttribute("readonly", "");
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            const copied = document.execCommand("copy");
+            textarea.remove();
+
+            if (!copied) {
+              throw new Error("No se pudo copiar automáticamente.");
+            }
+          }
+
+          $("ec-copy-status").textContent =
+            "Resumen copiado. Puedes pegarlo en tus notas.";
+        } catch (error) {
+          $("ec-copy-status").textContent =
+            "No se pudo copiar automáticamente. Selecciona el resumen y cópialo manualmente.";
+        }
+      });
+
+      $("ec-print").addEventListener("click", () => {
+        window.print();
+      });
+
+      // Estado inicial
+      render();
+    })();
+  </script>
+
+  <style>
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+
+      #ec-simulador,
+      #ec-simulador * {
+        visibility: visible !important;
+      }
+
+      #ec-simulador {
+        max-width: none;
+        padding: 0;
+      }
+
+      #ec-simulador .ec-layout {
+        display: block;
+      }
+
+      #ec-simulador .ec-layout > section:first-child,
+      #ec-simulador .ec-btn-row,
+      #ec-simulador header,
+      #ec-simulador .ec-bottom {
+        display: none !important;
+      }
+
+      #ec-simulador .ec-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      #ec-simulador a {
+        color: black;
+        text-decoration: none;
+      }
+    }
+  </style>
+
+</body>
+</html>
