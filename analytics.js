@@ -1,6 +1,7 @@
-/* Expertos Chile — instrumentación inicial
-   Sin servicios externos ni envío de datos.
-   La cola vive únicamente en la sesión de esta pestaña.
+
+/* Expertos Chile — eventos de navegación y embudo.
+   Sin envío a servidores ni proveedores externos.
+   No incluir nombres, teléfonos ni respuestas del cuestionario.
 */
 (function () {
   "use strict";
@@ -8,30 +9,34 @@
   const STORAGE_KEY = "expertos_chile_eventos_v1";
   const MAX_EVENTS = 100;
 
+  const ALLOWED_EVENTS = new Set([
+    "page_view",
+    "navigation_click",
+    "case_view_click",
+    "demo_open_click",
+    "diagnostic_open_click",
+    "diagnostic_start",
+    "diagnostic_complete",
+    "talks_open_click",
+    "services_open_click",
+    "contact_click",
+    "meeting_request",
+    "calendar_click",
+    "questionnaire_restart"
+  ]);
+
   function readEvents() {
     try {
-      const value = sessionStorage.getItem(STORAGE_KEY);
-      const events = value ? JSON.parse(value) : [];
-      return Array.isArray(events) ? events : [];
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      const data = raw ? JSON.parse(raw) : [];
+      return Array.isArray(data) ? data : [];
     } catch (_) {
       return [];
     }
   }
 
   function track(eventName, details) {
-    const allowed = new Set([
-      "page_view",
-      "navigation_click",
-      "case_view_click",
-      "demo_open_click",
-      "diagnostic_open_click",
-      "talks_open_click",
-      "services_open_click",
-      "contact_click",
-      "calendar_click"
-    ]);
-
-    if (!allowed.has(eventName)) return;
+    if (!ALLOWED_EVENTS.has(eventName)) return;
 
     const event = {
       event: eventName,
@@ -49,7 +54,7 @@
         JSON.stringify(events.slice(-MAX_EVENTS))
       );
     } catch (_) {
-      // Si el almacenamiento está bloqueado, el sitio sigue funcionando.
+      // El sitio sigue funcionando si el almacenamiento está bloqueado.
     }
 
     window.dispatchEvent(
@@ -60,9 +65,6 @@
   function classifyLink(link) {
     const url = new URL(link.href, location.href);
     const file = url.pathname.split("/").pop().toLowerCase();
-    const text = (link.innerText || link.getAttribute("aria-label") || "")
-      .trim()
-      .toLowerCase();
 
     if (url.hostname === "wa.me") return "contact_click";
     if (url.hostname.includes("calendar.google.com")) return "calendar_click";
@@ -80,23 +82,26 @@
     if (!link || !link.href) return;
 
     const url = new URL(link.href, location.href);
-
-    // No registrar navegación hacia sitios externos, salvo contacto
-    // o calendario, que se clasifican expresamente.
     const isExternal = url.origin !== location.origin;
-    if (isExternal && url.hostname !== "wa.me" &&
-        !url.hostname.includes("calendar.google.com")) return;
+
+    if (
+      isExternal &&
+      url.hostname !== "wa.me" &&
+      !url.hostname.includes("calendar.google.com")
+    ) return;
 
     track(classifyLink(link), {
       destination: url.pathname + url.search + url.hash,
-      link_text: (link.innerText || link.getAttribute("aria-label") || "")
-        .trim()
-        .slice(0, 100)
+      link_text: (
+        link.innerText ||
+        link.getAttribute("aria-label") ||
+        ""
+      ).trim().slice(0, 100)
     });
   });
 
   window.ExpertosAnalytics = {
-    track: track,
+    track,
     getEvents: readEvents,
     clearEvents: function () {
       try {
