@@ -14,22 +14,21 @@
   --ink:#f4efe6;
   --mute:#a4b4ca;
 
-  /* Componentes organizacionales: distintos del semáforo */
+  /* Componentes organizacionales */
   --P:#e879f9;
   --R:#22d3ee;
   --Pr:#818cf8;
   --D:#f4efe6;
 
-  /* Estructura */
   --N1:#4b5f7c;
   --N2:#2c3e5a;
 
-  /* Semáforo: exclusivamente estados */
+  /* Semáforo: estados de intervención */
   --g:#22c55e;
   --y:#facc15;
   --r:#ef4444;
 
-  /* Colores del cubo Rubik */
+  /* Cubo Rubik */
   --cube-white:#f8fafc;
   --cube-yellow:#facc15;
   --cube-red:#ef4444;
@@ -44,11 +43,12 @@
 *{box-sizing:border-box;margin:0}
 
 html,body{
+  width:100%;
   height:100%;
+  overflow:hidden;
   background:var(--bg2);
   color:var(--ink);
   font-family:var(--font);
-  overflow:hidden;
 }
 
 button{font-family:inherit}
@@ -56,6 +56,7 @@ button{font-family:inherit}
 .stage{
   position:fixed;
   inset:0;
+  overflow:hidden;
   background:radial-gradient(120% 90% at 50% 30%,var(--bg),var(--bg2));
   padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);
 }
@@ -64,38 +65,27 @@ button{font-family:inherit}
   position:absolute;
   top:0;
   left:0;
+  z-index:20;
+  width:0;
   height:4px;
   background:var(--cube-yellow);
-  width:0;
-  z-index:9;
 }
 
-.tag{
+.tag,.clock{
   position:absolute;
   top:14px;
-  left:16px;
-  font-size:11px;
+  z-index:20;
   color:var(--mute);
-  letter-spacing:.06em;
-  opacity:.8;
-  z-index:9;
-}
-
-.clock{
-  position:absolute;
-  top:14px;
-  right:16px;
   font-size:12px;
-  color:var(--mute);
-  opacity:.8;
-  font-variant-numeric:tabular-nums;
-  z-index:9;
 }
+
+.tag{left:16px;letter-spacing:.06em}
+.clock{right:16px;font-variant-numeric:tabular-nums}
 
 [data-a]{
   opacity:0;
   pointer-events:none;
-  transition:opacity .35s,transform .35s;
+  transition:opacity .3s,transform .3s;
 }
 
 [data-a].on{opacity:1}
@@ -110,15 +100,15 @@ button{font-family:inherit}
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
   gap:2.4vh;
-  transform:translateY(8px);
+  text-align:center;
+  transform:translateY(6px);
 }
 
 .sc.on{transform:none}
 
 .eyebrow{
-  font-size:clamp(12px,1.4vw,18px);
+  font-size:clamp(11px,1.4vw,18px);
   font-weight:800;
   letter-spacing:.12em;
   color:var(--mute);
@@ -127,24 +117,25 @@ button{font-family:inherit}
 h1,h2{
   font-weight:850;
   letter-spacing:-.025em;
-  line-height:1.05;
+  line-height:1.1;
 }
 
 h1{
-  font-size:clamp(26px,5.4vw,76px);
+  font-size:clamp(26px,5.2vw,72px);
   max-width:14em;
 }
 
 h2{
-  font-size:clamp(24px,4.2vw,58px);
-  max-width:14em;
+  font-size:clamp(23px,4vw,54px);
+  max-width:18em;
 }
 
 .sub{
-  font-size:clamp(14px,2vw,28px);
+  font-size:clamp(14px,2vw,27px);
   color:var(--mute);
   font-weight:600;
   max-width:30em;
+  line-height:1.35;
 }
 
 .sub b{color:var(--ink)}
@@ -153,38 +144,34 @@ h2{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  gap:1.4vw;
+  align-items:center;
+  gap:1.2vw;
+  font-size:clamp(13px,2.3vw,32px);
   font-weight:800;
-  font-size:clamp(14px,2.4vw,34px);
 }
 
 .row span{
-  transition:opacity .35s;
   opacity:0;
+  transition:opacity .3s;
 }
 
 .row span.on{opacity:1}
-
-.row .arr{
-  color:var(--mute);
-  font-weight:500;
-}
+.row .arr{color:var(--mute);font-weight:500}
 
 .p{color:var(--P)}
 .rr{color:var(--R)}
 .pr{color:var(--Pr)}
 .d{color:var(--D)}
+.warn{color:var(--y)}
 
 .pill{
   border:2px solid var(--N1);
   border-radius:999px;
-  padding:.35em .9em;
+  padding:.35em .8em;
   color:var(--mute);
 }
 
-.warn{color:var(--y)}
-
-/* Cubo Rubik */
+/* Cubo */
 .cubebox{
   position:absolute;
   left:4vw;
@@ -199,9 +186,9 @@ h2{
 
 .cube{
   --s:min(26vh,28vw);
+  position:relative;
   width:var(--s);
   height:var(--s);
-  position:relative;
   transform-style:preserve-3d;
   animation:spin 12s linear infinite;
 }
@@ -221,8 +208,8 @@ h2{
   gap:calc(var(--s)*.035);
   padding:calc(var(--s)*.035);
   background:#070d18;
-  border-radius:5px;
   border:1px solid #02050a;
+  border-radius:5px;
 }
 
 .face:nth-child(1){transform:translateZ(calc(var(--s)/2))}
@@ -233,9 +220,9 @@ h2{
 .face:nth-child(6){transform:rotateX(-90deg) translateZ(calc(var(--s)/2))}
 
 .st{
-  border-radius:3px;
   background:var(--c0);
   border:1px solid rgba(0,0,0,.3);
+  border-radius:3px;
   transition:background .8s var(--d);
 }
 
@@ -250,221 +237,222 @@ h2{
   display:flex;
   flex-direction:column;
   justify-content:center;
-  gap:2.4vh;
   align-items:flex-start;
+  gap:2.4vh;
   text-align:left;
+}
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:1vw;
 }
 
 .chip{
   display:inline-flex;
   align-items:center;
   gap:.5em;
-  padding:.4em .9em;
-  border-radius:999px;
+  padding:.4em .8em;
   border:2px solid var(--c);
+  border-radius:999px;
+  font-size:clamp(12px,1.7vw,23px);
   font-weight:700;
-  font-size:clamp(12px,1.9vw,24px);
 }
 
-.chip b{
-  color:var(--c);
-  font-size:1.4em;
-  line-height:1;
-}
+.chip b{color:var(--c);font-size:1.4em}
 
-.chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:1.2vw;
-}
-
-/* Cadena de consecuencias */
-.top{
+/* Escena de relaciones: cada elemento tiene una zona propia */
+.relation-scene{
   position:absolute;
+  inset:0;
+}
+
+.question-area{
+  position:absolute;
+  top:7vh;
   left:5vw;
   right:5vw;
-  top:8vh;
+  height:21vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  gap:2vh;
   text-align:center;
 }
 
-.top .h{
-  position:absolute;
-  left:0;
-  right:0;
-  opacity:0;
-  transition:opacity .35s;
+.question-area h2{
+  max-width:20em;
+  min-height:2.3em;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.top .h.on{opacity:1}
+.question-area .eyebrow{
+  max-width:90vw;
+}
 
+/* Cadena en una franja central, sin resultados flotantes */
 .chain{
-  --w:min(9vw,12vh,110px);
   position:absolute;
-  left:0;
-  right:0;
-  bottom:calc(var(--safe) + 29vh);
-  min-height:calc(var(--w)*1.75);
+  top:34vh;
+  left:3vw;
+  right:3vw;
+  height:22vh;
   display:flex;
-  align-items:flex-end;
+  align-items:center;
   justify-content:center;
-  gap:1vw;
-  padding:0 2vw;
+  gap:clamp(4px,1vw,16px);
 }
 
 .tile{
-  width:var(--w);
-  height:calc(var(--w)*1.75);
+  flex:0 1 13vw;
+  width:13vw;
+  max-width:125px;
+  min-width:58px;
+  height:clamp(100px,17vh,170px);
+  padding:8px 5px;
+  border:3px solid var(--c);
   border-radius:10px;
   background:#0e1a2e;
-  flex:none;
-  border:3px solid var(--c);
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:.3em;
+  gap:10px;
   text-align:center;
-  padding:.3em;
   transform-origin:100% 100%;
-  transition:transform .55s cubic-bezier(.5,0,.9,.6),box-shadow .4s,border-color .4s;
+  transition:transform .55s cubic-bezier(.5,0,.9,.6),
+             box-shadow .4s,
+             border-color .4s;
 }
 
 .tile b{
-  font-size:calc(var(--w)*.45);
-  line-height:1;
   color:var(--c);
+  font-size:clamp(26px,3.5vw,46px);
+  line-height:1;
 }
 
 .tile span{
-  font-size:clamp(9px,1.2vw,16px);
-  font-weight:600;
-  line-height:1.15;
+  font-size:clamp(10px,1.2vw,15px);
+  font-weight:650;
+  line-height:1.2;
+  overflow-wrap:anywhere;
 }
 
 .op{
-  align-self:center;
-  color:var(--mute);
-  font-size:clamp(14px,2.4vw,32px);
-  margin-bottom:6vh;
-  flex:none;
-}
-
-.res{
-  position:absolute;
-  top:calc(100% + 3vh);
-  left:50%;
-  transform:translateX(-50%);
-  width:calc(var(--w)*1.3);
-  aspect-ratio:1;
-  border-radius:50%;
-  border:3px dashed var(--mute);
-  opacity:.3;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  flex:0 1 3vw;
+  min-width:10px;
   text-align:center;
-  padding:.4em;
-  font-weight:700;
-  font-size:clamp(10px,1.4vw,18px);
-  line-height:1.15;
-  transition:opacity .6s,border-color .6s,box-shadow .5s;
+  color:var(--mute);
+  font-size:clamp(16px,2.3vw,30px);
 }
 
-.res .cap{
-  position:absolute;
-  top:calc(100% + .5em);
-  left:50%;
-  transform:translateX(-50%);
-  white-space:nowrap;
-  font-size:.85em;
-  font-weight:500;
-  color:var(--mute);
+/* Resultado como pieza independiente dentro de la cadena */
+.tile.result{
+  flex:0 1 14vw;
+  width:14vw;
+  max-width:132px;
+  min-width:62px;
+  height:clamp(100px,17vh,170px);
+  border-color:var(--ink);
+  border-style:dashed;
+  border-radius:50%;
+  padding:10px;
+  background:#101c30;
+}
+
+.tile.result b{
+  font-size:clamp(22px,3vw,38px);
+}
+
+.tile.result span{
+  font-size:clamp(9px,1.05vw,13px);
 }
 
 .fell .tile.fall{
-  transform:rotate(74deg);
-  transition-delay:calc(var(--i)*.35s);
+  transform:rotate(45deg);
+  transition-delay:calc(var(--i)*.16s);
 }
 
-.fell .res{
-  opacity:1;
-  border-style:solid;
-  border-color:var(--ink);
-  transition-delay:calc(var(--i)*.35s);
+.defon .tile.after{
+  transform:none;
+  transition-delay:0s;
 }
 
-.def{
-  align-self:stretch;
-  width:min(9vw,110px);
-  flex:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:.25;
-  transition:opacity .6s;
+.defon .tile.mv{
+  transform:rotate(18deg);
+  transition-delay:0s;
 }
-
-.def div{
-  writing-mode:vertical-rl;
-  transform:rotate(180deg);
-  padding:.6em .3em;
-  border:3px dashed var(--N1);
-  border-radius:10px;
-  font-weight:800;
-  font-size:clamp(11px,1.6vw,22px);
-  white-space:nowrap;
-  background:var(--bg2);
-  color:transparent;
-  transition:color .5s,border-color .5s,box-shadow .4s;
-}
-
-.defon .def{opacity:1}
-.defon .def div{color:var(--ink);border-color:var(--ink)}
-.defon .tile.after{transform:none;transition-delay:0s}
-.defon .tile.mv{transform:rotate(28deg);transition-delay:0s}
-.defon .res{opacity:.3;border-style:dashed;border-color:var(--mute);transition-delay:0s}
 
 [data-k="0"] .tile.first{
   border-color:var(--g);
-  box-shadow:0 0 24px var(--g);
+  box-shadow:0 0 18px var(--g);
 }
 
-[data-k="1"] .def div,
 [data-k="1"] .tile.mv{
   border-color:var(--y);
-  box-shadow:0 0 24px var(--y);
+  box-shadow:0 0 18px var(--y);
 }
 
-[data-k="2"] .res{
-  opacity:1;
-  border-style:solid;
+[data-k="2"] .tile.result{
   border-color:var(--r);
-  box-shadow:0 0 24px var(--r);
+  border-style:solid;
+  box-shadow:0 0 18px var(--r);
 }
 
-/* Semáforo: antes, durante, después */
+/* Validación: bloque propio bajo la cadena */
+.validation{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  top:59vh;
+  min-height:6vh;
+  width:min(84vw,650px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.7em;
+  padding:10px 18px;
+  border:2px solid var(--N1);
+  border-radius:12px;
+  background:#0e1a2e;
+  text-align:center;
+  color:var(--ink);
+  font-size:clamp(12px,1.7vw,21px);
+  font-weight:700;
+}
+
+.validation b{color:var(--R)}
+
+/* Semáforo separado en la franja inferior */
 .sema{
   position:absolute;
   left:0;
   right:0;
-  bottom:calc(var(--safe) + 3vh);
+  bottom:calc(var(--safe) + 1vh);
+  min-height:7vh;
   display:flex;
   justify-content:center;
-  gap:5vw;
+  align-items:center;
+  gap:clamp(14px,5vw,70px);
+  padding:0 3vw;
 }
 
 .lamp{
   display:flex;
   align-items:center;
-  gap:.7em;
-  font-weight:700;
-  font-size:clamp(12px,2vw,26px);
+  gap:.65em;
   color:var(--mute);
+  font-size:clamp(12px,1.7vw,23px);
+  font-weight:750;
   transition:color .4s;
 }
 
 .lamp i{
-  width:clamp(22px,4vw,52px);
+  display:block;
+  width:clamp(20px,3vw,38px);
   aspect-ratio:1;
   border-radius:50%;
   background:#1b2a42;
@@ -474,31 +462,40 @@ h2{
 
 .lamp small{
   display:block;
-  font-size:.55em;
+  font-size:.65em;
   font-weight:500;
 }
 
 .lamp.on{color:var(--ink)}
-.lamp.on i{background:var(--c);box-shadow:0 0 24px var(--c)}
+.lamp.on i{
+  background:var(--c);
+  box-shadow:0 0 18px var(--c);
+}
 
-/* Cierre */
+/* Propuesta de valor */
 .q{
+  font-size:clamp(16px,2.7vw,36px);
   font-weight:800;
-  font-size:clamp(16px,2.8vw,38px);
+  line-height:1.3;
 }
 
 .q span{
   display:block;
   opacity:0;
-  transition:opacity .35s;
   margin:.5vh 0;
+  transition:opacity .3s;
 }
 
 .q span.on{opacity:1}
 
+/* Cierre */
 .brand{
-  font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.4em;
   font-size:clamp(30px,6vw,80px);
+  font-weight:850;
 }
 
 .qr{
@@ -509,43 +506,44 @@ h2{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:.3em;
+  padding:5px;
   overflow:hidden;
+  pointer-events:auto;
 }
 
 .qr img{
   width:100%;
   height:100%;
   object-fit:contain;
-  border-radius:8px;
 }
 
 .qr-caption{
-  font-size:clamp(10px,1.4vw,16px);
   color:var(--mute);
-  font-weight:700;
+  font-size:clamp(10px,1.4vw,16px);
+  font-weight:750;
 }
 
 .ctl{
   position:fixed;
+  z-index:30;
   bottom:10px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
   gap:8px;
-  z-index:20;
-  opacity:.65;
+  opacity:.75;
 }
 
 .ctl:hover,.ctl:focus-within{opacity:1}
 
 .ctl button{
-  font:600 14px var(--font);
   padding:.6em 1.1em;
-  border-radius:8px;
   border:1px solid var(--N1);
+  border-radius:8px;
   background:#0e1a2e;
   color:var(--ink);
+  font-size:14px;
+  font-weight:650;
   cursor:pointer;
 }
 
@@ -560,19 +558,80 @@ h2{
   outline-offset:3px;
 }
 
+/* Ajustes para teléfonos */
 @media(max-width:600px){
-  .sc{left:5vw;right:5vw;gap:2vh}
+  .question-area{
+    top:8vh;
+    height:19vh;
+    gap:1vh;
+  }
+
+  .question-area h2{
+    font-size:clamp(19px,5vw,30px);
+    min-height:2.4em;
+  }
+
+  .chain{
+    left:2vw;
+    right:2vw;
+    top:34vh;
+    height:19vh;
+    gap:2px;
+  }
+
+  .tile{
+    flex:1 1 0;
+    min-width:0;
+    width:auto;
+    height:clamp(88px,15vh,120px);
+    padding:5px 2px;
+    border-width:2px;
+    gap:7px;
+  }
+
+  .tile b{font-size:clamp(19px,5vw,28px)}
+  .tile span{font-size:clamp(8px,2.1vw,11px)}
+
+  .tile.result{
+    flex:1.1 1 0;
+    width:auto;
+    min-width:0;
+    height:clamp(88px,15vh,120px);
+    padding:5px;
+  }
+
+  .tile.result span{font-size:clamp(8px,1.9vw,10px)}
+  .op{flex:0 0 3vw;font-size:14px}
+
+  .validation{
+    top:56vh;
+    width:90vw;
+    min-height:7vh;
+    padding:7px 9px;
+    font-size:clamp(11px,3vw,15px);
+  }
+
+  .sema{
+    bottom:calc(var(--safe) + 1vh);
+    gap:3vw;
+    padding:0 2vw;
+  }
+
+  .lamp{gap:5px;font-size:clamp(10px,2.8vw,13px)}
+  .lamp i{width:18px}
+
   .cubebox{left:0;width:43vw}
   .cubetxt{left:44vw;right:3vw}
-  .chips{gap:1vw}
-  .chip{padding:.35em .55em}
-  .chain{gap:.5vw;padding:0 1vw}
-  .tile{border-width:2px}
-  .tile span{font-size:9px}
-  .def{width:7vw}
-  .sema{gap:3vw}
-  .lamp{gap:.35em}
-  .lamp i{width:22px}
+  .chips{gap:5px}
+  .chip{padding:.35em .5em;font-size:11px}
+}
+
+@media(max-height:500px){
+  .question-area{top:6vh;height:20vh}
+  .chain{top:29vh;height:24vh}
+  .validation{top:56vh;min-height:7vh}
+  .sema{bottom:calc(var(--safe) + 0vh)}
+  .tile,.tile.result{height:20vh}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -588,7 +647,7 @@ h2{
   <div class="tag">DEMO ILUSTRATIVA</div>
   <div class="clock" id="clock">0:00 / 0:40</div>
 
-  <!-- 1. DOLOR: 0–6 segundos -->
+  <!-- ESCENA 1: PROBLEMA -->
   <div class="sc" data-a="0" data-b="6">
     <div class="eyebrow">1 · EL PROBLEMA</div>
     <h1>¿SOLUCIONAS UN PROBLEMA… Y DESPUÉS APARECE OTRO?</h1>
@@ -606,7 +665,7 @@ h2{
     </div>
   </div>
 
-  <!-- 2. SOLUCIONES HABITUALES: 6–10 segundos -->
+  <!-- ESCENA 2: SOLUCIONES HABITUALES -->
   <div class="sc" data-a="6" data-b="10">
     <div class="eyebrow">2 · LO QUE YA HACEMOS</div>
     <h2>MEDIMOS. CONTROLAMOS. CORREGIMOS.</h2>
@@ -622,7 +681,7 @@ h2{
     </div>
   </div>
 
-  <!-- 3. PREGUNTA: 10–12 segundos -->
+  <!-- ESCENA 3: PREGUNTA -->
   <div class="sc" data-a="10" data-b="12">
     <h1><span class="warn">PERO…</span><br>¿ESTAMOS VIENDO TODO LO QUE MOVEMOS?</h1>
     <div class="sub">
@@ -630,7 +689,7 @@ h2{
     </div>
   </div>
 
-  <!-- 4. CUBO: 12–18 segundos -->
+  <!-- ESCENA 4: CUBO -->
   <div class="cubebox" data-a="12" data-b="18">
     <div class="cube" id="cube" aria-label="Cubo tridimensional de seis caras"></div>
   </div>
@@ -646,32 +705,48 @@ h2{
     </div>
   </div>
 
-  <!-- 5. RELACIONES Y CONSECUENCIAS: 18–31 segundos -->
-  <div class="top" data-a="18" data-b="31">
-    <div class="eyebrow" style="margin-bottom:1vh">
-      ANTICIPAR CONSECUENCIAS · IDENTIFICAR PUNTOS DE INTERVENCIÓN
+  <!-- ESCENA 5: CADENA DE CONSECUENCIAS -->
+  <div class="relation-scene" data-a="18" data-b="31">
+
+    <div class="question-area">
+      <div class="eyebrow">
+        ANTICIPAR CONSECUENCIAS · IDENTIFICAR PUNTOS DE INTERVENCIÓN
+      </div>
+
+      <!-- La pregunta completa permanece junta -->
+      <h2 class="h" id="h1">¿QUÉ PASA CUANDO MOVEMOS UNA PIEZA?</h2>
+      <h2 class="h" id="h2">¿DÓNDE PODEMOS DETENER LA CADENA?</h2>
     </div>
-    <div style="position:relative;height:12vh">
-      <h2 class="h" id="h1">¿QUÉ PASA SI UNA PIEZA SE MUEVE?</h2>
-      <h2 class="h" id="h2">¿DÓNDE PUEDE DETENERSE?</h2>
+
+    <!-- Cadena horizontal independiente -->
+    <div class="chain" id="chain"></div>
+
+    <!-- Validación debajo de la cadena, nunca encima del título -->
+    <div class="validation" id="validation">
+      <b>POSIBLE PUNTO DE CONTROL</b>
+      <span>Validación de stock</span>
+    </div>
+
+    <!-- Semáforo en su propia franja inferior -->
+    <div class="sema">
+      <div class="lamp" style="--c:var(--g)">
+        <i></i>
+        <div>ANTES<small>prevenir</small></div>
+      </div>
+
+      <div class="lamp" style="--c:var(--y)">
+        <i></i>
+        <div>DURANTE<small>controlar</small></div>
+      </div>
+
+      <div class="lamp" style="--c:var(--r)">
+        <i></i>
+        <div>DESPUÉS<small>recuperar</small></div>
+      </div>
     </div>
   </div>
 
-  <div class="chain" id="chain" data-a="18" data-b="31"></div>
-
-  <div class="sema" data-a="25" data-b="31">
-    <div class="lamp" style="--c:var(--g)">
-      <i></i><div>ANTES<small>prevenir</small></div>
-    </div>
-    <div class="lamp" style="--c:var(--y)">
-      <i></i><div>DURANTE<small>controlar</small></div>
-    </div>
-    <div class="lamp" style="--c:var(--r)">
-      <i></i><div>DESPUÉS<small>recuperar</small></div>
-    </div>
-  </div>
-
-  <!-- 6. PROPUESTA DE VALOR: 31–36 segundos -->
+  <!-- ESCENA 6: PROPUESTA DE VALOR -->
   <div class="sc" data-a="31" data-b="36">
     <div class="eyebrow">4 · LO QUE CAMBIA PARA TI</div>
     <h1>DECIDE SABIENDO QUÉ ESTÁS MOVIENDO.</h1>
@@ -683,10 +758,11 @@ h2{
     </div>
   </div>
 
-  <!-- 7. MARCA Y QR: 36–40 segundos -->
+  <!-- ESCENA 7: CIERRE -->
   <div class="sc" data-a="36" data-b="9999">
-    <div class="brand" style="display:flex;align-items:center;justify-content:center;gap:.4em">
-      <img src="logo.png" alt="Logo de Expertos Chile" style="height:1.1em;width:1.1em;object-fit:contain">
+    <div class="brand">
+      <img src="logo.png" alt="Logo de Expertos Chile"
+           style="height:1.1em;width:1.1em;object-fit:contain">
       EXPERTOS CHILE
     </div>
 
@@ -698,16 +774,10 @@ h2{
       Antes de mover una pieza, descubre qué otras puede mover.
     </div>
 
-    <a
-      class="qr"
-      id="qr-link"
-      href="index.html"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Abrir la página de Expertos Chile"
-      style="pointer-events:auto"
-    >
-      <img id="qr-image" alt="Código QR para visitar la página de Expertos Chile">
+    <a class="qr" id="qr-link" href="index.html"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Abrir la página de Expertos Chile">
+      <img id="qr-image" alt="Código QR para visitar Expertos Chile">
     </a>
 
     <div class="qr-caption">ESCANEA Y CONOCE EL CASO</div>
@@ -722,90 +792,76 @@ h2{
 <script>
 "use strict";
 
-/*
- * DEMO ILUSTRATIVA.
- * El ejemplo describe relaciones hipotéticas entre una decisión,
- * procesos, recursos, personas y un resultado.
- * No representa un diagnóstico real ni demuestra causalidad.
- */
 const DEMO = {
   components: [
-    {id:"d1",name:"Cambiar proveedor",type:"Decisión"},
-    {id:"p1",name:"Despacho",type:"Proceso"},
-    {id:"r1",name:"Inventario",type:"Recurso"},
-    {id:"h1",name:"Equipo de bodega",type:"Personas"},
-    {id:"res",name:"Reclamos de clientes",type:"Resultado"}
+    {id:"d1", name:"Cambiar proveedor", type:"Decisión"},
+    {id:"p1", name:"Despacho", type:"Proceso"},
+    {id:"r1", name:"Inventario", type:"Recurso"},
+    {id:"h1", name:"Equipo de bodega", type:"Personas"},
+    {id:"res", name:"Reclamos de clientes", type:"Resultado"}
   ],
   relations: [
-    {src:"d1",dst:"p1"},
-    {src:"p1",dst:"r1",defense:"Validación de stock"},
-    {src:"r1",dst:"h1"},
-    {src:"h1",dst:"res"}
+    {src:"d1", dst:"p1"},
+    {src:"p1", dst:"r1", defense:"Validación de stock"},
+    {src:"r1", dst:"h1"},
+    {src:"h1", dst:"res"}
   ]
 };
 
 const PIECE = {
-  "Personas": {g:"♥",c:"var(--P)"},
-  "Recurso":  {g:"♦",c:"var(--R)"},
-  "Proceso":  {g:"♣",c:"var(--Pr)"},
-  "Decisión": {g:"♠",c:"var(--D)"}
+  "Personas": {g:"♥", c:"var(--P)"},
+  "Recurso":  {g:"♦", c:"var(--R)"},
+  "Proceso":  {g:"♣", c:"var(--Pr)"},
+  "Decisión": {g:"♠", c:"var(--D)"}
 };
 
-/* Construcción de la cadena de relaciones */
+/* Construye la cadena en orden y mantiene el resultado dentro de ella. */
 (function buildChain(){
-  const by = Object.fromEntries(
-    DEMO.components.map(c => [c.id,c])
+  const byId = Object.fromEntries(
+    DEMO.components.map(component => [component.id, component])
   );
 
-  const seq = ["d1"];
-  DEMO.relations.forEach(r => seq.push(r.dst));
-
-  const defIdx = DEMO.relations.findIndex(r => r.defense) + 1;
+  const sequence = ["d1", "p1", "r1", "h1", "res"];
   let html = "";
-  let after = false;
 
-  seq.forEach((id,i) => {
-    const c = by[id];
-    const rel = i ? DEMO.relations[i-1] : null;
+  sequence.forEach((id, index) => {
+    const component = byId[id];
 
-    if(c.type === "Resultado"){
+    if(index > 0){
+      html += '<div class="op" aria-hidden="true">→</div>';
+    }
+
+    if(component.type === "Resultado"){
       html += `
-        <div class="res" style="--i:${i}">
-          ${c.name}
-          <span class="cap">resultado emergente</span>
+        <div class="tile result fall"
+             style="--i:${index}">
+          <b>○</b>
+          <span>${component.name}</span>
         </div>`;
       return;
     }
 
-    if(rel && rel.defense){
-      html += `<div class="op">→</div>
-        <div class="def"><div>${rel.defense}</div></div>`;
-      after = true;
-    }else if(i){
-      html += `<div class="op">→</div>`;
-    }
+    const symbol = PIECE[component.type];
 
-    const p = PIECE[c.type];
-    const classes = ["tile","fall"];
-
-    if(after) classes.push("after");
-    if(i === defIdx-1) classes.push("mv");
-    if(i === 0) classes.push("first");
+    const classes = ["tile", "fall"];
+    if(index === 0) classes.push("first");
+    if(index >= 3) classes.push("after");
+    if(index === 2) classes.push("mv");
 
     html += `
       <div class="${classes.join(" ")}"
-           style="--c:${p.c};--i:${i}">
-        <b>${p.g}</b>
-        <span>${c.name}</span>
+           style="--c:${symbol.c};--i:${index}">
+        <b>${symbol.g}</b>
+        <span>${component.name}</span>
       </div>`;
   });
 
   document.getElementById("chain").innerHTML = html;
 })();
 
-/* Construcción del cubo con seis colores */
+/* Construye el cubo de seis colores. */
 (function buildCube(){
-  const faces = [
+  const colors = [
     "var(--cube-white)",
     "var(--cube-yellow)",
     "var(--cube-red)",
@@ -816,23 +872,23 @@ const PIECE = {
 
   let seed = 7;
 
-  function rnd(){
+  function random(){
     seed = (seed * 16807) % 2147483647;
     return (seed - 1) / 2147483646;
   }
 
   const cube = document.getElementById("cube");
 
-  cube.innerHTML = faces.map(faceColor => {
+  cube.innerHTML = colors.map(faceColor => {
     let stickers = "";
 
-    for(let k=0;k<9;k++){
-      const randomColor = faces[Math.floor(rnd()*faces.length)];
-      const delay = (rnd()*1.5).toFixed(2);
+    for(let i = 0; i < 9; i++){
+      const initialColor = colors[Math.floor(random() * colors.length)];
+      const delay = (random() * 1.5).toFixed(2);
 
       stickers += `
         <div class="st"
-             style="--c0:${randomColor};--c1:${faceColor};--d:${delay}s">
+             style="--c0:${initialColor};--c1:${faceColor};--d:${delay}s">
         </div>`;
     }
 
@@ -840,127 +896,128 @@ const PIECE = {
   }).join("");
 })();
 
-/* QR: se genera para index.html dentro del mismo sitio */
+/* QR para index.html del mismo sitio. */
 (function buildQR(){
   const target = new URL("index.html", window.location.href);
   target.hash = "";
   target.search = "";
 
-  const qrLink = document.getElementById("qr-link");
-  const qrImage = document.getElementById("qr-image");
+  document.getElementById("qr-link").href = target.href;
 
-  qrLink.href = target.href;
-
-  /*
-   * Servicio externo de generación de QR.
-   * El destino es la página index.html del mismo sitio.
-   */
-  qrImage.src =
+  document.getElementById("qr-image").src =
     "https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=8&data=" +
     encodeURIComponent(target.href);
 })();
 
-/* Temporizador: 40 segundos */
+/* Temporizador de 40 segundos. */
 const TOTAL = 40;
-const st = document.getElementById("st");
+const stage = document.getElementById("st");
 const bar = document.getElementById("bar");
-const bGo = document.getElementById("bGo");
-const bRe = document.getElementById("bRe");
+const buttonGo = document.getElementById("bGo");
+const buttonRestart = document.getElementById("bRe");
 const clock = document.getElementById("clock");
+
 const lamps = [...document.querySelectorAll(".lamp")];
+const heading1 = document.getElementById("h1");
+const heading2 = document.getElementById("h2");
 
 let t = 0;
 let playing = false;
 let last = 0;
 
-const fmt = seconds => {
+function formatTime(seconds){
   seconds = Math.floor(seconds);
-  return Math.floor(seconds/60) + ":" +
-    String(seconds%60).padStart(2,"0");
-};
+  return Math.floor(seconds / 60) + ":" +
+    String(seconds % 60).padStart(2, "0");
+}
 
 function render(){
-  st.classList.toggle("solving",t>=15);
-  st.classList.toggle("fell",t>=20);
-  st.classList.toggle("defon",t>=24);
+  stage.classList.toggle("solving", t >= 15);
+  stage.classList.toggle("fell", t >= 20);
+  stage.classList.toggle("defon", t >= 24);
 
-  const k = (t>=25 && t<31)
-    ? Math.min(2,Math.floor((t-25)/2))
-    : -1;
+  /*
+   * El semáforo indica tres momentos:
+   * 25–27 s: antes; 27–29 s: durante; 29–31 s: después.
+   */
+  let activeLamp = -1;
 
-  st.dataset.k = String(k);
+  if(t >= 25 && t < 31){
+    activeLamp = Math.min(2, Math.floor((t - 25) / 2));
+  }
 
-  lamps.forEach((lamp,i) => {
-    lamp.classList.toggle("on",i===k);
+  stage.dataset.k = String(activeLamp);
+
+  lamps.forEach((lamp, index) => {
+    lamp.classList.toggle("on", index === activeLamp);
   });
 
-  document.getElementById("h1").classList.toggle(
-    "on",t>=18 && t<24
-  );
+  /*
+   * Las dos preguntas ocupan el mismo espacio, pero nunca
+   * se muestran simultáneamente.
+   */
+  heading1.classList.toggle("on", t >= 18 && t < 24);
+  heading2.classList.toggle("on", t >= 24 && t < 31);
 
-  document.getElementById("h2").classList.toggle(
-    "on",t>=24 && t<31
-  );
+  document.querySelectorAll("[data-a]").forEach(element => {
+    const start = Number(element.dataset.a);
+    const end = Number(element.dataset.b || 9999);
 
-  document.querySelectorAll("[data-a]").forEach(el => {
-    const start = Number(el.dataset.a);
-    const end = Number(el.dataset.b || 9999);
-
-    el.classList.toggle("on",t>=start && t<end);
+    element.classList.toggle("on", t >= start && t < end);
   });
 
-  bar.style.width = Math.min(100,(t/TOTAL)*100) + "%";
-  clock.textContent = fmt(t) + " / " + fmt(TOTAL);
+  bar.style.width = Math.min(100, (t / TOTAL) * 100) + "%";
+  clock.textContent = formatTime(t) + " / " + formatTime(TOTAL);
 
-  st.classList.toggle("paused",!playing);
+  stage.classList.toggle("paused", !playing);
 
-  bGo.textContent = playing
+  buttonGo.textContent = playing
     ? "Pausa"
-    : (t>0 && t<TOTAL ? "Continuar" : "START");
+    : (t > 0 && t < TOTAL ? "Continuar" : "START");
 }
 
 function loop(now){
   if(playing){
-    t += (now-last)/1000;
+    t += (now - last) / 1000;
 
-    if(t>=TOTAL){
-      t=TOTAL;
-      playing=false;
+    if(t >= TOTAL){
+      t = TOTAL;
+      playing = false;
     }
 
     render();
   }
 
-  last=now;
+  last = now;
   requestAnimationFrame(loop);
 }
 
-function toggle(){
-  if(t>=TOTAL){
-    t=0;
+function togglePlayback(){
+  if(t >= TOTAL){
+    t = 0;
   }
 
-  playing=!playing;
-  last=performance.now();
+  playing = !playing;
+  last = performance.now();
   render();
 }
 
 function restart(){
-  t=0;
-  playing=false;
-  last=performance.now();
+  t = 0;
+  playing = false;
+  last = performance.now();
   render();
 }
 
-bGo.addEventListener("click",toggle);
-bRe.addEventListener("click",restart);
+buttonGo.addEventListener("click", togglePlayback);
+buttonRestart.addEventListener("click", restart);
 
-document.addEventListener("keydown",e => {
-  if(e.code==="Space"){
-    if(e.target instanceof HTMLButtonElement) return;
-    e.preventDefault();
-    toggle();
-  }else if(e.key==="r" || e.key==="R"){
+document.addEventListener("keydown", event => {
+  if(event.code === "Space"){
+    if(event.target instanceof HTMLButtonElement) return;
+    event.preventDefault();
+    togglePlayback();
+  }else if(event.key === "r" || event.key === "R"){
     restart();
   }
 });
