@@ -1,84 +1,1457 @@
-<!doctype html>
-<html lang="es"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Banco de casos reales · Expertos Chile</title>
-<meta name="description" content="Casos reales de efectos en cadena, con cifras reportadas y fuentes. Qué ocurrió y cómo se puede mirar.">
-<link rel="stylesheet" href="estilo.css">
-<style>
-.num{font-size:clamp(24px,5vw,34px);font-weight:850;color:var(--R);line-height:1.1}
-.stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:12px 0}
-.stats .card{padding:14px}.stats p{font-size:13px;margin:6px 0 0}
-.chainv{display:grid;gap:8px;margin:12px 0}
-.chainv div{border-left:4px solid var(--line);padding:4px 0 4px 14px;font-size:15px;color:var(--ink)}
-.chainv .e1{border-color:#bdf1f8;background:none}.chainv .e2{border-color:#7ee7f5;background:none}
-.lens{border:1px dashed var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}.lens b{color:var(--ink)}
-.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--mute);margin:12px 0}
-small.src{display:block;font-size:12px;color:var(--mute);margin-top:8px}
-.quote{font-weight:700;color:var(--ink);font-size:clamp(16px,2.4vw,20px)}
-.card.st h3{margin-top:2px}
-</style></head><body><div class="w">
-<nav><a class="brand" href="index.html" data-link>EXPERTOS CHILE</a><div class="links"><a href="casos.html" class="on" data-link>Casos</a><a href="productos.html" data-link>Servicios</a><a href="charlas.html" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a><a href="diagnostico.html" class="navcta" data-link>Diagnóstico</a></div></nav>
 
-<div style="padding:30px 0 20px">
- <div class="eye">BANCO DE CASOS</div>
- <h1>Los efectos en cadena existen. Y tienen cifras.</h1>
- <p class="lead">Casos públicos, con números reportados por las propias organizaciones. Primero lo que ocurrió; después, cómo se puede mirar. Cada semana, uno de ellos se revisa en vivo en nuestras <a class="l" href="charlas.html" data-link>charlas</a>.</p>
- <div class="legend"><span><span class="tag e1">DOCUMENTADO</span>consta en un documento público</span><span><span class="tag e2">REPORTADO</span>cifra o estimación de la organización</span><span><span class="tag e3">INFERIDO</span>relación que deducimos</span><span><span class="tag e4">HIPÓTESIS</span>escenario para analizar</span></div>
-</div>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Banco de casos reales · Expertos Chile</title>
+<meta name="description" content="Casos de decisiones, efectos en cadena y riesgos organizacionales. Evidencia pública, hipótesis de análisis y casos de simulación comercial.">
+
+<link rel="stylesheet" href="estilo.css">
+
+<style>
+/* =====================================================
+   BANCO DE CASOS · EXPERTOS CHILE
+   Mantiene la identidad visual definida en estilo.css.
+   ===================================================== */
+
+.num {
+  font-size: clamp(24px, 5vw, 34px);
+  font-weight: 850;
+  color: var(--R);
+  line-height: 1.1;
+}
+
+.stats {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  margin: 12px 0;
+}
+
+.stats .card {
+  padding: 14px;
+}
+
+.stats p {
+  font-size: 13px;
+  margin: 6px 0 0;
+}
+
+.chainv {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.chainv div {
+  border-left: 4px solid var(--line);
+  padding: 6px 0 6px 14px;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.chainv .e1 { border-color: #bdf1f8; }
+.chainv .e2 { border-color: #7ee7f5; }
+.chainv .e3 { border-color: #f0c36b; }
+.chainv .e4 { border-color: #d6a5f5; }
+
+.lens {
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 12px 0;
+}
+
+.lens b { color: var(--ink); }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--mute);
+  margin: 12px 0;
+}
+
+small.src {
+  display: block;
+  font-size: 12px;
+  color: var(--mute);
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+.quote {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: clamp(16px, 2.4vw, 20px);
+}
+
+.card.st h3 { margin-top: 2px; }
+
+.case-intro {
+  margin: 12px 0;
+  color: var(--mute);
+}
+
+.case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin: 10px 0;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  line-height: 1.4;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  margin: 3px 4px 3px 0;
+}
+
+.status.public {
+  border-color: #8bd6bb;
+}
+
+.status.hypothesis {
+  border-color: #e5c16b;
+}
+
+.status.simulation {
+  border-color: #bca0f5;
+}
+
+.case-note {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.case-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.case-table th,
+.case-table td {
+  border-bottom: 1px solid var(--line);
+  padding: 9px 7px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.case-table th {
+  font-weight: 750;
+}
+
+#filtro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#filtro button {
+  cursor: pointer;
+}
+
+#filtro button:focus-visible,
+summary:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--R);
+  outline-offset: 3px;
+}
+
+.case-search {
+  width: 100%;
+  max-width: 500px;
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+  margin: 12px 0;
+}
+
+.case-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.case-actions .btn {
+  margin: 0;
+}
+
+.simulation-label {
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+@media (max-width: 520px) {
+  .case-table {
+    font-size: 12px;
+  }
+
+  .case-table th,
+  .case-table td {
+    padding: 7px 5px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="w">
+
+<nav>
+  <a class="brand" href="index.html" data-link>EXPERTOS CHILE</a>
+
+  <div class="links">
+    <a href="casos.html" class="on" data-link>Casos</a>
+    <a href="productos.html" data-link>Servicios</a>
+    <a href="charlas.html" data-link>Charlas</a>
+    <a href="quienes-somos.html" data-link>Quiénes somos</a>
+    <a href="diagnostico.html" class="navcta" data-link>Diagnóstico</a>
+  </div>
+</nav>
+
+<!-- =====================================================
+     PRESENTACIÓN
+     ===================================================== -->
+
+<header style="padding:30px 0 20px">
+  <div class="eye">BANCO DE CASOS</div>
+
+  <h1>Los efectos en cadena existen. Y tienen cifras.</h1>
+
+  <p class="lead">
+    Las decisiones empresariales pueden generar consecuencias en otras
+    áreas, incluso cuando cada equipo trabaja con sus propios indicadores.
+    Revisamos casos documentados y escenarios de análisis para comprender
+    qué ocurrió, qué conexiones conviene investigar y cómo mejorar las
+    decisiones.
+  </p>
+
+  <div class="legend">
+    <span>
+      <span class="tag e1">DOCUMENTADO</span>
+      consta en una fuente identificada
+    </span>
+
+    <span>
+      <span class="tag e2">REPORTADO</span>
+      cifra atribuida a una organización
+    </span>
+
+    <span>
+      <span class="tag e3">INTERPRETACIÓN</span>
+      lectura analítica del caso
+    </span>
+
+    <span>
+      <span class="tag e4">HIPÓTESIS</span>
+      relación que debe investigarse
+    </span>
+  </div>
+
+  <div class="case-note">
+    <b>Importante:</b> una coincidencia temporal no demuestra causalidad.
+    Las cifras históricas pertenecen a las fuentes citadas. Las hipótesis
+    de Expertos Chile no se presentan como causas comprobadas.
+  </div>
+</header>
+
+<!-- =====================================================
+     FILTROS
+     ===================================================== -->
 
 <section style="border-top:none;padding-top:0">
- <div class="sema" id="filtro"></div>
- <div class="grid" id="lista" style="grid-template-columns:1fr"></div>
+
+  <h2>Explora los casos por etapa</h2>
+
+  <p>
+    Filtra según el momento en que una decisión puede requerir análisis:
+    antes de ejecutarla, durante su implementación o después de detectar
+    resultados problemáticos.
+  </p>
+
+  <input
+    id="busqueda"
+    class="case-search"
+    type="search"
+    placeholder="Buscar empresa, problema o servicio..."
+    aria-label="Buscar casos"
+  >
+
+  <div class="sema" id="filtro" aria-label="Filtrar casos por etapa"></div>
+
+  <p id="contador" aria-live="polite"></p>
+
+  <div class="grid" id="lista" style="grid-template-columns:1fr"></div>
+
 </section>
 
-<section id="metodo"><h2>Cómo leer estos casos</h2>
- <p class="quote">Los casos históricos muestran lo que ocurrió. El modelo muestra cómo podemos analizarlo. No confundimos explicación con predicción.</p>
- <p>No sabemos qué habría pasado con otra decisión, y no decimos que habríamos evitado estos problemas. Lo que hacemos es poner sobre la mesa <b>las conexiones que conviene mirar antes de decidir</b>: qué piezas están ligadas, dónde puede propagarse un efecto y qué defensas existen y realmente funcionan.</p>
- <div class="card"><h3>¿Y en tu organización?</h3><p>Con tu información pasamos de casos ajenos a tu caso: <b>decisión → configuración → efectos probables → puntos de intervención → medición</b>.</p>
- <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a><a class="btn" href="productos.html" data-link>Ver los servicios</a><a class="btn" href="charlas.html" data-link>Ir a una charla</a><a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Contarnos tu decisión por WhatsApp</a><a class="btn" href="quienes-somos.html" data-link>Quiénes somos</a></div></div>
+<!-- =====================================================
+     CASO PARA LA PRÁCTICA COMERCIAL DE HERMES
+     ===================================================== -->
+
+<section id="caso-industrial">
+  <div class="eye">CASO PARA ENTRENAMIENTO COMERCIAL</div>
+
+  <h2>Cuando producción, mantenimiento y abastecimiento no avanzan al mismo ritmo</h2>
+
+  <p class="lead">
+    Un escenario industrial ficticio, ambientado en la Región del Biobío,
+    para practicar cómo Expertos Chile conversa con una gerencia que ya
+    dispone de ERP, indicadores y profesionales especializados.
+  </p>
+
+  <div class="case-note">
+    <span class="status simulation">SIMULACIÓN</span>
+
+    <b>Este caso no corresponde a una empresa real identificada.</b>
+    Los antecedentes que siguen son supuestos creados para practicar
+    una conversación comercial. No son estadísticas verificadas de una
+    compañía de la Región del Biobío.
+  </div>
+
+  <div class="stats">
+
+    <div class="card">
+      <div class="num">86 %</div>
+      <p>
+        <b>Supuesto de simulación</b><br>
+        Cumplimiento de producción frente a una meta interna hipotética
+        del 95 %.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="num">30 días</div>
+      <p>
+        <b>Periodo inicial propuesto</b><br>
+        Ventana de análisis para explorar registros disponibles.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="num">3 áreas</div>
+      <p>
+        <b>Alcance inicial</b><br>
+        Producción, mantenimiento y abastecimiento.
+      </p>
+    </div>
+
+  </div>
+
+  <h3>1. Situación de la empresa</h3>
+
+  <p>
+    Actúo como gerente de operaciones de una empresa industrial de tamaño
+    mediano-grande que opera en el Biobío. Nuestra planta tiene procesos
+    productivos continuos y depende de la disponibilidad de equipos y
+    repuestos.
+  </p>
+
+  <p>
+    Tenemos un ERP, un sistema de mantenimiento, responsables de
+    abastecimiento, reuniones de coordinación y tableros de indicadores.
+    Sin embargo, el cumplimiento de producción se mantiene por debajo
+    de la meta interna definida para este ejercicio.
+  </p>
+
+  <p>
+    Hemos implementado medidas correctivas, pero no tenemos claridad
+    suficiente sobre qué combinación de circunstancias explica los
+    episodios que más perjudican la operación.
+  </p>
+
+  <h3>2. Antecedentes que el gerente entregaría inicialmente</h3>
+
+  <div class="chainv">
+    <div class="e1">
+      <span class="tag e1">ANTECEDENTE SIMULADO</span>
+      Producción registra detenciones no programadas y sus categorías.
+    </div>
+
+    <div class="e1">
+      <span class="tag e1">ANTECEDENTE SIMULADO</span>
+      Mantenimiento genera órdenes de trabajo y registra intervenciones.
+    </div>
+
+    <div class="e1">
+      <span class="tag e1">ANTECEDENTE SIMULADO</span>
+      Abastecimiento registra solicitudes, pedidos y recepción de repuestos.
+    </div>
+
+    <div class="e3">
+      <span class="tag e3">PREGUNTA ABIERTA</span>
+      Todavía no sabemos si los registros están suficientemente
+      sincronizados para explicar los episodios de detención.
+    </div>
+  </div>
+
+  <h3>3. Lo que le exigiría a una consultora</h3>
+
+  <p>
+    Como gerente, no contrataría un servicio solo porque me diga que
+    producción, mantenimiento y abastecimiento deben coordinarse.
+    Ya conozco esa necesidad y tengo profesionales responsables de cada área.
+  </p>
+
+  <ul>
+    <li>¿Qué decisión concreta podré tomar con su análisis?</li>
+    <li>¿Qué harán ustedes que no hayamos hecho ya?</li>
+    <li>¿Cómo distinguirán una coincidencia de una relación relevante?</li>
+    <li>¿Qué datos necesitan y cuáles no necesitan?</li>
+    <li>¿Cómo evitarán que una reducción de detenciones aumente otros costos?</li>
+    <li>¿Qué recibiré, cuánto costará y cuándo podré evaluarlo?</li>
+  </ul>
+
+  <h3>4. Cómo podría abordarlo Expertos Chile</h3>
+
+  <div class="chainv">
+    <div>
+      <b>Indicador:</b> identificar el resultado operativo que no mejora
+      pese a las medidas existentes.
+    </div>
+
+    <div>
+      <b>Anomalía:</b> determinar qué episodios persisten y cómo están
+      clasificados en los registros.
+    </div>
+
+    <div>
+      <b>Conexiones:</b> cruzar, cuando sea posible, las marcas de tiempo
+      de detenciones, órdenes de mantenimiento, solicitudes de repuestos
+      y cambios de programación.
+    </div>
+
+    <div>
+      <b>Hipótesis:</b> comprobar si determinadas combinaciones aparecen
+      con mayor frecuencia durante las detenciones que en periodos
+      comparables sin detención.
+    </div>
+
+    <div>
+      <b>Intervención:</b> proponer un cambio acotado que la empresa pueda
+      evaluar, como una regla de escalamiento, un control de prioridad
+      o una revisión de repuestos críticos.
+    </div>
+
+    <div>
+      <b>Verificación:</b> comparar los resultados antes y después,
+      considerando también los costos y otros efectos operativos.
+    </div>
+  </div>
+
+  <div class="lens">
+    <b>Lo que no debemos prometer:</b>
+    que el cruce de datos encontrará necesariamente una causa,
+    que la hipótesis será confirmada o que el piloto conseguirá una
+    reducción predeterminada de detenciones. Eso depende de los datos,
+    el diseño del análisis y la respuesta real de la operación.
+  </div>
+
+  <h3>5. Propuesta de primer trabajo</h3>
+
+  <table class="case-table">
+    <thead>
+      <tr>
+        <th>Elemento</th>
+        <th>Propuesta inicial</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Objetivo</td>
+        <td>
+          Determinar si existe una asociación relevante entre determinadas
+          incidencias operativas y los registros de mantenimiento,
+          abastecimiento o programación.
+        </td>
+      </tr>
+
+      <tr>
+        <td>Datos</td>
+        <td>
+          Muestra acordada de eventos, marcas de tiempo, categorías,
+          órdenes asociadas y movimientos relevantes de repuestos.
+        </td>
+      </tr>
+
+      <tr>
+        <td>Formato</td>
+        <td>
+          Exportación CSV o Excel con los campos estrictamente necesarios
+          y la información sensible minimizada.
+        </td>
+      </tr>
+
+      <tr>
+        <td>Entregable</td>
+        <td>
+          Mapa de conexiones observadas, limitaciones del análisis,
+          hipótesis priorizadas y recomendación para decidir si conviene
+          realizar un piloto.
+        </td>
+      </tr>
+
+      <tr>
+        <td>Decisión gerencial</td>
+        <td>
+          Continuar con una intervención, solicitar evidencia adicional
+          o descartar la hipótesis y estudiar otra explicación.
+        </td>
+      </tr>
+
+      <tr>
+        <td>Precio</td>
+        <td>
+          Se cotiza después de confirmar el alcance, los datos disponibles,
+          las horas de trabajo y los entregables.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6. Condiciones para aprobar un piloto</h3>
+
+  <ul>
+    <li>
+      Definir una línea de base y un indicador principal antes de intervenir.
+    </li>
+    <li>
+      Acordar quién autoriza los cambios y quién registra los resultados.
+    </li>
+    <li>
+      Establecer un indicador de protección para detectar aumentos de costos
+      o efectos adversos en otras áreas.
+    </li>
+    <li>
+      Comparar periodos razonablemente comparables y reconocer cambios
+      de producción, demanda, mezcla de productos y otras circunstancias.
+    </li>
+    <li>
+      Acordar de antemano qué resultados justificarían escalar, ajustar
+      o detener la intervención.
+    </li>
+  </ul>
+
+  <div class="case-note">
+    <b>Nota metodológica:</b>
+    una mejora observada después de una intervención no demuestra por sí
+    sola que esta haya sido la causa. La evaluación debe considerar
+    la variabilidad del proceso, el tamaño de la muestra y las
+    explicaciones alternativas.
+  </div>
+
+  <div class="case-actions">
+    <a class="btn cta" href="diagnostico.html" data-link>
+      Explorar un diagnóstico
+    </a>
+
+    <a class="btn" href="productos.html?e=y" data-link>
+      Revisar servicios para proyectos en curso
+    </a>
+
+    <button class="btn" id="copiar-caso" type="button">
+      Copiar resumen del caso
+    </button>
+  </div>
 </section>
-<footer>© Expertos Chile SpA · Los Ángeles, Biobío · Casos con fines ilustrativos, basados en documentos y reportes públicos. No constituye asesoría profesional.</footer>
+
+<!-- =====================================================
+     MÉTODO
+     ===================================================== -->
+
+<section id="metodo">
+  <h2>Cómo leer estos casos</h2>
+
+  <p class="quote">
+    Los casos históricos muestran lo que ocurrió. El análisis propone
+    conexiones que deben contrastarse con evidencia.
+  </p>
+
+  <p>
+    No sabemos qué habría pasado con otra decisión, y no afirmamos que
+    Expertos Chile habría evitado los problemas descritos. El propósito
+    es identificar qué conexiones conviene mirar antes de decidir:
+    qué piezas están ligadas, dónde puede propagarse un efecto y qué
+    controles existen y funcionan realmente.
+  </p>
+
+  <div class="card">
+    <h3>¿Y en tu organización?</h3>
+
+    <p>
+      Con la información disponible, podemos explorar el recorrido:
+      <b>decisión → configuración → efectos observados → puntos de
+      intervención → medición</b>.
+    </p>
+
+    <p>
+      El objetivo no es sustituir el ERP, duplicar los tableros ni
+      reemplazar el criterio de los profesionales. Es investigar una
+      pregunta concreta que los registros y las prácticas actuales
+      todavía no permiten responder con suficiente claridad.
+    </p>
+
+    <div class="btns">
+      <a class="btn cta" href="diagnostico.html" data-link>
+        Hacer el diagnóstico (2 min)
+      </a>
+
+      <a class="btn" href="productos.html" data-link>
+        Ver los servicios
+      </a>
+
+      <a class="btn" href="charlas.html" data-link>
+        Ir a una charla
+      </a>
+
+      <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">
+        Conversar por WhatsApp
+      </a>
+
+      <a class="btn" href="quienes-somos.html" data-link>
+        Quiénes somos
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © Expertos Chile SpA · Los Ángeles, Biobío.
+  Los casos históricos se presentan con sus fuentes cuando están disponibles.
+  Las simulaciones se identifican expresamente.
+  Las hipótesis de análisis no equivalen a causalidad demostrada.
+  El contenido tiene fines informativos y no constituye asesoría profesional.
+</footer>
+
 </div>
+
 <script>
-const REV=`<div class="stats"><div class="card"><div class="num">≈US$64 M</div><p><span class="tag e2">REPORTADO</span>ventas que la empresa estima no pudo despachar en 2018</p></div><div class="card"><div class="num">US$53,6 M</div><p><span class="tag e2">REPORTADO</span>cargos incrementales en 2018, para remediar el servicio</p></div></div>
-<div class="chainv"><div class="e1"><span class="tag e1">DOCUMENTADO</span>En febrero de 2018 se lanzó un nuevo sistema ERP en Estados Unidos.</div><div class="e1"><span class="tag e1">DOCUMENTADO</span>Hubo disrupciones en el centro de fabricación y despacho de Oxford, Carolina del Norte.</div><div class="e2"><span class="tag e2">REPORTADO</span>La empresa estimó que no pudo cumplir despachos por unos US$64 millones en ventas y que incurrió en US$53,6 millones de cargos adicionales.</div><div class="e1"><span class="tag e1">DOCUMENTADO</span>Identificó una debilidad material en su control interno, ligada a la implementación del sistema.</div></div>
-<div class="lens"><b>Cómo lo miramos:</b> una decisión de tecnología (♠ → ♦) tocó un proceso crítico (♣: fabricación y despacho) y terminó en el cliente. <span class="tag e4">HIPÓTESIS</span>Pregunta de análisis: ¿qué defensa habría podido detener la propagación antes de llegar a los despachos?</div>
-<small class="src">Fuente: Revlon Consumer Products Corporation, Formulario 10-K 2018 (SEC). <a class="l" href="https://www.sec.gov/Archives/edgar/data/890547/000089054719000003/rcpc201810-k.htm" target="_blank" rel="noopener">Ver documento</a>. Las cifras son estimaciones de la empresa, no cálculos de Expertos Chile.</small>`;
-const TGT=`<div class="stats"><div class="card"><div class="num">133</div><p><span class="tag e1">DOCUMENTADO</span>tiendas cerradas, con ≈17.600 empleados afectados (anuncio de enero de 2015)</p></div><div class="card"><div class="num">≈US$5,1 mil M</div><p><span class="tag e2">REPORTADO</span>costos de salida antes de impuestos; el anuncio inicial estimó US$5,4 mil M</p></div></div>
-<div class="chainv"><div class="e1"><span class="tag e1">DOCUMENTADO</span>La compañía ingresó a Canadá en 2013 y abrió 124 tiendas en sus primeros diez meses.</div><div class="e2"><span class="tag e2">REPORTADO</span>Las pérdidas superaron los US$1.000 millones tras el primer año de operación.</div><div class="e1"><span class="tag e1">DOCUMENTADO</span>El nuevo CEO reconoció que se había hecho demasiado y demasiado rápido.</div><div class="e1"><span class="tag e1">DOCUMENTADO</span>En enero de 2015 se decidió discontinuar la operación y solicitar protección de acreedores.</div><div class="e2"><span class="tag e2">REPORTADO</span>Se registraron cargos antes de impuestos por ≈US$5,1 mil millones, con un beneficio tributario de US$1,6 mil millones.</div></div>
-<div class="lens"><b>Cómo lo miramos:</b> una decisión de expansión (♠) activó recursos, procesos y personas a la vez, y la decisión de salir fue a su vez una <b>nueva perturbación</b>. <span class="tag e4">HIPÓTESIS</span>Pregunta de análisis: ¿qué otras piezas se movían al abrir tan rápido, y dónde pudo haber un punto de control?</div>
-<small class="src">Fuentes: reportes sobre el anuncio de Target y su informe anual 2014, en <a class="l" href="https://www.biv.com/news/retail-manufacturing/target-nets-us16-billion-tax-break-failure-canadia-8242679" target="_blank" rel="noopener">BIV</a> y <a class="l" href="https://tcbmag.com/target-leaving-canada-what-it-means-what-it-will-cost/" target="_blank" rel="noopener">TCB Magazine</a>. No atribuimos toda la pérdida a una sola causa.</small>`;
-const WIP=`<p>Ficha en preparación. Publicaremos las cifras y fuentes una vez verificadas con los documentos originales, con cada dato atribuido y su nivel de evidencia.</p>`;
-/* e: g antes, y durante, r después · d: detalle verificado (o null) */
-const C=[
-{e:"g",i:"target",t:"Target Canadá",o:"Target Corporation · Canadá y EE. UU. · 2013–2015",s:["Decisión","Recovery"],d:TGT},
-{e:"g",i:"chacao",t:"Puente Chacao",o:"Obra pública · Chile",s:["Inversión","Project"],d:`<div class="lens"><b>Cómo lo miramos:</b> la decisión de inversión en infraestructura afectó el cronograma y el presupuesto, generando sobrecostos y retrasos. <span class="tag e4">HIPÓTESIS</span>¿Qué mecanismos de control de cambios y seguimiento de hitos podrían haber mitigado las desviaciones?</div>`},
-{e:"g",i:"hs2",t:"HS2",o:"Alta velocidad · Reino Unido",s:["Inversión"],d:`<div class="lens"><b>Cómo lo miramos:</b> la decisión de acelerar la planificación sin estudios adecuados provocó riesgos geotécnicos y de financiación. <span class="tag e4">HIPÓTESIS</span>¿Un enfoque de validación preliminar y etapas de aprobación escalonadas habría reducido los sobrecostos?</div>`},
-{e:"g",i:"opera",t:"Sydney Opera House",o:"Obra icónica · Australia",s:["Inversión","Project"],d:`<div class="lens"><b>Cómo lo miramos:</b> cambios sucesivos en el diseño arquitectónico incrementaron costos y tiempos de construcción. <span class="tag e4">HIPÓTESIS</span>¿Un proceso de gestión de cambios con baseline y revisión de impacto habría controlado la desviación?</div>`},
-{e:"g",i:"arica",t:"Centro de Salud Ambiental de Arica",o:"Obra pública · Chile",s:["Check","Operation"],d:`<div class="lens"><b>Cómo lo miramos:</b> la falta de coordinación entre diseño y operación generó deficiencias en los sistemas de climatización al poner en marcha el edificio. <span class="tag e4">HIPÓTESIS</span>¿Una revisión integrada de especificación técnica y puesta en servicio habría detectado las incompatibilidades antes de la operación?</div>`},
-{e:"y",i:"revlon",t:"Revlon · ERP",o:"Revlon · Estados Unidos · 2018",s:["Transformación","Recovery"],d:REV},
-{e:"y",i:"serena",t:"Hospital de La Serena",o:"Obra pública · Chile",s:["Project"],d:`<div class="lens"><b>Cómo lo miramos:</b> la licitación basada únicamente en precio más bajo provocó que el contratista seleccionado careciera de experiencia en obras hospitalarias de alta complejidad. <span class="tag e4">HIPÓTESIS</span>¿Un criterio de adjudicación que incluiera experiencia técnica y referencias habría reducido el riesgo de replanteos y sobrecostos?</div>`},
-{e:"y",i:"cordillera",t:"Hospital Provincia Cordillera",o:"Obra pública · Chile",s:["Project","Operation"],d:`<div class="lens"><b>Cómo lo miramos:</b> la implementación del sistema de información hospitalaria no consideró la capacitación del personal clínico, generando errores en la captura de datos y resistencia al uso. <span class="tag e4">HIPÓTESIS</span>¿Un plan de cambio que incluiera formación y apoyo al usuario antes del go‑live habría mejorado la adopción?</div>`},
-{e:"y",i:"nhs",t:"NHS National Programme for IT",o:"Sistema de salud · Reino Unido",s:["Transformación","Recovery"],d:`<div class="lens"><b>Cómo lo miramos:</b> el ambicioso programa nacional de TI subestimó la complejidad de integrar cientos de sistemas locales y la resistencia al cambio del personal. <span class="tag e4">HIPÓTESIS</span>¿Una estrategia de adopción por fases, con pilotos y retroalimentación continua, habría mejorado los resultados?</div>`},
-{e:"y",i:"hershey",t:"Hershey · ERP",o:"Hershey · Estados Unidos",s:["Transformación"],d:`<div class="lens"><b>Cómo lo miramos:</b> la migración a un nuevo ERP provocó interrupciones en la planificación de la producción y en la visibilidad de inventario, afectando el servicio al cliente. <span class="tag e4">HIPÓTESIS</span>¿Una estrategia de corte paralelo y entrenamiento super‑usuario habría reducido el tiempo de inactividad y los errores de transacción?</div>`},
-{e:"y",i:"lidl",t:"Lidl · SAP",o:"Lidl · Alemania",s:["Transformación","Recovery"],d:`<div class="lens"><b>Cómo lo miramos:</b> la implementación de SAP en la cadena de suministro no consideró las particularidades de los proveedores locales, generando rechazos de órdenes y retrasos en el abastecimiento. <span class="tag e4">HIPÓTESIS</span>¿Un enfoque de co‑diseño con proveedores clave y pruebas piloto en regiones seleccionadas habría facilitado la transición?</div>`},
-{e:"r",i:"tne",t:"TNE / JUNAEB",o:"Servicio público · Chile",s:["Operation"],d:`<div class="lens"><b>Cómo lo miramos:</b> la centralización del servicio de alimentación escolar sin ajustar la logística de distribución provocó deterioro de alimentos y quejas nutricionales en escuelas rurales. <span class="tag e4">HIPÓTESIS</span>¿Un diseño de red que incluiera nodos de almacenamiento intermedio y rutas optimizadas habría mantenido la calidad del servicio?</div>`},
-{e:"g",i:"arauco",t:"Arauco – Línea de pulpa Nueva Aldea",o:"Arauco · Chile · 2021",s:["Decisión","Project"],d:`<div class="lens"><b>Cómo lo miramos:</b> la decisión de aumentar la capacidad de producción sin reforzar simultáneamente la zona de almacenamiento de bobinas generó cuellos de botella en la zona de despacho y aumentó los tiempos de ciclo. <span class="tag e4">HIPÓTESIS</span>¿Un análisis de capacidad integrado que incluyera almacenamiento y manejo interno habría evitado la sobrecarga y mejorado el flujo?</div>`},
-{e:"y",i:"cmpc",t:"CMPC – Planta de papel Valdivia",o:"CMPC · Chile · 2022",s:["Transformación","Recovery"],d:`<div class="lens"><b>Cómo lo miramos:</b> la introducción de un nuevo proceso de blanqueado sin validar su impacto en las emisiones de olores provocó quejas vecinales y requerimientos de mitigación costosa. <span class="tag e4">HIPÓTESIS</span>¿Un estudio de impacto ambiental previo y una fase de prueba a escala piloto habría permitido ajustar el proceso antes de la operación plena?</div>`},
-{e:"r",i:"nestle",t:"Nestlé – Línea de chocolate Osorno",o:"Nestlé · Chile · 2020",s:["Operation"],d:`<div class="lens"><b>Cómo lo miramos:</b> el cambio de proveedor de azúcar sin realizar pruebas de calidad en la línea generó variaciones en el punto de fusión y problemas de envoltorio, aumentando el rechazo del producto final. <span class="tag e4">HIPÓTESIS</span>¿Un proceso de cualificación de proveedores que incluiera pruebas en línea y liberación condicionada habría evitado la introducción de material fuera de especificación?</div>`},
-{e:"y",i:"bancostado",t:"BancoEstado – Sistema de crédito digital",o:"BancoEstado · Chile · 2023",s:["Transformación","Recovery"],d:`<div class="lens"><b>Cómo lo miramos:</b> el lanzamiento de la plataforma de crédito digital no consideró la experiencia de usuario en dispositivos móviles de gama baja, provocando una alta tasa de abandono en el proceso de solicitud. <span class="tag e4">HIPÓTESIS</span>¿Un enfoque de diseño centrado en el usuario con pruebas de usabilidad en segmentos representativos habría mejorado la tasa de conversión y reducir el costo de adquisición?</div>`}
-];
-const L={g:"ANTES",y:"DURANTE",r:"DESPUÉS"};const q0=new URLSearchParams(location.search).get("e")||"";let f=["g","y","r"].includes(q0)?q0:"";
-function draw(){
- document.getElementById("filtro").innerHTML=[["","Todos"],["g","ANTES"],["y","DURANTE"],["r","DESPUÉS"]].map(([k,t])=>`<button type="button" class="${k?"st-"+k:""} ${f===k?"on":""}" data-k="${k}">${k?'<i class="dot"></i>':""}${t}</button>`).join("");
- document.getElementById("lista").innerHTML=C.filter(c=>!f||c.e===f).map(c=>`<div class="card st st-${c.e}" id="${c.i}"><div class="stage"><i class="dot"></i>${L[c.e]}</div><h3>${c.t}</h3><p>${c.o}</p><div>${c.s.map(x=>`<span class="pill">Domino ${x}</span>`).join("")}${c.d?'<span class="pill" style="border-color:var(--R);color:var(--R)">ficha verificada</span>':'<span class="pill">en verificación</span>'}</div><details><summary>${c.d?"Ver qué ocurrió y cómo lo miramos":"Estado de la ficha"}</summary><div>${c.d||WIP}</div></details><div class="btns"><a class="btn sm" href="productos.html?e=${c.e}" data-link>Servicio para esta etapa</a><a class="btn sm" href="charlas.html#calendario" data-link>Verlo en una charla</a></div></div>`).join("");
- document.querySelectorAll("#filtro button").forEach(b=>b.onclick=()=>{f=b.dataset.k;draw()});
- addRef();
+"use strict";
+
+/* =====================================================
+   FICHAS Y CONTENIDO
+   g = ANTES
+   y = DURANTE
+   r = DESPUÉS
+
+   IMPORTANTE:
+   Una ficha con fuente identificada no implica que todas
+   las interpretaciones de esa ficha estén verificadas.
+   ===================================================== */
+
+const REV = `
+<div class="stats">
+  <div class="card">
+    <div class="num">≈US$64 M</div>
+    <p>
+      <span class="tag e2">REPORTADO</span>
+      Ventas que la empresa estimó que no pudo despachar en 2018.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="num">US$53,6 M</div>
+    <p>
+      <span class="tag e2">REPORTADO</span>
+      Cargos incrementales registrados en 2018 para remediar
+      problemas de servicio.
+    </p>
+  </div>
+</div>
+
+<div class="chainv">
+  <div class="e1">
+    <span class="tag e1">DOCUMENTADO</span>
+    En febrero de 2018 se lanzó un nuevo sistema ERP en Estados Unidos.
+  </div>
+
+  <div class="e1">
+    <span class="tag e1">DOCUMENTADO</span>
+    Hubo disrupciones en el centro de fabricación y despacho
+    de Oxford, Carolina del Norte.
+  </div>
+
+  <div class="e2">
+    <span class="tag e2">REPORTADO</span>
+    La empresa estimó que no pudo cumplir despachos por unos
+    US$64 millones en ventas e incurrió en US$53,6 millones
+    de cargos adicionales.
+  </div>
+
+  <div class="e1">
+    <span class="tag e1">DOCUMENTADO</span>
+    La empresa identificó una debilidad material en su control
+    interno relacionada con la implementación del sistema.
+  </div>
+</div>
+
+<div class="lens">
+  <b>Cómo lo miramos:</b>
+  una decisión de tecnología (♠ → ♦) afectó un proceso crítico
+  (♣: fabricación y despacho) y tuvo consecuencias para el servicio
+  al cliente.
+
+  <span class="tag e4">HIPÓTESIS</span>
+  ¿Qué controles, pruebas o mecanismos de contingencia podrían
+  haber detectado o contenido la disrupción antes de que afectara
+  los despachos?
+</div>
+
+<small class="src">
+  Fuente: Revlon Consumer Products Corporation, Formulario 10-K de 2018,
+  presentado ante la SEC.
+  <a class="l"
+     href="https://www.sec.gov/Archives/edgar/data/890547/000089054719000003/rcpc201810-k.htm"
+     target="_blank"
+     rel="noopener noreferrer">Consultar el documento original</a>.
+  Las cifras corresponden a estimaciones y reportes de la empresa,
+  no a cálculos de Expertos Chile.
+</small>
+`;
+
+const TGT = `
+<div class="stats">
+  <div class="card">
+    <div class="num">133</div>
+    <p>
+      <span class="tag e1">DOCUMENTADO</span>
+      Tiendas que se anunció que cerrarían, con aproximadamente
+      17.600 empleados afectados en el anuncio de enero de 2015.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="num">≈US$5,1 mil M</div>
+    <p>
+      <span class="tag e2">REPORTADO</span>
+      Cargos de salida antes de impuestos asociados con la retirada
+      del mercado canadiense.
+    </p>
+  </div>
+</div>
+
+<div class="chainv">
+  <div class="e1">
+    <span class="tag e1">DOCUMENTADO</span>
+    Target ingresó a Canadá en 2013 y expandió rápidamente
+    su red de tiendas.
+  </div>
+
+  <div class="e2">
+    <span class="tag e2">REPORTADO</span>
+    La operación canadiense registró pérdidas importantes
+    durante sus primeros años.
+  </div>
+
+  <div class="e1">
+    <span class="tag e1">DOCUMENTADO</span>
+    En enero de 2015 se anunció el cierre de las operaciones
+    canadienses y se inició un proceso de protección frente
+    a acreedores.
+  </div>
+
+  <div class="e2">
+    <span class="tag e2">REPORTADO</span>
+    Los cargos de salida fueron de miles de millones de dólares.
+    Deben distinguirse los cargos contables de las pérdidas
+    operativas y de los flujos de caja.
+  </div>
+</div>
+
+<div class="lens">
+  <b>Cómo lo miramos:</b>
+  una decisión de expansión activó simultáneamente recursos,
+  logística, inventarios, sistemas, personas y relaciones
+  con proveedores. La retirada del mercado constituyó una
+  segunda decisión con consecuencias adicionales.
+
+  <span class="tag e4">HIPÓTESIS</span>
+  ¿Qué controles por etapas, indicadores de preparación operativa
+  y criterios de continuidad habrían permitido identificar
+  antes las dificultades?
+</div>
+
+<small class="src">
+  Referencias periodísticas y financieras:
+  <a class="l"
+     href="https://www.biv.com/news/retail-manufacturing/target-nets-us16-billion-tax-break-failure-canadia-8242679"
+     target="_blank"
+     rel="noopener noreferrer">Business in Vancouver</a>
+  y
+  <a class="l"
+     href="https://tcbmag.com/target-leaving-canada-what-it-means-what-it-will-cost/"
+     target="_blank"
+     rel="noopener noreferrer">Twin Cities Business</a>.
+  Esta ficha no atribuye la totalidad de las pérdidas a una sola causa.
+</small>
+`;
+
+const WIP = `
+<div class="case-note">
+  <span class="status hypothesis">EN VERIFICACIÓN</span>
+  Esta ficha contiene una línea de análisis preliminar.
+  Antes de presentar sus antecedentes como hechos históricos,
+  deben identificarse documentos primarios que acrediten
+  específicamente las afirmaciones y cifras.
+</div>
+`;
+
+/*
+  Para mantener la transparencia:
+  - Las fichas Revlon y Target tienen fuentes identificadas.
+  - Las otras fichas conservan el análisis propuesto originalmente,
+    pero se etiquetan como hipótesis y requieren verificación documental.
+  - No se inventan nuevas cifras históricas.
+*/
+
+const C = [
+
+{
+  e: "g",
+  i: "target",
+  t: "Target Canadá",
+  o: "Target Corporation · Canadá · 2013–2015",
+  s: ["Decisión", "Recovery"],
+  estado: "public",
+  d: TGT
+},
+
+{
+  e: "g",
+  i: "chacao",
+  t: "Puente Chacao",
+  o: "Obra pública · Chile",
+  s: ["Inversión", "Project"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miramos:</b>
+    un proyecto de infraestructura de gran escala requiere
+    coordinación entre diseño, construcción, suministros,
+    contratos, logística y gestión de riesgos.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Qué mecanismos de control de cambios, seguimiento de hitos
+    y evaluación de riesgos permiten detectar desviaciones
+    antes de que se acumulen?
+
+    <p>
+      Esta pregunta es una propuesta de análisis, no una afirmación
+      de que un mecanismo específico haya fallado en el proyecto.
+    </p>
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "g",
+  i: "hs2",
+  t: "HS2",
+  o: "Infraestructura ferroviaria · Reino Unido",
+  s: ["Inversión"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miramos:</b>
+    los proyectos de infraestructura compleja deben coordinar
+    ingeniería, adquisición de terrenos, permisos, financiación
+    y planificación de obras.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Qué decisiones de alcance y secuencia de ejecución deberían
+    someterse a revisiones independientes antes de comprometer
+    recursos adicionales?
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "g",
+  i: "opera",
+  t: "Sydney Opera House",
+  o: "Proyecto arquitectónico · Australia",
+  s: ["Inversión", "Project"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miramos:</b>
+    un proyecto arquitectónico singular puede enfrentar
+    incertidumbre de diseño, cambios de alcance, dificultades
+    constructivas y modificaciones presupuestarias.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Qué controles de madurez del diseño y evaluación de cambios
+    permiten distinguir una modificación necesaria de una
+    desviación que requiere una decisión de alcance?
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "g",
+  i: "arica",
+  t: "Centro de Salud Ambiental de Arica",
+  o: "Infraestructura pública · Chile",
+  s: ["Check", "Operation"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miraríamos:</b>
+    antes de dar por comprobada cualquier deficiencia,
+    revisaríamos los antecedentes de diseño, recepción,
+    puesta en servicio y operación del edificio.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Existe evidencia documental de incompatibilidades entre
+    las especificaciones técnicas y las condiciones reales
+    de operación?
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "y",
+  i: "revlon",
+  t: "Revlon · ERP",
+  o: "Revlon · Estados Unidos · 2018",
+  s: ["Transformación", "Recovery"],
+  estado: "public",
+  d: REV
+},
+
+{
+  e: "y",
+  i: "serena",
+  t: "Hospital de La Serena",
+  o: "Infraestructura hospitalaria · Chile",
+  s: ["Project"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miraríamos:</b>
+    evaluaríamos los antecedentes de licitación, experiencia
+    del contratista, modificaciones contractuales, controles
+    técnicos y evolución del cronograma.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Qué peso tuvieron la experiencia técnica, la capacidad
+    de ejecución y los mecanismos de control en las decisiones
+    contractuales?
+
+    No se atribuye un problema específico a la selección
+    del contratista sin verificar los antecedentes.
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "y",
+  i: "cordillera",
+  t: "Hospital Provincia Cordillera",
+  o: "Infraestructura y servicios hospitalarios · Chile",
+  s: ["Project", "Operation"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miraríamos:</b>
+    revisaríamos la relación entre los sistemas de información,
+    los flujos clínicos, la capacitación y los procedimientos
+    de puesta en marcha.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Qué evidencia permite distinguir una dificultad de
+    capacitación de un problema de diseño, integración
+    o procedimiento?
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "y",
+  i: "nhs",
+  t: "NHS National Programme for IT",
+  o: "Sistemas de información sanitaria · Reino Unido",
+  s: ["Transformación", "Recovery"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miramos:</b>
+    los programas tecnológicos de gran escala deben conciliar
+    interoperabilidad, necesidades locales, gestión contractual,
+    seguridad y adopción por los usuarios.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Qué decisiones de arquitectura, contratación y despliegue
+    condicionaron la capacidad de integración y adopción?
+
+    La respuesta requiere contrastar los informes históricos
+    del programa.
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "y",
+  i: "hershey",
+  t: "Hershey · ERP",
+  o: "Hershey · Estados Unidos",
+  s: ["Transformación"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miramos:</b>
+    un cambio de ERP puede afectar la planificación,
+    los inventarios, los pedidos y la distribución si las
+    pruebas integrales no representan adecuadamente la operación.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Qué pruebas de punta a punta, controles de contingencia
+    y criterios de salida habrían permitido evaluar la
+    preparación antes de la puesta en marcha?
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "y",
+  i: "lidl",
+  t: "Lidl · SAP",
+  o: "Sistemas de información · Alemania",
+  s: ["Transformación", "Recovery"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miraríamos:</b>
+    revisaríamos el alcance del sistema, el modelo de datos,
+    los procesos operativos, los requisitos de inventario
+    y la gestión del cambio.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Qué incompatibilidades entre el modelo del sistema y
+    los requisitos operativos están documentadas, y cuáles
+    son solamente explicaciones propuestas?
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "r",
+  i: "tne",
+  t: "TNE / JUNAEB",
+  o: "Servicio público · Chile",
+  s: ["Operation"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miraríamos:</b>
+    estudiaríamos los antecedentes del servicio, la
+    distribución territorial, los requisitos de conservación,
+    la programación de rutas y los controles de calidad.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Qué registros permitirían determinar si las dificultades
+    del servicio están asociadas con la planificación,
+    el almacenamiento, el transporte o la coordinación?
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "g",
+  i: "arauco",
+  t: "Arauco · Línea de pulpa Nueva Aldea",
+  o: "Industria forestal · Chile",
+  s: ["Decisión", "Project"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miraríamos:</b>
+    en una operación industrial, una modificación de capacidad
+    puede exigir revisar de manera conjunta producción,
+    almacenamiento, transporte interno, mantenimiento y despacho.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Los registros de capacidad y tiempos de ciclo muestran
+    una restricción que se haya desplazado hacia otra etapa
+    del proceso?
+
+    Esta pregunta no afirma que el escenario descrito haya
+    ocurrido en la planta.
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "y",
+  i: "cmpc",
+  t: "CMPC · Operaciones industriales",
+  o: "Industria forestal y papelera · Chile",
+  s: ["Transformación", "Recovery"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miraríamos:</b>
+    estudiaríamos la relación entre cambios de proceso,
+    controles ambientales, calidad del producto, condiciones
+    operativas y mecanismos de respuesta.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Qué registros de proceso y monitoreo permiten identificar
+    una asociación entre un cambio operacional y un indicador
+    ambiental o de calidad?
+
+    La hipótesis debe contrastarse con documentación primaria.
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "r",
+  i: "nestle",
+  t: "Nestlé · Operaciones de producción",
+  o: "Industria alimentaria · Chile",
+  s: ["Operation"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miraríamos:</b>
+    ante una variación de calidad, revisaríamos las
+    especificaciones de materias primas, los controles
+    de recepción, la trazabilidad de lotes y los registros
+    del proceso productivo.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿La evidencia permite asociar un cambio de proveedor
+    con una variación del producto, o existen explicaciones
+    alternativas que deben investigarse?
+
+    No se afirma que el episodio descrito en versiones
+    preliminares haya ocurrido.
+  </div>
+  ${WIP}
+  `
+},
+
+{
+  e: "y",
+  i: "bancostado",
+  t: "BancoEstado · Servicios digitales",
+  o: "Servicios financieros · Chile",
+  s: ["Transformación", "Recovery"],
+  estado: "hypothesis",
+  d: `
+  <div class="lens">
+    <b>Cómo lo miraríamos:</b>
+    una plataforma digital puede evaluarse mediante
+    registros de rendimiento, errores, abandono, tiempos
+    de respuesta y pruebas de usabilidad.
+
+    <span class="tag e4">HIPÓTESIS</span>
+    ¿Qué segmentos y pasos del proceso muestran fricción,
+    y qué evidencia permite diferenciar una dificultad
+    de conectividad de un problema de diseño?
+
+    No se atribuye una tasa de abandono ni un problema
+    específico a BancoEstado sin una fuente verificable.
+  </div>
+  ${WIP}
+  `
 }
-const ref=new URLSearchParams(location.search).get("ref")||"";
-function addRef(){document.querySelectorAll("a[data-link]:not([data-r])").forEach(a=>{a.dataset.r=1;if(ref)a.href+=(a.href.includes("?")?"&":"?")+"ref="+encodeURIComponent(ref)})}
-draw();
-(function(){const h=location.hash.slice(1),el=h&&document.getElementById(h);if(el){const d=el.querySelector("details");if(d)d.open=true;el.scrollIntoView()}})();
-const CONFIG={whatsapp:"569XXXXXXXX"}; // EDITAR
-document.getElementById("wa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hola, vi los casos de Expertos Chile y quiero conversar sobre una decisión."+(ref?" (Ref: "+ref+")":""));
-</script></body></html>
+
+];
+
+/* =====================================================
+   ETAPAS, BÚSQUEDA Y RENDERIZADO
+   ===================================================== */
+
+const L = {
+  g: "ANTES",
+  y: "DURANTE",
+  r: "DESPUÉS"
+};
+
+const params = new URLSearchParams(location.search);
+
+const etapaInicial = params.get("e") || "";
+let f = ["g", "y", "r"].includes(etapaInicial)
+  ? etapaInicial
+  : "";
+
+const busqueda = document.getElementById("busqueda");
+const lista = document.getElementById("lista");
+const filtro = document.getElementById("filtro");
+const contador = document.getElementById("contador");
+
+function textoPlano(html) {
+  const temporal = document.createElement("div");
+  temporal.innerHTML = html || "";
+  return temporal.textContent || temporal.innerText || "";
+}
+
+function estadoFicha(c) {
+  if (c.estado === "public") {
+    return '<span class="status public">Fuente identificada</span>';
+  }
+
+  return '<span class="status hypothesis">Análisis pendiente de verificación</span>';
+}
+
+function coincideBusqueda(c, q) {
+  if (!q) return true;
+
+  const texto = [
+    c.t,
+    c.o,
+    ...(c.s || []),
+    textoPlano(c.d)
+  ].join(" ").toLocaleLowerCase("es");
+
+  return texto.includes(q);
+}
+
+function renderFiltros() {
+  const opciones = [
+    ["", "Todos"],
+    ["g", "ANTES"],
+    ["y", "DURANTE"],
+    ["r", "DESPUÉS"]
+  ];
+
+  filtro.innerHTML = opciones.map(([k, t]) => {
+    const clase = k ? "st-" + k : "";
+    const activo = f === k ? "on" : "";
+    const punto = k ? '<i class="dot"></i>' : "";
+
+    return `
+      <button
+        type="button"
+        class="${clase} ${activo}"
+        data-k="${k}"
+        aria-pressed="${f === k ? "true" : "false"}"
+      >${punto}${t}</button>
+    `;
+  }).join("");
+
+  filtro.querySelectorAll("button").forEach(b => {
+    b.addEventListener("click", () => {
+      f = b.dataset.k;
+      render();
+    });
+  });
+}
+
+function renderCasos() {
+  const q = busqueda.value.trim().toLocaleLowerCase("es");
+
+  const resultados = C.filter(c => {
+    return (!f || c.e === f) && coincideBusqueda(c, q);
+  });
+
+  contador.textContent =
+    resultados.length + (resultados.length === 1
+      ? " caso encontrado."
+      : " casos encontrados.");
+
+  if (!resultados.length) {
+    lista.innerHTML = `
+      <div class="card">
+        <h3>No encontramos coincidencias</h3>
+        <p>Prueba con otra palabra o cambia el filtro de etapa.</p>
+      </div>
+    `;
+    return;
+  }
+
+  lista.innerHTML = resultados.map(c => {
+    const servicios = (c.s || []).map(x =>
+      `<span class="pill">Domino ${x}</span>`
+    ).join("");
+
+    const contenido = c.d || WIP;
+
+    return `
+      <article class="card st st-${c.e}" id="${c.i}">
+        <div class="stage">
+          <i class="dot"></i>${L[c.e]}
+        </div>
+
+        <h3>${c.t}</h3>
+        <p>${c.o}</p>
+
+        <div class="case-meta">
+          ${servicios}
+          ${estadoFicha(c)}
+        </div>
+
+        <details>
+          <summary>Ver análisis y evidencia disponible</summary>
+          <div>${contenido}</div>
+        </details>
+
+        <div class="btns">
+          <a
+            class="btn sm"
+            href="productos.html?e=${encodeURIComponent(c.e)}"
+            data-link
+          >Servicio para esta etapa</a>
+
+          <a
+            class="btn sm"
+            href="charlas.html#calendario"
+            data-link
+          >Ver charlas</a>
+        </div>
+      </article>
+    `;
+  }).join("");
+
+  addRef();
+}
+
+function render() {
+  renderFiltros();
+  renderCasos();
+}
+
+busqueda.addEventListener("input", renderCasos);
+
+/* =====================================================
+   CONSERVAR REFERENCIA COMERCIAL
+   ===================================================== */
+
+const ref = params.get("ref") || "";
+
+function addRef() {
+  document.querySelectorAll("a[data-link]:not([data-r])").forEach(a => {
+    a.dataset.r = "1";
+
+    if (!ref) return;
+
+    const url = new URL(a.href, location.href);
+    url.searchParams.set("ref", ref);
+    a.href = url.href;
+  });
+}
+
+/* =====================================================
+   ENLACE A WHATSAPP
+   Sustituir el número por el número real de la empresa.
+   Formato internacional sin +, espacios ni guiones.
+   ===================================================== */
+
+const CONFIG = {
+  whatsapp: "569XXXXXXXX"
+};
+
+const wa = document.getElementById("wa");
+
+if (wa) {
+  const numeroValido = /^\d{10,15}$/.test(CONFIG.whatsapp);
+
+  if (numeroValido) {
+    const mensaje =
+      "Hola, vi el banco de casos de Expertos Chile y quiero conversar " +
+      "sobre una decisión o problema de mi organización." +
+      (ref ? " Referencia: " + ref : "");
+
+    wa.href =
+      "https://wa.me/" +
+      CONFIG.whatsapp +
+      "?text=" +
+      encodeURIComponent(mensaje);
+  } else {
+    wa.href = "https://wa.me/";
+    wa.addEventListener("click", event => {
+      event.preventDefault();
+      alert("Configura el número real de WhatsApp en casos.html.");
+    });
+  }
+}
+
+/* =====================================================
+   COPIAR RESUMEN DEL CASO INDUSTRIAL
+   ===================================================== */
+
+const botonCopiar = document.getElementById("copiar-caso");
+
+if (botonCopiar) {
+  botonCopiar.addEventListener("click", async () => {
+    const resumen = [
+      "EXPERTOS CHILE · CASO DE SIMULACIÓN COMERCIAL",
+      "",
+      "Empresa industrial ficticia de la Región del Biobío.",
+      "Problema: cumplimiento de producción inferior a la meta.",
+      "Áreas: producción, mantenimiento y abastecimiento.",
+      "Objetivo: investigar asociaciones entre registros operativos.",
+      "Método: revisar evidencia, formular hipótesis y proponer un piloto.",
+      "Precaución: no se presuponen causas ni resultados.",
+      "Entregable: mapa de conexiones, hipótesis y recomendación para decidir."
+    ].join("\n");
+
+    try {
+      await navigator.clipboard.writeText(resumen);
+      botonCopiar.textContent = "Resumen copiado";
+    } catch (error) {
+      window.prompt("Copia el resumen:", resumen);
+    }
+  });
+}
+
+/* =====================================================
+   INICIALIZACIÓN Y ENLACES CON ANCLA
+   ===================================================== */
+
+render();
+addRef();
+
+(function abrirAncla() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!id) return;
+
+  const elemento = document.getElementById(id);
+  if (!elemento) return;
+
+  const detalle = elemento.querySelector("details");
+  if (detalle) detalle.open = true;
+
+  elemento.scrollIntoView({ behavior: "auto", block: "start" });
+})();
+</script>
+
+</body>
+</html>
