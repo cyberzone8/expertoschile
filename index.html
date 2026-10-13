@@ -1,184 +1,453 @@
+
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8">
+<html lang="es">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Expertos Chile · ¿Qué costos ocultos tiene tu próxima decisión?</title>
 <meta name="description" content="Arreglas un problema y aparece otro. Haz el diagnóstico de 2 minutos y mira dónde pueden estar los costos que tus indicadores no explican.">
 <meta property="og:title" content="¿Qué costos ocultos tiene tu próxima decisión?">
 <meta property="og:description" content="Diagnóstico de 2 minutos · Expertos Chile">
+<meta name="theme-color" content="#13233b">
+
 <style>
-:root{--bg:#13233b;--bg2:#0b1424;--card:#0e1a2e;--ink:#f4efe6;--mute:#8fa3bf;--line:#2c3e5a;--P:#e879f9;--R:#22d3ee;--Pr:#6366f1;--D:#f4efe6;--g:#22c55e;--y:#facc15;--r:#ef4444;--font:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
-*{box-sizing:border-box;margin:0}
-html{background:var(--bg2);scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0)}
-body{color:var(--ink);font-family:var(--font);line-height:1.6;background:radial-gradient(120% 60% at 50% 0,var(--bg),var(--bg2));padding:env(safe-area-inset-top,0) 0 calc(env(safe-area-inset-bottom,0) + 70px)}
+:root{
+  --bg:#13233b;--bg2:#0b1424;--card:#0e1a2e;
+  --ink:#f4efe6;--mute:#8fa3bf;--line:#2c3e5a;
+  --P:#e879f9;--R:#22d3ee;--Pr:#6366f1;--D:#f4efe6;
+  --g:#22c55e;--y:#facc15;--r:#ef4444;
+  --font:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{
+  background:var(--bg2);
+  scroll-behavior:smooth;
+  scroll-padding-top:20px;
+}
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:var(--font);
+  line-height:1.6;
+  background:radial-gradient(120% 60% at 50% 0,var(--bg),var(--bg2));
+  padding:env(safe-area-inset-top,0) 0 calc(env(safe-area-inset-bottom,0) + 76px);
+}
 .w{max-width:880px;margin:0 auto;padding:0 20px}
-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0;font-weight:800;letter-spacing:.05em}
-nav a{color:var(--mute);font-weight:600;font-size:14px;text-decoration:none;letter-spacing:0}
-nav a:hover{color:var(--ink)}
+
+/* Navegación común */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px;
+  padding:18px 0;
+  font-weight:800;
+  letter-spacing:.05em;
+}
+nav .brand{
+  color:var(--ink);
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.05em;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.lk{
+  display:flex;
+  gap:8px 16px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:flex-end;
+}
+nav a{
+  color:var(--mute);
+  font-weight:600;
+  font-size:14px;
+  text-decoration:none;
+  letter-spacing:0;
+}
+nav a:hover,nav a:focus-visible{color:var(--ink)}
+nav a.navcta{
+  background:var(--R);
+  color:#06222b;
+  border-radius:8px;
+  padding:.4em .8em;
+  font-weight:800;
+}
+nav a.navcta:hover{filter:brightness(1.08);color:#06222b}
+nav a:focus-visible,.btn:focus-visible,summary:focus-visible{
+  outline:3px solid var(--D);
+  outline-offset:3px;
+  border-radius:5px;
+}
+
+/* Contenido */
 .hero{padding:36px 0 40px}
-.eye{font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--R);margin-bottom:12px}
-h1{font-size:clamp(32px,7vw,58px);line-height:1.05;letter-spacing:-.025em;margin-bottom:18px}
-h2{font-size:clamp(24px,4.6vw,34px);line-height:1.15;letter-spacing:-.015em;margin-bottom:14px}
-h3{font-size:18px;margin-bottom:6px}
-p{color:var(--mute);margin-bottom:12px}
+.eye{
+  font-size:13px;font-weight:800;letter-spacing:.12em;
+  color:var(--R);margin-bottom:12px;
+}
+h1{
+  font-size:clamp(32px,7vw,58px);
+  line-height:1.05;letter-spacing:-.025em;margin:0 0 18px;
+}
+h2{
+  font-size:clamp(24px,4.6vw,34px);
+  line-height:1.15;letter-spacing:-.015em;margin:0 0 14px;
+}
+h3{font-size:18px;margin:0 0 6px}
+p{color:var(--mute);margin:0 0 12px}
 p b{color:var(--ink)}
 .hl{color:var(--y)}
-.num{font-size:clamp(26px,5vw,36px);font-weight:850;color:var(--R);line-height:1.1;margin-bottom:6px}
+.num{
+  font-size:clamp(26px,5vw,36px);font-weight:850;
+  color:var(--R);line-height:1.1;margin-bottom:6px;
+}
 .lead{font-size:clamp(17px,2.4vw,21px);max-width:34em}
 section{padding:38px 0;border-top:1px solid var(--line)}
-.btn{font:700 16px var(--font);display:inline-block;padding:.9em 1.5em;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;cursor:pointer}
-.btn:focus-visible{outline:3px solid var(--D);outline-offset:2px}
-.cta{background:var(--R);color:#06222b;border-color:var(--R)}.cta:hover{filter:brightness(1.08)}
+.btn{
+  font:700 16px var(--font);
+  display:inline-flex;align-items:center;justify-content:center;
+  text-align:center;
+  padding:.8em 1.2em;
+  min-height:46px;
+  border-radius:12px;border:2px solid var(--line);
+  background:var(--card);color:var(--ink);
+  text-decoration:none;cursor:pointer;
+  overflow-wrap:anywhere;
+}
+.cta{background:var(--R);color:#06222b;border-color:var(--R)}
+.cta:hover{filter:brightness(1.08)}
 .wa{background:#25D366;color:#06220f;border-color:#25D366}
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
 .micro{font-size:13px;margin-top:12px}
-.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0;font-weight:800;font-size:15px}
-.chain span.t{border:2px solid var(--c);color:var(--c);border-radius:10px;padding:.35em .8em}
+.chain{
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  margin:18px 0;font-weight:800;font-size:15px;
+}
+.chain span.t{
+  border:2px solid var(--c);color:var(--c);
+  border-radius:10px;padding:.35em .8em;
+}
 .chain span.a{color:var(--mute)}
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
-.pills span{border:2px solid var(--line);border-radius:999px;padding:.3em .9em;font-size:14px;color:var(--mute)}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:16px}
+.pills span{
+  border:2px solid var(--line);border-radius:999px;
+  padding:.3em .9em;font-size:14px;color:var(--mute);
+}
+.grid{
+  display:grid;gap:14px;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));
+  margin-top:16px;
+}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
 .card p{margin:0;font-size:15px}
 .card ul{margin:8px 0 0;padding-left:18px;color:var(--mute);font-size:15px}
-/* embudo visual */
 .fun{display:grid;gap:8px;margin:20px auto;max-width:640px}
-.fun div{margin:0 auto;border-radius:12px;padding:12px 16px;text-align:center;font-weight:700;color:#06222b}
+.fun div{
+  margin:0 auto;border-radius:12px;padding:12px 16px;
+  text-align:center;font-weight:700;color:#06222b;
+}
 .fun small{display:block;font-weight:500;font-size:13px;opacity:.85}
-.f1{width:100%;background:var(--R)}.f2{width:78%;background:#7ee7f5}.f3{width:56%;background:#bdf1f8}
-.paths{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:18px}
+.f1{width:100%;background:var(--R)}
+.f2{width:78%;max-width:100%;background:#7ee7f5}
+.f3{width:56%;max-width:100%;background:#bdf1f8}
+.paths{
+  display:grid;gap:14px;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));
+  margin-top:18px;
+}
 .path{display:flex;flex-direction:column;justify-content:space-between;gap:14px}
 details{border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0;background:var(--card)}
 summary{font-weight:700;cursor:pointer}
 details p{margin:10px 0 0;font-size:15px}
-footer{padding:30px 0 40px;text-align:center;font-size:12px;color:var(--mute);border-top:1px solid var(--line)}
-.sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0));background:rgba(11,20,36,.94);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:10}
-.sticky .btn{width:100%;max-width:420px;text-align:center}
-.lk{display:flex;gap:16px;flex-wrap:wrap}
+footer{
+  padding:30px 0 40px;text-align:center;
+  font-size:12px;color:var(--mute);border-top:1px solid var(--line);
+}
+.sticky{
+  position:fixed;left:0;right:0;bottom:0;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom,0));
+  background:rgba(11,20,36,.96);
+  border-top:1px solid var(--line);
+  display:flex;justify-content:center;z-index:10;
+}
+.sticky .btn{width:100%;max-width:420px}
 .st-g{--c:var(--g)}.st-y{--c:var(--y)}.st-r{--c:var(--r)}
 .card.st{border-top:5px solid var(--c)}
-.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-right:8px;box-shadow:0 0 10px var(--c)}
-.stage{display:flex;align-items:center;font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--c);margin-bottom:8px}
-nav a.navcta{background:var(--R);color:#06222b;border-radius:8px;padding:.25em .8em;font-weight:700}nav a.navcta:hover{color:#06222b;filter:brightness(1.08)}nav a.on{color:var(--ink)}
-</style></head><body>
-<div class="w">
-<nav><a href="index.html" data-link style="color:var(--ink);font-size:16px;font-weight:800;letter-spacing:.05em">EXPERTOS CHILE</a><span class="lk"><a href="casos.html" data-link>Casos</a><a href="productos.html" data-link>Servicios</a><a href="charlas.html" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a><a href="diagnostico.html" class="navcta" data-link>Diagnóstico</a></span></nav>
+.dot{
+  display:inline-block;width:12px;height:12px;border-radius:50%;
+  background:var(--c);margin-right:8px;box-shadow:0 0 10px var(--c);
+}
+.stage{
+  display:flex;align-items:center;font-size:12px;font-weight:800;
+  letter-spacing:.1em;color:var(--c);margin-bottom:8px;
+}
+section[id]{scroll-margin-top:20px}
 
-<div class="hero">
- <div class="eye">PARA EMPRESAS E INSTITUCIONES</div>
- <h1>Antes de decidir, mira <span class="hl">qué otras piezas se mueven</span>.</h1>
- <p class="lead">Imagina ver el dominó completo <b>antes</b> de mover la primera ficha. Un cambio de sistema dejó unos <b>US$64 millones</b> en ventas sin despachar. Una expansión terminó con <b>133 tiendas cerradas</b>. Son casos reales, con cifras reportadas por las propias empresas. Tú ya mides, controlas y corriges, y es justo ahí donde conviene mirar lo que esos indicadores no muestran: los efectos en cadena de tu próxima decisión.</p>
- <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a><a class="btn" href="casos.html" data-link>Ver los casos reales</a><a class="btn" href="expertos-chile-demo.html" data-link>Ver la demo (40 s)</a></div>
- <p class="micro">Sin registro previo · Orientación inicial, no un estudio completo.</p>
+@media(max-width:620px){
+  .w{padding:0 16px}
+  nav{align-items:flex-start;gap:12px;padding:15px 0}
+  nav .brand{width:100%}
+  .lk{width:100%;justify-content:flex-start;gap:10px 14px}
+  nav a{font-size:13px}
+  .hero{padding:28px 0 32px}
+  section{padding:30px 0}
+  .btns .btn{flex:1 1 100%;width:100%}
+  .chain{font-size:13px}
+  .sticky{padding-left:12px;padding-right:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+
+<body>
+<div class="w">
+
+<nav aria-label="Navegación principal">
+  <a class="brand" href="index.html" data-link>EXPERTOS CHILE</a>
+  <div class="lk">
+    <a href="casos.html" data-link>Casos</a>
+    <a href="productos.html" data-link>Servicios</a>
+    <a href="charlas.html" data-link>Charlas</a>
+    <a href="quienes-somos.html" data-link>Quiénes somos</a>
+    <a href="diagnostico.html" class="navcta" data-link>Diagnóstico</a>
+  </div>
+</nav>
+
+<main>
+<div class="hero" id="inicio">
+  <div class="eye">PARA EMPRESAS E INSTITUCIONES</div>
+  <h1>Antes de decidir, mira <span class="hl">qué otras piezas se mueven</span>.</h1>
+  <p class="lead">Imagina ver el dominó completo <b>antes</b> de mover la primera ficha. Un cambio de sistema dejó unos <b>US$64 millones</b> en ventas sin despachar. Una expansión terminó con <b>133 tiendas cerradas</b>. Son casos reales, con cifras reportadas por las propias empresas. Tú ya mides, controlas y corriges, y es justo ahí donde conviene mirar lo que esos indicadores no muestran: los efectos en cadena de tu próxima decisión.</p>
+  <div class="btns">
+    <a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a>
+    <a class="btn" href="casos.html" data-link>Ver los casos reales</a>
+    <a class="btn" href="expertos-chile-demo.html" data-link>Ver la demo (40 s)</a>
+  </div>
+  <p class="micro">Sin registro previo · Orientación inicial, no un estudio completo.</p>
 </div>
 
 <section id="dolor">
- <h2>Cuando mueves una pieza, se mueven otras</h2>
- <p>Una decisión rara vez se queda donde nació. Pasa por procesos, consume recursos y llega a las personas. Lo que se mide es la pieza que ves, y el costo aparece en otro lado.</p>
- <div class="chain"><span class="t" style="--c:var(--D)">♠ Decisión</span><span class="a">→</span><span class="t" style="--c:var(--Pr)">♣ Proceso</span><span class="a">→</span><span class="t" style="--c:var(--R)">♦ Recurso</span><span class="a">→</span><span class="t" style="--c:var(--P)">♥ Personas</span><span class="a">→</span><span class="t" style="--c:var(--y)">¿Resultado?</span></div>
- <div class="grid">
-  <div class="card"><h3>Lo que ya haces</h3><p>Medir, controlar y corregir: indicadores, reuniones, procesos, consultoría y tecnología. Y muchas veces funciona.</p></div>
-  <div class="card"><h3>Lo que suele quedar sin mirar</h3><ul><li>Retrabajo y horas extra</li><li>Sobrecarga y rotación</li><li>Reclamos de clientes o vecinos</li><li>Parches que mueven el problema</li></ul></div>
- </div>
+  <h2>Cuando mueves una pieza, se mueven otras</h2>
+  <p>Una decisión rara vez se queda donde nació. Pasa por procesos, consume recursos y llega a las personas. Lo que se mide es la pieza que ves, y el costo aparece en otro lado.</p>
+  <div class="chain">
+    <span class="t" style="--c:var(--D)">♠ Decisión</span><span class="a">→</span>
+    <span class="t" style="--c:var(--Pr)">♣ Proceso</span><span class="a">→</span>
+    <span class="t" style="--c:var(--R)">♦ Recurso</span><span class="a">→</span>
+    <span class="t" style="--c:var(--P)">♥ Personas</span><span class="a">→</span>
+    <span class="t" style="--c:var(--y)">¿Resultado?</span>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <h3>Lo que ya haces</h3>
+      <p>Medir, controlar y corregir: indicadores, reuniones, procesos, consultoría y tecnología. Y muchas veces funciona.</p>
+    </div>
+    <div class="card">
+      <h3>Lo que suele quedar sin mirar</h3>
+      <ul>
+        <li>Retrabajo y horas extra</li>
+        <li>Sobrecarga y rotación</li>
+        <li>Reclamos de clientes o vecinos</li>
+        <li>Parches que mueven el problema</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <section id="casos">
- <h2>Casos reales, números reales</h2>
- <p>Cuando una decisión no se mira en conjunto, el costo aparece en otra parte. Esto es lo que reportaron las propias empresas.</p>
- <div class="grid">
-  <div class="card"><div class="num">≈US$64 M</div><p>en ventas que Revlon estimó no poder despachar en 2018, tras lanzar un nuevo sistema ERP, más US$53,6 M de cargos adicionales.</p><p class="micro"><a href="casos.html#revlon" data-link style="color:var(--R)">Ver el caso Revlon</a></p></div>
-  <div class="card"><div class="num">133 tiendas</div><p>cerradas por Target en Canadá, con costos de salida antes de impuestos por cerca de US$5,1 mil millones.</p><p class="micro"><a href="casos.html#target" data-link style="color:var(--R)">Ver el caso Target Canadá</a></p></div>
- </div>
- <p class="micro">Cifras reportadas por las empresas en documentos públicos; no son cálculos nuestros. <a href="casos.html" data-link style="color:var(--R)">Ver qué ocurrió y cómo se puede mirar</a>.</p>
+  <h2>Casos reales, números reales</h2>
+  <p>Cuando una decisión no se mira en conjunto, el costo aparece en otra parte. Esto es lo que reportaron las propias empresas.</p>
+  <div class="grid">
+    <div class="card">
+      <div class="num">≈US$64 M</div>
+      <p>en ventas que Revlon estimó no poder despachar en 2018, tras lanzar un nuevo sistema ERP, más US$53,6 M de cargos adicionales.</p>
+      <p class="micro"><a href="casos.html#revlon" data-link style="color:var(--R)">Ver el caso Revlon</a></p>
+    </div>
+    <div class="card">
+      <div class="num">133 tiendas</div>
+      <p>cerradas por Target en Canadá, con costos de salida antes de impuestos por cerca de US$5,1 mil millones.</p>
+      <p class="micro"><a href="casos.html#target" data-link style="color:var(--R)">Ver el caso Target Canadá</a></p>
+    </div>
+  </div>
+  <p class="micro">Cifras reportadas por las empresas en documentos públicos; no son cálculos nuestros. <a href="casos.html" data-link style="color:var(--R)">Ver qué ocurrió y cómo se puede mirar</a>.</p>
 </section>
 
 <section id="utilidad">
- <h2>Qué obtienes</h2>
- <div class="grid">
-  <div class="card"><h3>Ver antes de decidir</h3><p>Un mapa de los efectos probables de una decisión concreta: qué áreas, procesos y personas toca.</p></div>
-  <div class="card"><h3>Saber dónde buscar el costo oculto</h3><p>Los lugares donde suelen aparecer retrabajo, sobrecarga o reclamos, y cómo empezar a medirlos.</p></div>
-  <div class="card"><h3>Defensas que sí funcionan</h3><p>Distinguimos un control que existe de uno que realmente detiene la propagación.</p></div>
-  <div class="card"><h3>Medir el resultado</h3><p>Indicadores de seguimiento, para comprobar si la intervención cambió algo.</p></div>
- </div>
- <p class="micro">No prometemos ahorros ni predecimos el futuro: mostramos hipótesis fundamentadas para verificar con tu equipo y tus datos.</p>
+  <h2>Qué obtienes</h2>
+  <div class="grid">
+    <div class="card"><h3>Ver antes de decidir</h3><p>Un mapa de los efectos probables de una decisión concreta: qué áreas, procesos y personas toca.</p></div>
+    <div class="card"><h3>Saber dónde buscar el costo oculto</h3><p>Los lugares donde suelen aparecer retrabajo, sobrecarga o reclamos, y cómo empezar a medirlos.</p></div>
+    <div class="card"><h3>Defensas que sí funcionan</h3><p>Distinguimos un control que existe de uno que realmente detiene la propagación.</p></div>
+    <div class="card"><h3>Medir el resultado</h3><p>Indicadores de seguimiento, para comprobar si la intervención cambió algo.</p></div>
+  </div>
+  <p class="micro">No prometemos ahorros ni predecimos el futuro: mostramos hipótesis fundamentadas para verificar con tu equipo y tus datos.</p>
 </section>
 
 <section id="rubro">
- <h2>¿Te suena en tu área?</h2>
- <p>Ejemplos de preguntas que ayudamos a responder, según el tipo de organización.</p>
- <div class="grid">
-  <div class="card"><h3>Operaciones y logística</h3><p>Si cambiamos de proveedor, sistema o turnos, ¿qué otros procesos se resienten?</p></div>
-  <div class="card"><h3>Energía e infraestructura</h3><p>Si se interviene una obra o una zona, ¿qué ocurre con vecinos, proveedores y plazos?</p></div>
-  <div class="card"><h3>Comercio y centros comerciales</h3><p>Si abrimos, ampliamos o cambiamos horarios, ¿qué pasa con dotación, servicio y reclamos?</p></div>
-  <div class="card"><h3>Banca y servicios financieros</h3><p>Si rediseñamos un proceso, ¿qué cambia para el cliente y para los equipos de atención?</p></div>
-  <div class="card"><h3>Hotelería y servicios</h3><p>Si crece la demanda en temporada, ¿dónde se rompe primero la cadena de servicio?</p></div>
-  <div class="card"><h3>Sector público y municipios</h3><p>Si priorizamos una inversión, ¿qué sectores y servicios quedan más expuestos?</p></div>
- </div>
+  <h2>¿Te suena en tu área?</h2>
+  <p>Ejemplos de preguntas que ayudamos a responder, según el tipo de organización.</p>
+  <div class="grid">
+    <div class="card"><h3>Operaciones y logística</h3><p>Si cambiamos de proveedor, sistema o turnos, ¿qué otros procesos se resienten?</p></div>
+    <div class="card"><h3>Energía e infraestructura</h3><p>Si se interviene una obra o una zona, ¿qué ocurre con vecinos, proveedores y plazos?</p></div>
+    <div class="card"><h3>Comercio y centros comerciales</h3><p>Si abrimos, ampliamos o cambiamos horarios, ¿qué pasa con dotación, servicio y reclamos?</p></div>
+    <div class="card"><h3>Banca y servicios financieros</h3><p>Si rediseñamos un proceso, ¿qué cambia para el cliente y para los equipos de atención?</p></div>
+    <div class="card"><h3>Hotelería y servicios</h3><p>Si crece la demanda en temporada, ¿dónde se rompe primero la cadena de servicio?</p></div>
+    <div class="card"><h3>Sector público y municipios</h3><p>Si priorizamos una inversión, ¿qué sectores y servicios quedan más expuestos?</p></div>
+  </div>
 </section>
 
 <section id="como">
- <h2>Cómo funciona</h2>
- <p>Un recorrido corto, en tres etapas. Tú decides hasta dónde llegar.</p>
- <div class="fun">
-  <div class="f1">1 · Haces el diagnóstico<small>6 preguntas, 2 minutos, resultado inmediato</small></div>
-  <div class="f2">2 · Ves tus puntos ciegos<small>Decisiones, procesos, recursos y personas</small></div>
-  <div class="f3">3 · Conversamos<small>Agenda o WhatsApp, si te sirve</small></div>
- </div>
- <p>Si después quieres ir más a fondo, tomamos <b>una decisión concreta</b> de tu organización y la mapeamos con tu equipo: efectos probables, costos ocultos y los tres puntos donde conviene prevenir, controlar o recuperar.</p>
+  <h2>Cómo funciona</h2>
+  <p>Un recorrido corto, en tres etapas. Tú decides hasta dónde llegar.</p>
+  <div class="fun">
+    <div class="f1">1 · Haces el diagnóstico<small>6 preguntas, 2 minutos, resultado inmediato</small></div>
+    <div class="f2">2 · Ves tus puntos ciegos<small>Decisiones, procesos, recursos y personas</small></div>
+    <div class="f3">3 · Conversamos<small>Agenda o WhatsApp, si te sirve</small></div>
+  </div>
+  <p>Si después quieres ir más a fondo, tomamos <b>una decisión concreta</b> de tu organización y la mapeamos con tu equipo: efectos probables, costos ocultos y los tres puntos donde conviene prevenir, controlar o recuperar.</p>
+  <div class="btns">
+    <a class="btn cta" href="diagnostico.html" data-link>Comenzar el diagnóstico</a>
+    <a class="btn" href="productos.html" data-link>Conocer los servicios</a>
+  </div>
 </section>
 
 <section id="etapas">
- <h2>¿En qué momento estás?</h2>
- <p>Cuando sabes dónde estás, es más fácil ver el siguiente paso. Elige tu etapa y mira lo que podrías ver.</p>
- <div class="grid">
-  <div class="card st st-g"><div class="stage"><i class="dot"></i>ANTES</div><h3>Estoy por decidir</h3><p>Ves qué otras piezas se mueven y qué costos pueden aparecer, mientras todavía puedes elegir.</p><a class="btn" href="productos.html?e=g" data-link>Ver servicios</a></div>
-  <div class="card st st-y"><div class="stage"><i class="dot"></i>DURANTE</div><h3>Estoy en pleno cambio</h3><p>Detectas señales tempranas y pones puntos de control antes de que el efecto llegue al cliente.</p><a class="btn" href="productos.html?e=y" data-link>Ver servicios</a></div>
-  <div class="card st st-r"><div class="stage"><i class="dot"></i>DESPUÉS</div><h3>El problema ya está aquí</h3><p>Entiendes por qué sigue ocurriendo y dónde detenerlo, para recuperar el rumbo.</p><a class="btn" href="productos.html?e=r" data-link>Ver servicios</a></div>
- </div>
+  <h2>¿En qué momento estás?</h2>
+  <p>Cuando sabes dónde estás, es más fácil ver el siguiente paso. Elige tu etapa y mira lo que podrías ver.</p>
+  <div class="grid">
+    <div class="card st st-g">
+      <div class="stage"><i class="dot"></i>ANTES</div>
+      <h3>Estoy por decidir</h3>
+      <p>Ves qué otras piezas se mueven y qué costos pueden aparecer, mientras todavía puedes elegir.</p>
+      <a class="btn" href="productos.html?e=g" data-link>Ver servicios</a>
+    </div>
+    <div class="card st st-y">
+      <div class="stage"><i class="dot"></i>DURANTE</div>
+      <h3>Estoy en pleno cambio</h3>
+      <p>Detectas señales tempranas y pones puntos de control antes de que el efecto llegue al cliente.</p>
+      <a class="btn" href="productos.html?e=y" data-link>Ver servicios</a>
+    </div>
+    <div class="card st st-r">
+      <div class="stage"><i class="dot"></i>DESPUÉS</div>
+      <h3>El problema ya está aquí</h3>
+      <p>Entiendes por qué sigue ocurriendo y dónde detenerlo, para recuperar el rumbo.</p>
+      <a class="btn" href="productos.html?e=r" data-link>Ver servicios</a>
+    </div>
+  </div>
 </section>
 
 <section id="charlas">
- <h2>Míranos trabajar, en vivo y gratis</h2>
- <p>Una vez por semana tomamos un caso real y lo recorremos juntos en 30 minutos: cómo estaba armado, qué se movió y dónde se podía intervenir. Cuando termines, sabrás qué preguntas hacerte antes de tu próxima decisión.</p>
- <div class="btns"><a class="btn cta" href="charlas.html" data-link>Ver el calendario de charlas</a><a class="btn" href="casos.html" data-link>Explorar el banco de casos</a></div>
+  <h2>Míranos trabajar, en vivo y gratis</h2>
+  <p>Una vez por semana tomamos un caso real y lo recorremos juntos en 30 minutos: cómo estaba armado, qué se movió y dónde se podía intervenir. Cuando termines, sabrás qué preguntas hacerte antes de tu próxima decisión.</p>
+  <div class="btns">
+    <a class="btn cta" href="charlas.html" data-link>Ver el calendario de charlas</a>
+    <a class="btn" href="casos.html" data-link>Explorar el banco de casos</a>
+  </div>
 </section>
 
 <section id="caminos">
- <h2>Elige por dónde empezar</h2>
- <div class="paths">
-  <div class="card path"><div><h3>Quiero conocer a Expertos Chile</h3><p>Qué hacemos, cómo pensamos y para quién trabajamos.</p></div><a class="btn" href="quienes-somos.html" data-link>Conocer más</a></div>
-  <div class="card path"><div><h3>Quiero ver mi caso</h3><p>Responde el cuestionario y descubre dónde pueden estar tus puntos ciegos.</p></div><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico</a></div>
-  <div class="card path"><div><h3>Prefiero conversar</h3><p>Cuéntanos qué decisión tienes pendiente y te respondemos.</p></div><a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a></div>
- </div>
+  <h2>Elige por dónde empezar</h2>
+  <div class="paths">
+    <div class="card path">
+      <div><h3>Quiero conocer a Expertos Chile</h3><p>Qué hacemos, cómo pensamos y para quién trabajamos.</p></div>
+      <a class="btn" href="quienes-somos.html" data-link>Conocer más</a>
+    </div>
+    <div class="card path">
+      <div><h3>Quiero ver mi caso</h3><p>Responde el cuestionario y descubre dónde pueden estar tus puntos ciegos.</p></div>
+      <a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico</a>
+    </div>
+    <div class="card path">
+      <div><h3>Prefiero conversar</h3><p>Cuéntanos qué decisión tienes pendiente y te respondemos.</p></div>
+      <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    </div>
+  </div>
 </section>
 
 <section id="para">
- <h2>¿Para quién es?</h2>
- <div class="pills"><span>Gerencias de operaciones</span><span>Sostenibilidad</span><span>Relaciones comunitarias</span><span>Municipios e instituciones</span></div>
- <p>Para equipos que están por tomar una decisión que afectará a más de un área, o que quieren entender por qué ciertos costos suben sin una causa clara.</p>
+  <h2>¿Para quién es?</h2>
+  <div class="pills">
+    <span>Gerencias de operaciones</span>
+    <span>Sostenibilidad</span>
+    <span>Relaciones comunitarias</span>
+    <span>Municipios e instituciones</span>
+  </div>
+  <p>Para equipos que están por tomar una decisión que afectará a más de un área, o que quieren entender por qué ciertos costos suben sin una causa clara.</p>
 </section>
 
 <section id="faq">
- <h2>Preguntas frecuentes</h2>
- <details><summary>¿Es una predicción?</summary><p>No. Planteamos hipótesis de efectos, con su nivel de probabilidad, para verificarlas con tu equipo y tus datos.</p></details>
- <details><summary>¿Qué pasa con mis datos?</summary><p>El cuestionario no guarda nada en la web. Solo si decides escribirnos por WhatsApp, esos datos llegan directamente a nuestro chat.</p></details>
- <details><summary>¿Cuánto cuesta?</summary><p>El diagnóstico de 2 minutos es gratuito. Un diagnóstico completo se define según el alcance de la decisión; lo conversamos antes de empezar.</p></details>
- <details><summary>¿En qué se diferencia de un tablero de indicadores o una consultoría?</summary><p>Los indicadores miran cada pieza por separado y la consultoría suele transformar la organización completa. Aquí miramos qué otras piezas se mueven cuando tomas una decisión concreta.</p></details>
+  <h2>Preguntas frecuentes</h2>
+  <details><summary>¿Es una predicción?</summary><p>No. Planteamos hipótesis de efectos, con su nivel de probabilidad, para verificarlas con tu equipo y tus datos.</p></details>
+  <details><summary>¿Qué pasa con mis datos?</summary><p>Las respuestas del cuestionario no se guardan en esta página. La instrumentación inicial registra eventos técnicos de navegación en la sesión de tu pestaña; no registra respuestas, nombres ni teléfonos ni envía esos eventos a un servidor. Si decides escribirnos por WhatsApp, los datos que incluyas llegan directamente a nuestro chat.</p></details>
+  <details><summary>¿Cuánto cuesta?</summary><p>El diagnóstico de 2 minutos es gratuito. Un diagnóstico completo se define según el alcance de la decisión; lo conversamos antes de empezar.</p></details>
+  <details><summary>¿En qué se diferencia de un tablero de indicadores o una consultoría?</summary><p>Los indicadores miran cada pieza por separado y la consultoría suele transformar la organización completa. Aquí miramos qué otras piezas se mueven cuando tomas una decisión concreta.</p></details>
 </section>
 
 <section id="final">
- <h2>Decide sabiendo qué estás moviendo.</h2>
- <p><b>¿Qué decisión tienes sobre la mesa esta semana?</b> Si la ves completa hoy, la decides distinto.</p>
- <p>Antes de mover una pieza, descubre qué otras puede mover.</p>
- <div class="btns"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a></div>
+  <h2>Decide sabiendo qué estás moviendo.</h2>
+  <p><b>¿Qué decisión tienes sobre la mesa esta semana?</b> Si la ves completa hoy, la decides distinto.</p>
+  <p>Antes de mover una pieza, descubre qué otras puede mover.</p>
+  <div class="btns">
+    <a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a>
+    <a class="btn" href="casos.html" data-link>Ver los casos reales</a>
+  </div>
 </section>
-<footer>© Expertos Chile SpA · Los Ángeles, Biobío · Información general, no constituye asesoría profesional.</footer>
+</main>
+
+<footer>
+  © Expertos Chile SpA · Los Ángeles, Biobío · Información general, no constituye asesoría profesional.
+</footer>
 </div>
-<div class="sticky"><a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a></div>
+
+<div class="sticky">
+  <a class="btn cta" href="diagnostico.html" data-link>Hacer el diagnóstico (2 min)</a>
+</div>
+
+<script src="analytics.js"></script>
 <script>
-const CONFIG={whatsapp:"569XXXXXXXX"}; // EDITAR: número en formato internacional, sin + ni espacios
-/* Conserva el origen (?ref=...) en los enlaces internos, para medir de dónde llegan */
-const ref=new URLSearchParams(location.search).get("ref")||"";
-document.querySelectorAll("a[data-link]").forEach(a=>{if(ref)a.href+=(a.href.includes("?")?"&":"?")+"ref="+encodeURIComponent(ref)});
-document.getElementById("wa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hola, vi la página de Expertos Chile y quiero conversar."+(ref?" (Ref: "+ref+")":""));
+"use strict";
+
+const CONFIG = {
+  whatsapp: "569XXXXXXXX" // Reemplazar por el número real, sin + ni espacios.
+};
+
+/* Preserva ref y mantiene correctamente query y hash.
+   Ejemplo: casos.html#revlon sigue apuntando a #revlon.
+   Los enlaces externos no se modifican.
+*/
+const params = new URLSearchParams(location.search);
+const ref = params.get("ref") || "";
+
+document.querySelectorAll("a[data-link]").forEach(function (link) {
+  try {
+    const url = new URL(link.getAttribute("href"), location.href);
+
+    if (url.origin !== location.origin) return;
+
+    if (ref && !url.searchParams.has("ref")) {
+      url.searchParams.set("ref", ref);
+    }
+
+    link.href = url.pathname + url.search + url.hash;
+  } catch (_) {
+    // Un enlace defectuoso no debe detener el resto de la página.
+  }
+});
+
+/* El contacto se construye después de preservar el origen. */
+const waLink = document.getElementById("wa");
+if (waLink) {
+  const message =
+    "Hola, vi la página de Expertos Chile y quiero conversar." +
+    (ref ? " (Ref: " + ref + ")" : "");
+
+  waLink.href =
+    "https://wa.me/" + CONFIG.whatsapp +
+    "?text=" + encodeURIComponent(message);
+}
 </script>
-</body></html>
+</body>
+</html>
