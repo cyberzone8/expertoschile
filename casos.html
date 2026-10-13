@@ -7,14 +7,14 @@
 
 <title>Banco de casos reales · Expertos Chile</title>
 <meta name="description" content="Casos de decisiones, efectos en cadena y riesgos organizacionales. Evidencia pública, hipótesis de análisis y casos de simulación comercial.">
+<meta name="theme-color" content="#ffffff">
 
 <link rel="stylesheet" href="estilo.css">
 <script src="analytics.js" defer></script>
-   
+
 <style>
 /* =====================================================
    BANCO DE CASOS · EXPERTOS CHILE
-   Mantiene la identidad visual definida en estilo.css.
    ===================================================== */
 
 .num {
@@ -172,7 +172,9 @@ small.src {
 
 #filtro button:focus-visible,
 summary:focus-visible,
-a:focus-visible {
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
   outline: 2px solid var(--R);
   outline-offset: 3px;
 }
@@ -204,6 +206,21 @@ a:focus-visible {
   letter-spacing: .04em;
 }
 
+#lista article[id],
+#caso-industrial,
+#metodo {
+  scroll-margin-top: 24px;
+}
+
+#contador {
+  min-height: 1.5em;
+}
+
+.case-search::placeholder {
+  color: var(--mute);
+  opacity: 1;
+}
+
 @media (max-width: 520px) {
   .case-table {
     font-size: 12px;
@@ -212,6 +229,21 @@ a:focus-visible {
   .case-table th,
   .case-table td {
     padding: 7px 5px;
+    overflow-wrap: anywhere;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
 </style>
@@ -220,11 +252,11 @@ a:focus-visible {
 <body>
 <div class="w">
 
-<nav>
+<nav aria-label="Navegación principal">
   <a class="brand" href="index.html" data-link>EXPERTOS CHILE</a>
 
   <div class="links">
-    <a href="casos.html" class="on" data-link>Casos</a>
+    <a href="casos.html" class="on" aria-current="page" data-link>Casos</a>
     <a href="productos.html" data-link>Servicios</a>
     <a href="charlas.html" data-link>Charlas</a>
     <a href="quienes-somos.html" data-link>Quiénes somos</a>
@@ -279,11 +311,10 @@ a:focus-visible {
 </header>
 
 <!-- =====================================================
-     FILTROS
+     FILTROS Y BÚSQUEDA
      ===================================================== -->
 
-<section style="border-top:none;padding-top:0">
-
+<section id="explorar-casos" style="border-top:none;padding-top:0">
   <h2>Explora los casos por etapa</h2>
 
   <p>
@@ -292,24 +323,26 @@ a:focus-visible {
     resultados problemáticos.
   </p>
 
+  <label for="busqueda">Buscar por empresa, problema o servicio</label>
+
   <input
     id="busqueda"
     class="case-search"
     type="search"
-    placeholder="Buscar empresa, problema o servicio..."
+    placeholder="Ej.: ERP, hospital, inversión..."
     aria-label="Buscar casos"
+    autocomplete="off"
   >
 
-  <div class="sema" id="filtro" aria-label="Filtrar casos por etapa"></div>
+  <div class="sema" id="filtro" role="group" aria-label="Filtrar casos por etapa"></div>
 
-  <p id="contador" aria-live="polite"></p>
+  <p id="contador" aria-live="polite" aria-atomic="true"></p>
 
   <div class="grid" id="lista" style="grid-template-columns:1fr"></div>
-
 </section>
 
 <!-- =====================================================
-     CASO PARA LA PRÁCTICA COMERCIAL DE HERMES
+     CASO PARA ENTRENAMIENTO COMERCIAL
      ===================================================== -->
 
 <section id="caso-industrial">
@@ -325,7 +358,6 @@ a:focus-visible {
 
   <div class="case-note">
     <span class="status simulation">SIMULACIÓN</span>
-
     <b>Este caso no corresponde a una empresa real identificada.</b>
     Los antecedentes que siguen son supuestos creados para practicar
     una conversación comercial. No son estadísticas verificadas de una
@@ -333,7 +365,6 @@ a:focus-visible {
   </div>
 
   <div class="stats">
-
     <div class="card">
       <div class="num">86 %</div>
       <p>
@@ -358,7 +389,6 @@ a:focus-visible {
         Producción, mantenimiento y abastecimiento.
       </p>
     </div>
-
   </div>
 
   <h3>1. Situación de la empresa</h3>
@@ -475,14 +505,14 @@ a:focus-visible {
   <table class="case-table">
     <thead>
       <tr>
-        <th>Elemento</th>
-        <th>Propuesta inicial</th>
+        <th scope="col">Elemento</th>
+        <th scope="col">Propuesta inicial</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>Objetivo</td>
+        <th scope="row">Objetivo</th>
         <td>
           Determinar si existe una asociación relevante entre determinadas
           incidencias operativas y los registros de mantenimiento,
@@ -491,7 +521,7 @@ a:focus-visible {
       </tr>
 
       <tr>
-        <td>Datos</td>
+        <th scope="row">Datos</th>
         <td>
           Muestra acordada de eventos, marcas de tiempo, categorías,
           órdenes asociadas y movimientos relevantes de repuestos.
@@ -499,7 +529,7 @@ a:focus-visible {
       </tr>
 
       <tr>
-        <td>Formato</td>
+        <th scope="row">Formato</th>
         <td>
           Exportación CSV o Excel con los campos estrictamente necesarios
           y la información sensible minimizada.
@@ -507,7 +537,7 @@ a:focus-visible {
       </tr>
 
       <tr>
-        <td>Entregable</td>
+        <th scope="row">Entregable</th>
         <td>
           Mapa de conexiones observadas, limitaciones del análisis,
           hipótesis priorizadas y recomendación para decidir si conviene
@@ -516,7 +546,7 @@ a:focus-visible {
       </tr>
 
       <tr>
-        <td>Decisión gerencial</td>
+        <th scope="row">Decisión gerencial</th>
         <td>
           Continuar con una intervención, solicitar evidencia adicional
           o descartar la hipótesis y estudiar otra explicación.
@@ -524,7 +554,7 @@ a:focus-visible {
       </tr>
 
       <tr>
-        <td>Precio</td>
+        <th scope="row">Precio</th>
         <td>
           Se cotiza después de confirmar el alcance, los datos disponibles,
           las horas de trabajo y los entregables.
@@ -580,7 +610,7 @@ a:focus-visible {
 </section>
 
 <!-- =====================================================
-     MÉTODO
+     MÉTODO Y CONVERSIÓN
      ===================================================== -->
 
 <section id="metodo">
@@ -628,7 +658,7 @@ a:focus-visible {
         Ir a una charla
       </a>
 
-      <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">
+      <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener noreferrer">
         Conversar por WhatsApp
       </a>
 
@@ -657,10 +687,6 @@ a:focus-visible {
    g = ANTES
    y = DURANTE
    r = DESPUÉS
-
-   IMPORTANTE:
-   Una ficha con fuente identificada no implica que todas
-   las interpretaciones de esa ficha estén verificadas.
    ===================================================== */
 
 const REV = `
@@ -820,380 +846,361 @@ const WIP = `
 </div>
 `;
 
-/*
-  Para mantener la transparencia:
-  - Las fichas Revlon y Target tienen fuentes identificadas.
-  - Las otras fichas conservan el análisis propuesto originalmente,
-    pero se etiquetan como hipótesis y requieren verificación documental.
-  - No se inventan nuevas cifras históricas.
-*/
+/* =====================================================
+   BANCO DE CASOS
+   Las fichas no identificadas como documentadas permanecen
+   explícitamente pendientes de verificación.
+   ===================================================== */
 
 const C = [
+  {
+    e: "g",
+    i: "target",
+    t: "Target Canadá",
+    o: "Target Corporation · Canadá · 2013–2015",
+    s: ["Decisión", "Recovery"],
+    estado: "public",
+    d: TGT
+  },
+  {
+    e: "g",
+    i: "chacao",
+    t: "Puente Chacao",
+    o: "Obra pública · Chile",
+    s: ["Inversión", "Project"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miramos:</b>
+        un proyecto de infraestructura de gran escala requiere
+        coordinación entre diseño, construcción, suministros,
+        contratos, logística y gestión de riesgos.
 
-{
-  e: "g",
-  i: "target",
-  t: "Target Canadá",
-  o: "Target Corporation · Canadá · 2013–2015",
-  s: ["Decisión", "Recovery"],
-  estado: "public",
-  d: TGT
-},
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Qué mecanismos de control de cambios, seguimiento de hitos
+        y evaluación de riesgos permiten detectar desviaciones
+        antes de que se acumulen?
 
-{
-  e: "g",
-  i: "chacao",
-  t: "Puente Chacao",
-  o: "Obra pública · Chile",
-  s: ["Inversión", "Project"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miramos:</b>
-    un proyecto de infraestructura de gran escala requiere
-    coordinación entre diseño, construcción, suministros,
-    contratos, logística y gestión de riesgos.
+        <p>
+          Esta pregunta es una propuesta de análisis, no una afirmación
+          de que un mecanismo específico haya fallado en el proyecto.
+        </p>
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "g",
+    i: "hs2",
+    t: "HS2",
+    o: "Infraestructura ferroviaria · Reino Unido",
+    s: ["Inversión"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miramos:</b>
+        los proyectos de infraestructura compleja deben coordinar
+        ingeniería, adquisición de terrenos, permisos, financiación
+        y planificación de obras.
 
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Qué mecanismos de control de cambios, seguimiento de hitos
-    y evaluación de riesgos permiten detectar desviaciones
-    antes de que se acumulen?
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Qué decisiones de alcance y secuencia de ejecución deberían
+        someterse a revisiones independientes antes de comprometer
+        recursos adicionales?
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "g",
+    i: "opera",
+    t: "Sydney Opera House",
+    o: "Proyecto arquitectónico · Australia",
+    s: ["Inversión", "Project"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miramos:</b>
+        un proyecto arquitectónico singular puede enfrentar
+        incertidumbre de diseño, cambios de alcance, dificultades
+        constructivas y modificaciones presupuestarias.
 
-    <p>
-      Esta pregunta es una propuesta de análisis, no una afirmación
-      de que un mecanismo específico haya fallado en el proyecto.
-    </p>
-  </div>
-  ${WIP}
-  `
-},
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Qué controles de madurez del diseño y evaluación de cambios
+        permiten distinguir una modificación necesaria de una
+        desviación que requiere una decisión de alcance?
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "g",
+    i: "arica",
+    t: "Centro de Salud Ambiental de Arica",
+    o: "Infraestructura pública · Chile",
+    s: ["Check", "Operation"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miraríamos:</b>
+        antes de dar por comprobada cualquier deficiencia,
+        revisaríamos los antecedentes de diseño, recepción,
+        puesta en servicio y operación del edificio.
 
-{
-  e: "g",
-  i: "hs2",
-  t: "HS2",
-  o: "Infraestructura ferroviaria · Reino Unido",
-  s: ["Inversión"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miramos:</b>
-    los proyectos de infraestructura compleja deben coordinar
-    ingeniería, adquisición de terrenos, permisos, financiación
-    y planificación de obras.
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Existe evidencia documental de incompatibilidades entre
+        las especificaciones técnicas y las condiciones reales
+        de operación?
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "y",
+    i: "revlon",
+    t: "Revlon · ERP",
+    o: "Revlon · Estados Unidos · 2018",
+    s: ["Transformación", "Recovery"],
+    estado: "public",
+    d: REV
+  },
+  {
+    e: "y",
+    i: "serena",
+    t: "Hospital de La Serena",
+    o: "Infraestructura hospitalaria · Chile",
+    s: ["Project"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miraríamos:</b>
+        evaluaríamos los antecedentes de licitación, experiencia
+        del contratista, modificaciones contractuales, controles
+        técnicos y evolución del cronograma.
 
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Qué decisiones de alcance y secuencia de ejecución deberían
-    someterse a revisiones independientes antes de comprometer
-    recursos adicionales?
-  </div>
-  ${WIP}
-  `
-},
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Qué peso tuvieron la experiencia técnica, la capacidad
+        de ejecución y los mecanismos de control en las decisiones
+        contractuales?
 
-{
-  e: "g",
-  i: "opera",
-  t: "Sydney Opera House",
-  o: "Proyecto arquitectónico · Australia",
-  s: ["Inversión", "Project"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miramos:</b>
-    un proyecto arquitectónico singular puede enfrentar
-    incertidumbre de diseño, cambios de alcance, dificultades
-    constructivas y modificaciones presupuestarias.
+        No se atribuye un problema específico a la selección
+        del contratista sin verificar los antecedentes.
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "y",
+    i: "cordillera",
+    t: "Hospital Provincia Cordillera",
+    o: "Infraestructura y servicios hospitalarios · Chile",
+    s: ["Project", "Operation"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miraríamos:</b>
+        revisaríamos la relación entre los sistemas de información,
+        los flujos clínicos, la capacitación y los procedimientos
+        de puesta en marcha.
 
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Qué controles de madurez del diseño y evaluación de cambios
-    permiten distinguir una modificación necesaria de una
-    desviación que requiere una decisión de alcance?
-  </div>
-  ${WIP}
-  `
-},
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Qué evidencia permite distinguir una dificultad de
+        capacitación de un problema de diseño, integración
+        o procedimiento?
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "y",
+    i: "nhs",
+    t: "NHS National Programme for IT",
+    o: "Sistemas de información sanitaria · Reino Unido",
+    s: ["Transformación", "Recovery"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miramos:</b>
+        los programas tecnológicos de gran escala deben conciliar
+        interoperabilidad, necesidades locales, gestión contractual,
+        seguridad y adopción por los usuarios.
 
-{
-  e: "g",
-  i: "arica",
-  t: "Centro de Salud Ambiental de Arica",
-  o: "Infraestructura pública · Chile",
-  s: ["Check", "Operation"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miraríamos:</b>
-    antes de dar por comprobada cualquier deficiencia,
-    revisaríamos los antecedentes de diseño, recepción,
-    puesta en servicio y operación del edificio.
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Qué decisiones de arquitectura, contratación y despliegue
+        condicionaron la capacidad de integración y adopción?
 
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Existe evidencia documental de incompatibilidades entre
-    las especificaciones técnicas y las condiciones reales
-    de operación?
-  </div>
-  ${WIP}
-  `
-},
+        La respuesta requiere contrastar los informes históricos
+        del programa.
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "y",
+    i: "hershey",
+    t: "Hershey · ERP",
+    o: "Hershey · Estados Unidos",
+    s: ["Transformación"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miramos:</b>
+        un cambio de ERP puede afectar la planificación,
+        los inventarios, los pedidos y la distribución si las
+        pruebas integrales no representan adecuadamente la operación.
 
-{
-  e: "y",
-  i: "revlon",
-  t: "Revlon · ERP",
-  o: "Revlon · Estados Unidos · 2018",
-  s: ["Transformación", "Recovery"],
-  estado: "public",
-  d: REV
-},
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Qué pruebas de punta a punta, controles de contingencia
+        y criterios de salida habrían permitido evaluar la
+        preparación antes de la puesta en marcha?
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "y",
+    i: "lidl",
+    t: "Lidl · SAP",
+    o: "Sistemas de información · Alemania",
+    s: ["Transformación", "Recovery"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miraríamos:</b>
+        revisaríamos el alcance del sistema, el modelo de datos,
+        los procesos operativos, los requisitos de inventario
+        y la gestión del cambio.
 
-{
-  e: "y",
-  i: "serena",
-  t: "Hospital de La Serena",
-  o: "Infraestructura hospitalaria · Chile",
-  s: ["Project"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miraríamos:</b>
-    evaluaríamos los antecedentes de licitación, experiencia
-    del contratista, modificaciones contractuales, controles
-    técnicos y evolución del cronograma.
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Qué incompatibilidades entre el modelo del sistema y
+        los requisitos operativos están documentadas, y cuáles
+        son solamente explicaciones propuestas?
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "r",
+    i: "tne",
+    t: "TNE / JUNAEB",
+    o: "Servicio público · Chile",
+    s: ["Operation"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miraríamos:</b>
+        estudiaríamos los antecedentes del servicio, la
+        distribución territorial, los requisitos de conservación,
+        la programación de rutas y los controles de calidad.
 
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Qué peso tuvieron la experiencia técnica, la capacidad
-    de ejecución y los mecanismos de control en las decisiones
-    contractuales?
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Qué registros permitirían determinar si las dificultades
+        del servicio están asociadas con la planificación,
+        el almacenamiento, el transporte o la coordinación?
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "g",
+    i: "arauco",
+    t: "Arauco · Línea de pulpa Nueva Aldea",
+    o: "Industria forestal · Chile",
+    s: ["Decisión", "Project"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miraríamos:</b>
+        en una operación industrial, una modificación de capacidad
+        puede exigir revisar de manera conjunta producción,
+        almacenamiento, transporte interno, mantenimiento y despacho.
 
-    No se atribuye un problema específico a la selección
-    del contratista sin verificar los antecedentes.
-  </div>
-  ${WIP}
-  `
-},
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Los registros de capacidad y tiempos de ciclo muestran
+        una restricción que se haya desplazado hacia otra etapa
+        del proceso?
 
-{
-  e: "y",
-  i: "cordillera",
-  t: "Hospital Provincia Cordillera",
-  o: "Infraestructura y servicios hospitalarios · Chile",
-  s: ["Project", "Operation"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miraríamos:</b>
-    revisaríamos la relación entre los sistemas de información,
-    los flujos clínicos, la capacitación y los procedimientos
-    de puesta en marcha.
+        Esta pregunta no afirma que el escenario descrito haya
+        ocurrido en la planta.
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "y",
+    i: "cmpc",
+    t: "CMPC · Operaciones industriales",
+    o: "Industria forestal y papelera · Chile",
+    s: ["Transformación", "Recovery"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miraríamos:</b>
+        estudiaríamos la relación entre cambios de proceso,
+        controles ambientales, calidad del producto, condiciones
+        operativas y mecanismos de respuesta.
 
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Qué evidencia permite distinguir una dificultad de
-    capacitación de un problema de diseño, integración
-    o procedimiento?
-  </div>
-  ${WIP}
-  `
-},
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Qué registros de proceso y monitoreo permiten identificar
+        una asociación entre un cambio operacional y un indicador
+        ambiental o de calidad?
 
-{
-  e: "y",
-  i: "nhs",
-  t: "NHS National Programme for IT",
-  o: "Sistemas de información sanitaria · Reino Unido",
-  s: ["Transformación", "Recovery"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miramos:</b>
-    los programas tecnológicos de gran escala deben conciliar
-    interoperabilidad, necesidades locales, gestión contractual,
-    seguridad y adopción por los usuarios.
+        La hipótesis debe contrastarse con documentación primaria.
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "r",
+    i: "nestle",
+    t: "Nestlé · Operaciones de producción",
+    o: "Industria alimentaria · Chile",
+    s: ["Operation"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miraríamos:</b>
+        ante una variación de calidad, revisaríamos las
+        especificaciones de materias primas, los controles
+        de recepción, la trazabilidad de lotes y los registros
+        del proceso productivo.
 
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Qué decisiones de arquitectura, contratación y despliegue
-    condicionaron la capacidad de integración y adopción?
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿La evidencia permite asociar un cambio de proveedor
+        con una variación del producto, o existen explicaciones
+        alternativas que deben investigarse?
 
-    La respuesta requiere contrastar los informes históricos
-    del programa.
-  </div>
-  ${WIP}
-  `
-},
+        No se afirma que el episodio descrito en versiones
+        preliminares haya ocurrido.
+      </div>
+      ${WIP}
+    `
+  },
+  {
+    e: "y",
+    i: "bancostado",
+    t: "BancoEstado · Servicios digitales",
+    o: "Servicios financieros · Chile",
+    s: ["Transformación", "Recovery"],
+    estado: "hypothesis",
+    d: `
+      <div class="lens">
+        <b>Cómo lo miraríamos:</b>
+        una plataforma digital puede evaluarse mediante
+        registros de rendimiento, errores, abandono, tiempos
+        de respuesta y pruebas de usabilidad.
 
-{
-  e: "y",
-  i: "hershey",
-  t: "Hershey · ERP",
-  o: "Hershey · Estados Unidos",
-  s: ["Transformación"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miramos:</b>
-    un cambio de ERP puede afectar la planificación,
-    los inventarios, los pedidos y la distribución si las
-    pruebas integrales no representan adecuadamente la operación.
+        <span class="tag e4">HIPÓTESIS</span>
+        ¿Qué segmentos y pasos del proceso muestran fricción,
+        y qué evidencia permite diferenciar una dificultad
+        de conectividad de un problema de diseño?
 
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Qué pruebas de punta a punta, controles de contingencia
-    y criterios de salida habrían permitido evaluar la
-    preparación antes de la puesta en marcha?
-  </div>
-  ${WIP}
-  `
-},
-
-{
-  e: "y",
-  i: "lidl",
-  t: "Lidl · SAP",
-  o: "Sistemas de información · Alemania",
-  s: ["Transformación", "Recovery"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miraríamos:</b>
-    revisaríamos el alcance del sistema, el modelo de datos,
-    los procesos operativos, los requisitos de inventario
-    y la gestión del cambio.
-
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Qué incompatibilidades entre el modelo del sistema y
-    los requisitos operativos están documentadas, y cuáles
-    son solamente explicaciones propuestas?
-  </div>
-  ${WIP}
-  `
-},
-
-{
-  e: "r",
-  i: "tne",
-  t: "TNE / JUNAEB",
-  o: "Servicio público · Chile",
-  s: ["Operation"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miraríamos:</b>
-    estudiaríamos los antecedentes del servicio, la
-    distribución territorial, los requisitos de conservación,
-    la programación de rutas y los controles de calidad.
-
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Qué registros permitirían determinar si las dificultades
-    del servicio están asociadas con la planificación,
-    el almacenamiento, el transporte o la coordinación?
-  </div>
-  ${WIP}
-  `
-},
-
-{
-  e: "g",
-  i: "arauco",
-  t: "Arauco · Línea de pulpa Nueva Aldea",
-  o: "Industria forestal · Chile",
-  s: ["Decisión", "Project"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miraríamos:</b>
-    en una operación industrial, una modificación de capacidad
-    puede exigir revisar de manera conjunta producción,
-    almacenamiento, transporte interno, mantenimiento y despacho.
-
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Los registros de capacidad y tiempos de ciclo muestran
-    una restricción que se haya desplazado hacia otra etapa
-    del proceso?
-
-    Esta pregunta no afirma que el escenario descrito haya
-    ocurrido en la planta.
-  </div>
-  ${WIP}
-  `
-},
-
-{
-  e: "y",
-  i: "cmpc",
-  t: "CMPC · Operaciones industriales",
-  o: "Industria forestal y papelera · Chile",
-  s: ["Transformación", "Recovery"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miraríamos:</b>
-    estudiaríamos la relación entre cambios de proceso,
-    controles ambientales, calidad del producto, condiciones
-    operativas y mecanismos de respuesta.
-
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Qué registros de proceso y monitoreo permiten identificar
-    una asociación entre un cambio operacional y un indicador
-    ambiental o de calidad?
-
-    La hipótesis debe contrastarse con documentación primaria.
-  </div>
-  ${WIP}
-  `
-},
-
-{
-  e: "r",
-  i: "nestle",
-  t: "Nestlé · Operaciones de producción",
-  o: "Industria alimentaria · Chile",
-  s: ["Operation"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miraríamos:</b>
-    ante una variación de calidad, revisaríamos las
-    especificaciones de materias primas, los controles
-    de recepción, la trazabilidad de lotes y los registros
-    del proceso productivo.
-
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿La evidencia permite asociar un cambio de proveedor
-    con una variación del producto, o existen explicaciones
-    alternativas que deben investigarse?
-
-    No se afirma que el episodio descrito en versiones
-    preliminares haya ocurrido.
-  </div>
-  ${WIP}
-  `
-},
-
-{
-  e: "y",
-  i: "bancostado",
-  t: "BancoEstado · Servicios digitales",
-  o: "Servicios financieros · Chile",
-  s: ["Transformación", "Recovery"],
-  estado: "hypothesis",
-  d: `
-  <div class="lens">
-    <b>Cómo lo miraríamos:</b>
-    una plataforma digital puede evaluarse mediante
-    registros de rendimiento, errores, abandono, tiempos
-    de respuesta y pruebas de usabilidad.
-
-    <span class="tag e4">HIPÓTESIS</span>
-    ¿Qué segmentos y pasos del proceso muestran fricción,
-    y qué evidencia permite diferenciar una dificultad
-    de conectividad de un problema de diseño?
-
-    No se atribuye una tasa de abandono ni un problema
-    específico a BancoEstado sin una fuente verificable.
-  </div>
-  ${WIP}
-  `
-}
-
+        No se atribuye una tasa de abandono ni un problema
+        específico a BancoEstado sin una fuente verificable.
+      </div>
+      ${WIP}
+    `
+  }
 ];
 
 /* =====================================================
@@ -1207,16 +1214,25 @@ const L = {
 };
 
 const params = new URLSearchParams(location.search);
-
-const etapaInicial = params.get("e") || "";
-let f = ["g", "y", "r"].includes(etapaInicial)
-  ? etapaInicial
-  : "";
+const ref = params.get("ref") || "";
 
 const busqueda = document.getElementById("busqueda");
 const lista = document.getElementById("lista");
 const filtro = document.getElementById("filtro");
 const contador = document.getElementById("contador");
+
+let f = ["g", "y", "r"].includes(params.get("e"))
+  ? params.get("e")
+  : "";
+
+function track(eventName, details = {}) {
+  if (
+    window.ExpertosAnalytics &&
+    typeof window.ExpertosAnalytics.track === "function"
+  ) {
+    window.ExpertosAnalytics.track(eventName, details);
+  }
+}
 
 function textoPlano(html) {
   const temporal = document.createElement("div");
@@ -1245,6 +1261,38 @@ function coincideBusqueda(c, q) {
   return texto.includes(q);
 }
 
+/* Conserva los parámetros de destino, la referencia y el fragmento. */
+
+function construirUrlInterna(href) {
+  const url = new URL(href, location.href);
+
+  if (url.origin === location.origin && ref) {
+    url.searchParams.set("ref", ref);
+  }
+
+  return url;
+}
+
+function actualizarFiltroEnUrl() {
+  const url = new URL(location.href);
+
+  if (f) {
+    url.searchParams.set("e", f);
+  } else {
+    url.searchParams.delete("e");
+  }
+
+  if (ref) {
+    url.searchParams.set("ref", ref);
+  }
+
+  history.replaceState(
+    null,
+    "",
+    url.pathname + url.search + url.hash
+  );
+}
+
 function renderFiltros() {
   const opciones = [
     ["", "Todos"],
@@ -1254,9 +1302,12 @@ function renderFiltros() {
   ];
 
   filtro.innerHTML = opciones.map(([k, t]) => {
+    const cantidad = C.filter(c => !k || c.e === k).length;
     const clase = k ? "st-" + k : "";
     const activo = f === k ? "on" : "";
-    const punto = k ? '<i class="dot"></i>' : "";
+    const punto = k
+      ? '<i class="dot" aria-hidden="true"></i>'
+      : "";
 
     return `
       <button
@@ -1264,14 +1315,23 @@ function renderFiltros() {
         class="${clase} ${activo}"
         data-k="${k}"
         aria-pressed="${f === k ? "true" : "false"}"
-      >${punto}${t}</button>
+      >${punto}${t} (${cantidad})</button>
     `;
   }).join("");
 
   filtro.querySelectorAll("button").forEach(b => {
     b.addEventListener("click", () => {
-      f = b.dataset.k;
+      const nuevoFiltro = b.dataset.k;
+
+      if (nuevoFiltro === f) return;
+
+      f = nuevoFiltro;
+      actualizarFiltroEnUrl();
       render();
+
+      track("case_filter", {
+        stage: f || "all"
+      });
     });
   });
 }
@@ -1284,7 +1344,8 @@ function renderCasos() {
   });
 
   contador.textContent =
-    resultados.length + (resultados.length === 1
+    resultados.length +
+    (resultados.length === 1
       ? " caso encontrado."
       : " casos encontrados.");
 
@@ -1293,14 +1354,26 @@ function renderCasos() {
       <div class="card">
         <h3>No encontramos coincidencias</h3>
         <p>Prueba con otra palabra o cambia el filtro de etapa.</p>
+        <button type="button" class="btn" id="limpiar-busqueda">
+          Limpiar búsqueda y filtros
+        </button>
       </div>
     `;
+
+    document.getElementById("limpiar-busqueda")
+      ?.addEventListener("click", () => {
+        busqueda.value = "";
+        f = "";
+        actualizarFiltroEnUrl();
+        render();
+      });
+
     return;
   }
 
   lista.innerHTML = resultados.map(c => {
     const servicios = (c.s || []).map(x =>
-      `<span class="pill">Domino ${x}</span>`
+      `<span class="pill">Dominio ${x}</span>`
     ).join("");
 
     const contenido = c.d || WIP;
@@ -1308,7 +1381,7 @@ function renderCasos() {
     return `
       <article class="card st st-${c.e}" id="${c.i}">
         <div class="stage">
-          <i class="dot"></i>${L[c.e]}
+          <i class="dot" aria-hidden="true"></i>${L[c.e]}
         </div>
 
         <h3>${c.t}</h3>
@@ -1319,7 +1392,7 @@ function renderCasos() {
           ${estadoFicha(c)}
         </div>
 
-        <details>
+        <details data-case-id="${c.i}">
           <summary>Ver análisis y evidencia disponible</summary>
           <div>${contenido}</div>
         </details>
@@ -1349,29 +1422,52 @@ function render() {
   renderCasos();
 }
 
-busqueda.addEventListener("input", renderCasos);
+/* Registrar búsquedas sin almacenar el texto introducido. */
 
-/* =====================================================
-   CONSERVAR REFERENCIA COMERCIAL
-   ===================================================== */
+let temporizadorBusqueda;
 
-const ref = params.get("ref") || "";
+busqueda.addEventListener("input", () => {
+  renderCasos();
+
+  clearTimeout(temporizadorBusqueda);
+
+  temporizadorBusqueda = setTimeout(() => {
+    track("case_search", {
+      search_used: Boolean(busqueda.value.trim())
+    });
+  }, 500);
+});
+
+/* Navegación interna: actualizar los enlaces también después
+   de renderizar dinámicamente las fichas. */
 
 function addRef() {
-  document.querySelectorAll("a[data-link]:not([data-r])").forEach(a => {
-    a.dataset.r = "1";
-
-    if (!ref) return;
-
-    const url = new URL(a.href, location.href);
-    url.searchParams.set("ref", ref);
+  document.querySelectorAll("a[data-link]").forEach(a => {
+    const url = construirUrlInterna(a.href);
     a.href = url.href;
   });
 }
 
+/* Abrir y registrar los análisis expandidos.
+   El listener delegado continúa activo tras volver a renderizar. */
+
+lista.addEventListener("toggle", event => {
+  const details = event.target;
+
+  if (
+    details instanceof HTMLDetailsElement &&
+    details.open &&
+    details.dataset.caseId
+  ) {
+    track("case_detail_open", {
+      case_id: details.dataset.caseId
+    });
+  }
+}, true);
+
 /* =====================================================
-   ENLACE A WHATSAPP
-   Sustituir el número por el número real de la empresa.
+   WHATSAPP
+   Sustituir el marcador por el número real de la empresa.
    Formato internacional sin +, espacios ni guiones.
    ===================================================== */
 
@@ -1395,8 +1491,20 @@ if (wa) {
       CONFIG.whatsapp +
       "?text=" +
       encodeURIComponent(mensaje);
+
+    wa.target = "_blank";
+    wa.rel = "noopener noreferrer";
+
+    wa.addEventListener("click", () => {
+      track("contact_click", {
+        channel: "whatsapp",
+        source: "casos"
+      });
+    });
   } else {
-    wa.href = "https://wa.me/";
+    wa.href = "#";
+    wa.removeAttribute("target");
+
     wa.addEventListener("click", event => {
       event.preventDefault();
       alert("Configura el número real de WhatsApp en casos.html.");
@@ -1427,31 +1535,82 @@ if (botonCopiar) {
     try {
       await navigator.clipboard.writeText(resumen);
       botonCopiar.textContent = "Resumen copiado";
-    } catch (error) {
+
+      track("case_summary_copy", {
+        case_id: "caso-industrial"
+      });
+    } catch (_) {
       window.prompt("Copia el resumen:", resumen);
     }
   });
 }
 
 /* =====================================================
-   INICIALIZACIÓN Y ENLACES CON ANCLA
+   ABRIR ANCLAS
+   Ejemplos:
+   casos.html#revlon
+   casos.html#target
+   casos.html#caso-industrial
+   ===================================================== */
+
+function abrirAnclaInicial() {
+  let id = "";
+
+  try {
+    id = decodeURIComponent(location.hash.slice(1));
+  } catch (_) {
+    id = location.hash.slice(1);
+  }
+
+  if (!id) return;
+
+  const caso = C.find(c => c.i === id);
+
+  if (caso) {
+    f = caso.e;
+    busqueda.value = "";
+    actualizarFiltroEnUrl();
+    render();
+  }
+
+  const elemento = document.getElementById(id);
+
+  if (!elemento) return;
+
+  const detalle = elemento.querySelector("details");
+
+  if (detalle) {
+    detalle.open = true;
+  }
+
+  requestAnimationFrame(() => {
+    const destino = document.getElementById(id);
+
+    if (destino) {
+      destino.scrollIntoView({
+        behavior: "auto",
+        block: "start"
+      });
+    }
+  });
+}
+
+/* =====================================================
+   INICIALIZACIÓN
    ===================================================== */
 
 render();
 addRef();
+abrirAnclaInicial();
 
-(function abrirAncla() {
-  const id = decodeURIComponent(location.hash.slice(1));
-  if (!id) return;
+window.addEventListener("hashchange", abrirAnclaInicial);
 
-  const elemento = document.getElementById(id);
-  if (!elemento) return;
+/* Registrar eventos sin depender de que analytics.js esté disponible.
+   El módulo externo registra page_view por separado. */
 
-  const detalle = elemento.querySelector("details");
-  if (detalle) detalle.open = true;
-
-  elemento.scrollIntoView({ behavior: "auto", block: "start" });
-})();
+track("case_bank_ready", {
+  total_cases: C.length
+});
 </script>
 
 </body>
