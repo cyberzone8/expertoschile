@@ -1,63 +1,469 @@
-<!doctype html>
-<html lang="es"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Servicios · Expertos Chile</title>
-<meta name="description" content="Siete servicios para ver qué mueve una decisión: antes, durante y después. Expertos Chile.">
-<link rel="stylesheet" href="estilo.css">
-</head><body><div class="w">
-<nav><a class="brand" href="index.html" data-link>EXPERTOS CHILE</a><div class="links"><a href="casos.html" data-link>Casos</a><a href="productos.html" class="on" data-link>Servicios</a><a href="charlas.html" data-link>Charlas</a><a href="quienes-somos.html" data-link>Quiénes somos</a><a href="diagnostico.html" class="navcta" data-link>Diagnóstico</a></div></nav>
 
-<div style="padding:30px 0 20px">
- <div class="eye">SERVICIOS</div>
- <h1>Elige el momento en que estás. Te mostramos lo que viene después.</h1>
- <p class="lead">Si estás por decidir, en pleno cambio o ya con el problema encima, hay un lugar donde empezar. Cada servicio parte de una pregunta y termina en un punto donde intervenir.</p>
- <div class="sema"><span class="st-g"><i class="dot"></i>ANTES · prevenir</span><span class="st-y"><i class="dot"></i>DURANTE · controlar</span><span class="st-r"><i class="dot"></i>DESPUÉS · recuperar</span></div>
-</div>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1424">
+<title>Servicios · Expertos Chile</title>
+<meta name="description" content="Siete servicios para anticipar las consecuencias de una decisión, controlar cambios y recuperar el rumbo. Expertos Chile.">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<div class="w">
+
+<nav aria-label="Navegación principal">
+  <a class="brand" href="index.html" data-link>EXPERTOS CHILE</a>
+  <div class="links">
+    <a href="casos.html" data-link>Casos</a>
+    <a href="productos.html" class="on" aria-current="page" data-link>Servicios</a>
+    <a href="charlas.html" data-link>Charlas</a>
+    <a href="quienes-somos.html" data-link>Quiénes somos</a>
+    <a href="diagnostico.html" class="navcta" data-link>Diagnóstico</a>
+  </div>
+</nav>
+
+<header style="padding:30px 0 20px">
+  <div class="eye">SERVICIOS</div>
+  <h1>Elige el momento en que estás. Te mostramos lo que puede venir después.</h1>
+  <p class="lead">
+    Si estás por decidir, en pleno cambio o ya tienes un problema,
+    hay un punto de partida. Cada servicio comienza con una pregunta
+    y busca identificar dónde conviene intervenir.
+  </p>
+
+  <div class="sema" aria-label="Etapas de intervención">
+    <span class="st-g"><i class="dot"></i>ANTES · prevenir</span>
+    <span class="st-y"><i class="dot"></i>DURANTE · controlar</span>
+    <span class="st-r"><i class="dot"></i>DESPUÉS · recuperar</span>
+  </div>
+</header>
 
 <section id="entrada">
- <h2>Para empezar, sin compromiso</h2>
- <div class="grid">
-  <div class="card"><h3>Diagnóstico de 2 minutos</h3><p>Seis preguntas y un resultado inmediato: dónde pueden estar tus puntos ciegos.</p><div class="btns"><a class="btn cta sm" href="diagnostico.html" data-link>Hacerlo ahora</a></div></div>
-  <div class="card"><h3>Charla semanal en vivo</h3><p>Cada semana tomamos un caso real y lo miramos juntos, paso a paso. Tú ves cómo trabajamos.</p><div class="btns"><a class="btn sm" href="charlas.html" data-link>Ver el calendario</a></div></div>
- </div>
+  <h2>Para empezar, sin compromiso</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Diagnóstico de 2 minutos</h3>
+      <p>
+        Responde seis preguntas y obtén una orientación inicial
+        sobre posibles puntos ciegos.
+      </p>
+      <div class="btns">
+        <a class="btn cta sm" href="diagnostico.html" data-link>
+          Hacer el diagnóstico
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Charlas y casos</h3>
+      <p>
+        Conoce el método a través de ejemplos y actividades.
+        Consulta la página de charlas para revisar la información disponible.
+      </p>
+      <div class="btns">
+        <a class="btn sm" href="charlas.html" data-link>
+          Ver las charlas
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="catalogo"><h2>Los siete servicios</h2><p>Filtra por etapa y mira qué entrega cada uno.</p>
- <div class="sema" id="filtro"></div>
- <div class="grid" id="lista"></div>
- <p class="micro">Alcance, plazo y valor se definen según la decisión que traigas. Lo conversamos antes de empezar, sin compromiso.</p>
+<section id="catalogo">
+  <h2>Los siete servicios</h2>
+  <p>Filtra por etapa y revisa qué pregunta responde cada servicio.</p>
+
+  <div class="sema" id="filtro" role="group" aria-label="Filtrar servicios por etapa"></div>
+
+  <p id="resultado-filtro" class="micro" aria-live="polite"></p>
+
+  <div class="grid" id="lista"></div>
+
+  <p class="micro">
+    El alcance, el plazo y el valor se acuerdan según el caso.
+    Primero conversamos sobre la necesidad; después definimos una propuesta.
+  </p>
 </section>
 
-<section id="como"><h2>Cómo es trabajar con nosotros</h2>
- <div class="grid">
-  <div class="card"><h3>1 · Configurar</h3><p>Ordenamos las piezas y sus conexiones: personas, recursos, procesos y decisiones.</p></div>
-  <div class="card"><h3>2 · Propagar</h3><p>Miramos qué ocurre cuando una pieza se mueve y dónde puede seguir el efecto.</p></div>
-  <div class="card"><h3>3 · Intervenir</h3><p>Definimos dónde poner defensas y cómo medir si funcionaron.</p></div>
- </div>
- <div class="btns"><a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Contarnos tu decisión por WhatsApp</a></div>
+<section id="como">
+  <h2>Cómo trabajamos</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>1 · Configurar</h3>
+      <p>
+        Ordenamos las piezas relevantes y sus conexiones:
+        personas, recursos, procesos y decisiones.
+      </p>
+    </div>
+    <div class="card">
+      <h3>2 · Analizar</h3>
+      <p>
+        Exploramos qué puede ocurrir cuando cambia una pieza,
+        qué otras áreas podrían verse afectadas y qué evidencias faltan.
+      </p>
+    </div>
+    <div class="card">
+      <h3>3 · Intervenir</h3>
+      <p>
+        Identificamos posibles puntos de control y definimos
+        cómo comprobar si las medidas adoptadas funcionan.
+      </p>
+    </div>
+  </div>
+
+  <div class="btns">
+    <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener noreferrer">
+      Conversar sobre mi decisión
+    </a>
+  </div>
+  <p class="micro" id="wa-notice"></p>
 </section>
-<footer>© Expertos Chile SpA · Los Ángeles, Biobío · Información general, no constituye asesoría profesional.</footer>
+
+<footer>
+  © Expertos Chile SpA · Los Ángeles, Biobío ·
+  Información general; el alcance de cada servicio se define según el caso.
+</footer>
 </div>
+
 <script>
-const CONFIG={whatsapp:"569XXXXXXXX"}; // EDITAR
-const S=[
-{e:"g",n:"Domino Check",q:"¿Dónde está el dominó?",d:"Una mirada rápida a una decisión o proceso para ubicar sus conexiones y puntos ciegos.",x:["Mapa inicial de conexiones","3 puntos ciegos priorizados"],c:["Centro de Salud Ambiental (Arica)","Caso PYME"]},
-{e:"g",n:"Domino Decisión",q:"¿Qué puede mover esta decisión?",d:"Antes de decidir, vemos qué otras piezas se mueven y qué costos ocultos pueden aparecer.",x:["Mapa de efectos probables","Costos ocultos a vigilar"],c:["Target Canadá"]},
-{e:"g",n:"Domino Inversión",q:"¿Qué estamos comprometiendo?",d:"Escenarios de exposición de una inversión, con sus supuestos a validar. No es un costo final.",x:["Escenarios y supuestos","Puntos de control del gasto"],c:["Puente Chacao","HS2","Sydney Opera House"]},
-{e:"y",n:"Domino Project",q:"¿Dónde puede romperse el proyecto?",d:"Con el proyecto en marcha, mapeamos dependencias para detectar señales tempranas.",x:["Mapa de dependencias","Defensas y puntos de control"],c:["Hospital de La Serena","Hospital Provincia Cordillera"]},
-{e:"y",n:"Domino Transformación",q:"¿Qué otras piezas mueve el cambio?",d:"Un cambio de sistema, estructura o proceso toca a más áreas de las previstas. Las ubicamos.",x:["Efectos en procesos y personas","Plan de contención"],c:["Revlon","NHS","Hershey","Lidl"]},
-{e:"r",n:"Domino Operation",q:"¿Por qué sigue ocurriendo?",d:"Cuando el problema se repite, buscamos qué defensas existen y cuáles realmente funcionan.",x:["Análisis de recurrencia","Defensa existente vs. efectiva"],c:["TNE / JUNAEB","Centro de Salud Ambiental (Arica)"]},
-{e:"r",n:"Domino Recovery",q:"¿Dónde detenemos el dominó?",d:"Con el efecto ya en marcha, definimos cómo contenerlo y recuperar el rumbo.",x:["Plan de contención y recuperación","Indicadores de seguimiento"],c:["Revlon","NHS","Target Canadá","Lidl"]}
+"use strict";
+
+/*
+ * CONFIGURACIÓN
+ *
+ * Sustituye el valor de whatsapp por el número real,
+ * con código de país y sin +, espacios ni guiones.
+ * Ejemplo de formato para Chile: 56912345678
+ */
+const CONFIG = {
+  whatsapp: "569XXXXXXXX"
+};
+
+const SERVICIOS = [
+  {
+    id:"revision-inicial",
+    etapa:"g",
+    nombre:"Revisión inicial",
+    pregunta:"¿Dónde están los puntos ciegos?",
+    descripcion:"Una primera revisión de una decisión o proceso para reconocer conexiones importantes y aspectos que conviene investigar.",
+    entregables:[
+      "Mapa inicial de conexiones",
+      "Tres puntos ciegos por revisar"
+    ],
+    casos:[
+      {nombre:"Centro de Salud Ambiental (Arica)", id:"arica"},
+      {nombre:"Caso PYME", id:null}
+    ]
+  },
+  {
+    id:"analisis-decision",
+    etapa:"g",
+    nombre:"Análisis de decisión",
+    pregunta:"¿Qué puede mover esta decisión?",
+    descripcion:"Antes de decidir, examinamos efectos posibles sobre otras áreas, supuestos y costos que conviene vigilar.",
+    entregables:[
+      "Mapa de efectos posibles",
+      "Supuestos y costos por validar"
+    ],
+    casos:[
+      {nombre:"Target Canadá", id:"target"}
+    ]
+  },
+  {
+    id:"analisis-inversion",
+    etapa:"g",
+    nombre:"Análisis de inversión",
+    pregunta:"¿Qué estamos comprometiendo?",
+    descripcion:"Comparamos escenarios de exposición de una inversión y explicitamos los supuestos que deben validarse. No sustituye una evaluación financiera formal.",
+    entregables:[
+      "Escenarios y supuestos",
+      "Puntos de control del gasto"
+    ],
+    casos:[
+      {nombre:"Puente Chacao", id:"chacao"},
+      {nombre:"HS2", id:"hs2"},
+      {nombre:"Sydney Opera House", id:"opera"}
+    ]
+  },
+  {
+    id:"control-proyecto",
+    etapa:"y",
+    nombre:"Control de proyecto",
+    pregunta:"¿Dónde puede desviarse el proyecto?",
+    descripcion:"Durante la ejecución, revisamos conexiones entre actividades para identificar señales tempranas, riesgos y posibles puntos de control.",
+    entregables:[
+      "Mapa de conexiones críticas",
+      "Medidas de control por evaluar"
+    ],
+    casos:[
+      {nombre:"Hospital de La Serena", id:"serena"},
+      {nombre:"Hospital Provincia Cordillera", id:"cordillera"}
+    ]
+  },
+  {
+    id:"transformacion",
+    etapa:"y",
+    nombre:"Análisis de transformación",
+    pregunta:"¿Qué otras piezas mueve el cambio?",
+    descripcion:"Examinamos cómo una modificación de sistema, estructura o proceso puede repercutir en otras áreas de la organización.",
+    entregables:[
+      "Efectos potenciales en procesos y personas",
+      "Plan de seguimiento y contención"
+    ],
+    casos:[
+      {nombre:"Revlon", id:"revlon"},
+      {nombre:"NHS", id:"nhs"},
+      {nombre:"Hershey", id:"hershey"},
+      {nombre:"Lidl", id:"lidl"}
+    ]
+  },
+  {
+    id:"analisis-recurrencia",
+    etapa:"r",
+    nombre:"Análisis de recurrencia",
+    pregunta:"¿Por qué sigue ocurriendo?",
+    descripcion:"Cuando un problema se repite, examinamos las condiciones que lo mantienen y la diferencia entre las medidas previstas y las que realmente funcionan.",
+    entregables:[
+      "Análisis de recurrencia",
+      "Revisión de medidas de control"
+    ],
+    casos:[
+      {nombre:"TNE / JUNAEB", id:"tne"},
+      {nombre:"Centro de Salud Ambiental (Arica)", id:"arica"}
+    ]
+  },
+  {
+    id:"recuperacion",
+    etapa:"r",
+    nombre:"Contención y recuperación",
+    pregunta:"¿Dónde podemos contener el problema?",
+    descripcion:"Cuando los efectos ya están en marcha, identificamos opciones para contenerlos, recuperar el control y hacer seguimiento.",
+    entregables:[
+      "Opciones de contención y recuperación",
+      "Indicadores de seguimiento"
+    ],
+    casos:[
+      {nombre:"Revlon", id:"revlon"},
+      {nombre:"NHS", id:"nhs"},
+      {nombre:"Target Canadá", id:"target"},
+      {nombre:"Lidl", id:"lidl"}
+    ]
+  }
 ];
-const L={g:"ANTES",y:"DURANTE",r:"DESPUÉS"};const ID={"Centro de Salud Ambiental (Arica)":"arica","Target Canadá":"target","Puente Chacao":"chacao","HS2":"hs2","Sydney Opera House":"opera","Hospital de La Serena":"serena","Hospital Provincia Cordillera":"cordillera","Revlon":"revlon","NHS":"nhs","Hershey":"hershey","Lidl":"lidl","TNE / JUNAEB":"tne"};const q0=new URLSearchParams(location.search).get("e")||"";let f=["g","y","r"].includes(q0)?q0:"";
-function draw(){
- document.getElementById("filtro").innerHTML=[["","Todos"],["g","ANTES"],["y","DURANTE"],["r","DESPUÉS"]].map(([k,t])=>`<button type="button" class="${k?"st-"+k:""} ${f===k?"on":""}" data-k="${k}">${k?'<i class="dot"></i>':""}${t}</button>`).join("");
- document.getElementById("lista").innerHTML=S.filter(s=>!f||s.e===f).map(s=>`<div class="card st st-${s.e}"><div class="stage"><i class="dot"></i>${L[s.e]}</div><h3>${s.n}</h3><p><b>${s.q}</b></p><p>${s.d}</p><p>${s.x.map(t=>"✓ "+t).join("<br>")}</p><div>${s.c.map(t=>ID[t]?`<a class="pill" href="casos.html#${ID[t]}" data-link>${t}</a>`:`<span class="pill">${t}</span>`).join("")}</div><a class="btn sm" href="casos.html?e=${s.e}" data-link>Ver casos de esta etapa</a></div>`).join("");
- document.querySelectorAll("#filtro button").forEach(b=>b.onclick=()=>{f=b.dataset.k;draw();if(typeof addRef=="function")addRef()});
+
+const ETAPAS = {
+  g:{nombre:"ANTES", accion:"prevenir"},
+  y:{nombre:"DURANTE", accion:"controlar"},
+  r:{nombre:"DESPUÉS", accion:"recuperar"}
+};
+
+const params = new URLSearchParams(window.location.search);
+const initialFilter = params.get("e") || "";
+let filtroActual = ["g","y","r"].includes(initialFilter)
+  ? initialFilter
+  : "";
+
+const referencia = params.get("ref") || "";
+
+function crearEnlaceConReferencia(url){
+  const destino = new URL(url, window.location.href);
+
+  if(referencia && !destino.searchParams.has("ref")){
+    destino.searchParams.set("ref", referencia);
+  }
+
+  return destino.pathname.split("/").pop() +
+    destino.search +
+    destino.hash;
 }
-draw();
-const ref=new URLSearchParams(location.search).get("ref")||"";
-function addRef(){document.querySelectorAll("a[data-link]:not([data-r])").forEach(a=>{a.dataset.r=1;if(ref)a.href+=(a.href.includes("?")?"&":"?")+"ref="+encodeURIComponent(ref)})}
-addRef();
-document.getElementById("wa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hola, vi los servicios de Expertos Chile y quiero conversar sobre una decisión."+(ref?" (Ref: "+ref+")":""));
-</script></body></html>
+
+function actualizarEnlaces(){
+  document.querySelectorAll("a[data-link]").forEach(link => {
+    if(link.dataset.refReady === "1") return;
+
+    link.dataset.refReady = "1";
+    link.href = crearEnlaceConReferencia(link.getAttribute("href"));
+  });
+}
+
+function actualizarURL(){
+  const url = new URL(window.location.href);
+
+  if(filtroActual){
+    url.searchParams.set("e", filtroActual);
+  }else{
+    url.searchParams.delete("e");
+  }
+
+  if(referencia){
+    url.searchParams.set("ref", referencia);
+  }
+
+  history.replaceState(null, "", url);
+}
+
+function renderFiltros(){
+  const opciones = [
+    {id:"", texto:"Todos"},
+    {id:"g", texto:"ANTES"},
+    {id:"y", texto:"DURANTE"},
+    {id:"r", texto:"DESPUÉS"}
+  ];
+
+  document.getElementById("filtro").innerHTML =
+    opciones.map(opcion => {
+      const activa = filtroActual === opcion.id;
+      const claseEtapa = opcion.id ? "st-" + opcion.id : "";
+
+      return `
+        <button
+          type="button"
+          class="${claseEtapa} ${activa ? "on" : ""}"
+          data-k="${opcion.id}"
+          aria-pressed="${activa}"
+          ${activa ? 'aria-current="true"' : ""}
+        >
+          ${opcion.id ? '<i class="dot" aria-hidden="true"></i>' : ""}
+          ${opcion.texto}
+        </button>
+      `;
+    }).join("");
+
+  document.querySelectorAll("#filtro button").forEach(button => {
+    button.addEventListener("click", () => {
+      filtroActual = button.dataset.k;
+      actualizarURL();
+      render();
+    });
+  });
+}
+
+function renderServicios(){
+  const visibles = SERVICIOS.filter(servicio =>
+    !filtroActual || servicio.etapa === filtroActual
+  );
+
+  document.getElementById("resultado-filtro").textContent =
+    `Mostrando ${visibles.length} de ${SERVICIOS.length} servicios.`;
+
+  document.getElementById("lista").innerHTML = visibles.map(servicio => {
+    const etapa = ETAPAS[servicio.etapa];
+
+    const casosHTML = servicio.casos.map(caso => {
+      if(caso.id){
+        const href = crearEnlaceConReferencia(
+          `casos.html#${caso.id}`
+        );
+
+        return `<a class="pill" href="${href}" data-link>${caso.nombre}</a>`;
+      }
+
+      return `<span class="pill">${caso.nombre}</span>`;
+    }).join(" ");
+
+    const entregablesHTML = servicio.entregables.map(item =>
+      `<li>✓ ${item}</li>`
+    ).join("");
+
+    const enlaceCasos = crearEnlaceConReferencia(
+      `casos.html?e=${servicio.etapa}`
+    );
+
+    return `
+      <article class="card st st-${servicio.etapa}">
+        <div class="stage">
+          <i class="dot" aria-hidden="true"></i>
+          ${etapa.nombre} · ${etapa.accion}
+        </div>
+
+        <h3>${servicio.nombre}</h3>
+        <p><b>${servicio.pregunta}</b></p>
+        <p>${servicio.descripcion}</p>
+
+        <ul class="service-deliverables">
+          ${entregablesHTML}
+        </ul>
+
+        <div class="service-cases">
+          ${casosHTML}
+        </div>
+
+        <a class="btn sm" href="${enlaceCasos}" data-link>
+          Explorar casos relacionados
+        </a>
+      </article>
+    `;
+  }).join("");
+
+  actualizarEnlaces();
+}
+
+function render(){
+  renderFiltros();
+  renderServicios();
+}
+
+render();
+actualizarEnlaces();
+
+/* WhatsApp: evita abrir un enlace con número de ejemplo. */
+const waLink = document.getElementById("wa");
+const waNotice = document.getElementById("wa-notice");
+const numeroValido = /^56\d{9}$/.test(CONFIG.whatsapp);
+
+if(numeroValido){
+  const mensaje =
+    "Hola, vi los servicios de Expertos Chile y quiero conversar sobre una decisión." +
+    (referencia ? " Referencia: " + referencia : "");
+
+  waLink.href =
+    "https://wa.me/" + CONFIG.whatsapp +
+    "?text=" + encodeURIComponent(mensaje);
+
+  waLink.target = "_blank";
+}else{
+  waLink.href = "charlas.html";
+  waLink.removeAttribute("target");
+  waNotice.textContent =
+    "El contacto por WhatsApp estará disponible cuando se configure el número oficial.";
+  waLink.textContent = "Conocer las charlas mientras tanto";
+}
+</script>
+
+<style>
+/* Complementos locales; el diseño general sigue en estilo.css. */
+.service-deliverables{
+  list-style:none;
+  padding:0;
+  margin:12px 0;
+  line-height:1.65;
+}
+
+.service-cases{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:12px 0;
+}
+
+#filtro button{
+  cursor:pointer;
+}
+
+#filtro button:focus-visible,
+a:focus-visible{
+  outline:3px solid #facc15;
+  outline-offset:3px;
+}
+
+#filtro button[aria-pressed="true"]{
+  box-shadow:inset 0 0 0 2px currentColor;
+}
+
+#resultado-filtro{
+  margin:12px 0;
+}
+</style>
+</body>
+</html>
