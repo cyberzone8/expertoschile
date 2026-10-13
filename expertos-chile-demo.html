@@ -90,6 +90,9 @@ h2{font-size:clamp(21px,6.4vw,30px)}
 .pre{display:block;margin-top:1.4dvh;padding:.55em 1em;border-radius:14px;border:1.5px solid var(--y);color:var(--y);font-weight:800;font-size:12.5px;text-align:center}
 .src{margin-top:1dvh;font-size:8.5px;color:#9fb0e6;line-height:1.35}
 /* cierre */
+.svc{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:1.6dvh}
+.svc em{flex-basis:100%;font-style:normal;font-size:11px;font-weight:850;letter-spacing:.1em;color:var(--b3)}
+.svc span{padding:.3em .8em;border:1.5px solid rgba(255,255,255,.3);border-radius:999px;background:rgba(255,255,255,.06);font-size:clamp(11.5px,3.3vw,13px);font-weight:750}
 .who{margin-top:1.4dvh;line-height:1.3}
 .who strong{display:block;font-size:clamp(16px,4.6vw,20px);font-weight:900;letter-spacing:-.01em}
 .who span{display:block;font-size:clamp(12px,3.4vw,14px);color:var(--muted);font-weight:700}
@@ -162,6 +165,7 @@ button:disabled{opacity:.5;cursor:default}
  .src{font-size:9px}
  .logo-big{width:min(32%,17dvh);margin:0 0 1.6dvh}
  .fin{text-align:left}
+ .svc{justify-content:flex-start}.svc span{font-size:clamp(11px,1.3vw,16px)}.svc em{font-size:clamp(10px,1.1vw,14px)}
  .who strong{font-size:clamp(16px,2vw,26px)}.who span{font-size:clamp(12px,1.4vw,18px)}.who em{font-size:clamp(11px,1.2vw,15px)}
  .fin .qr{display:block;width:min(100%,26dvh);margin:0 auto}
  .fin .qr strong{font-size:clamp(11px,1.3vw,15px)}
@@ -237,6 +241,7 @@ button:disabled{opacity:.5;cursor:default}
     <div>
       <img class="logo-big" data-img="logo" alt="Expertos Chile">
       <h2>¿<span class="y">CUÁNTO COSTARÁ</span> TU PRÓXIMA DECISIÓN?</h2>
+      <div class="svc rv" data-at="36.8"><em>QUÉ HACEMOS</em><span>Asesoría</span><span>Capacitación</span><span>Coaching y mentoring</span><span>Charlas y seminarios</span></div>
       <div class="who"><strong>Gustavo Godoy Uribe</strong><span>Dr. c. M. Sc. Ing.</span><em>Gerente · Expertos Chile</em></div>
       <a class="open" href="index.html" target="_blank" rel="noopener">Abrir la demo →</a>
     </div>
